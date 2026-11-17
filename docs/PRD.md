@@ -428,3 +428,8 @@ The prototype is complete when:
 - the poisoned-document scenario produces a visible block and audit trail;
 - a safe internal-email request produces a pending approval card and never sends anything;
 - step, token, and request limits stop abusive runs;
+- `make eval-smoke` works with a configured Cohere key;
+- the committed final report compares baseline and governed modes;
+- `docker compose up --build` starts a local copy from documented prerequisites;
+- CI passes and the README links the demo, report, architecture, threat model, and video.
+
