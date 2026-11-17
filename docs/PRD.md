@@ -328,3 +328,8 @@ FastAPI monolith ------------------------------------------------+
 - Postgres 16 plus pgvector.
 - Cohere Python SDK using API v2.
 - React, TypeScript, Vite, and plain component-level CSS.
+- Pytest for unit and integration tests.
+- Docker Compose for local development.
+- GitHub Actions for lint, tests, build, and an eight-case evaluation smoke test when credentials are available.
+
+### Why a monolith
