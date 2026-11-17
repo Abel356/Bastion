@@ -13,3 +13,8 @@
 - Use Embed v4 search-document inputs during ingestion.
 - Embed user queries with the search-query input type.
 - Call Rerank 5 Fast only with ACL-authorized candidates.
+- Preserve stable chunk IDs for Cohere citation sources.
+- Cache embeddings and rerank results by model and corpus version.
+- Provide a clearly labeled local fallback when no API key exists.
+- Add provider contract and retrieval integration tests.
+
