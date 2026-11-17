@@ -158,3 +158,8 @@ This condition is enforced inside the retrieval query before vector ranking. Pos
 - **FR-3:** The UI clearly labels this as demo identity rather than production authentication.
 
 ### 8.2 Permission-aware retrieval
+
+- **FR-4:** Ingest 50–70 synthetic Markdown documents across five departments and three clearance levels.
+- **FR-5:** Chunk documents, generate Cohere embeddings, and store chunks plus ACL metadata in Postgres with pgvector.
+- **FR-6:** Embed the query using the search-query input type.
+- **FR-7:** Apply ACL and active-status filters in SQL before selecting the nearest 20 chunks.
