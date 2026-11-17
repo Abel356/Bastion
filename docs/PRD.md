@@ -133,3 +133,8 @@ An admin settings product surface is intentionally omitted. Demo policies live i
 | Priya Shah | Security | 3 | Security reviewer | Search, read, inspect all audit events |
 
 Each document has:
+
+- `department`: Engineering, HR, Finance, Security, or Company;
+- `clearance`: 1, 2, or 3;
+- `trust_level`: internal, externally-supplied, or quarantined;
+- `contains_test_payload`: evaluation metadata never shown to the model.
