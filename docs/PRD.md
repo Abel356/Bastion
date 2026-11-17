@@ -458,3 +458,8 @@ Do not cut:
 | Risk | Mitigation |
 |---|---|
 | Trial API limits interrupt development | Cache embeddings and reranks, run an eight-case smoke suite, estimate calls before evaluation, and keep model IDs configurable. |
+| Scanner appears more capable than it is | Publish its exact rules, adversarial misses, and benchmark limitations. |
+| Model behavior varies | Use low temperature, repeat held-out cases, log parameters, and avoid claims of determinism. |
+| Public demo consumes the API quota | Enforce strict guest limits and fall back to clearly labelled recorded runs. |
+| Hosting cold start hurts the demo | Use an always-on instance during active recruiting or open the health URL before a scheduled walkthrough. |
+| UI work crowds out evaluation | Build the API and report first; keep only three UI screens. |
