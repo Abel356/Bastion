@@ -63,3 +63,8 @@ The public demo uses a fictional company named **Acme Systems** and three select
 
 The repository includes a recorded run replay and a committed evaluation report. If the hosted model quota is unavailable, the UI may replay those events only when clearly labelled **Recorded run**. It must never present cached output as a new live model response.
 
+## 5. Goals and non-goals
+
+### Goals
+
+- **G1:** Demonstrate correct access-controlled retrieval with tests proving unauthorized chunks never enter model context.
