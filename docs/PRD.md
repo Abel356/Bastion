@@ -178,3 +178,8 @@ This condition is enforced inside the retrieval query before vector ranking. Pos
 - **FR-14:** `propose_email` creates only a pending synthetic action. No message is ever sent.
 - **FR-15:** External recipients are always blocked in v1.
 - **FR-16:** A pending internal email requires an explicit approval click before it is written to the demo outbox.
+
+### 8.4 Governance controls
+
+- **FR-17:** Treat retrieved passages and tool outputs as untrusted data and attach source IDs and trust labels.
+- **FR-18:** Scan retrieved text for a documented, versioned set of suspicious instruction and exfiltration patterns.
