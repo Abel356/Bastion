@@ -12,3 +12,7 @@ def decode_token(token: str) -> str:
         payload = jwt.decode(token, settings.jwt_secret, algorithms=["HS256"])
     except jwt.PyJWTError as exc:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Invalid session") from exc
+    subject = payload.get("sub")
+    if subject not in PERSONAS:
+        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Unknown persona")
+    return subject
