@@ -418,3 +418,8 @@ Local Compose runs only the application and Postgres. The Cohere API is the sole
 
 **Exit:** A new visitor can understand the claim, run the canonical scenarios, and find the evidence without assistance.
 
+## 16. Acceptance criteria
+
+The prototype is complete when:
+
+- a public URL exposes the governed demo without revealing credentials;
