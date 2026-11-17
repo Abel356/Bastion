@@ -8,3 +8,7 @@ class PersonaView(BaseModel):
     name: str
     departments: frozenset[str]
     clearance: int
+    role: str
+
+@router.get("/personas", response_model=list[PersonaView])
+def list_personas() -> list: return list(PERSONAS.values())
