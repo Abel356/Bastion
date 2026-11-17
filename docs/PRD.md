@@ -413,3 +413,8 @@ Local Compose runs only the application and Postgres. The Cohere API is the sole
 
 - Build the three UI screens and scripted demo prompts.
 - Deploy Docker service and hosted Postgres.
+- Finish README, threat model, architecture diagram, demo video, and walkthrough.
+- Rehearse a three-minute demo and a ten-minute technical explanation.
+
+**Exit:** A new visitor can understand the claim, run the canonical scenarios, and find the evidence without assistance.
+
