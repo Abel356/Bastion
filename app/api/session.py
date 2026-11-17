@@ -17,3 +17,4 @@ def select_persona(persona_id: str, response: Response) -> dict[str, str]:
     if persona_id not in PERSONAS:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Persona not found")
     response.set_cookie("bastion_session", create_token(persona_id), httponly=True, samesite="lax")
+    return {"persona_id": persona_id}
