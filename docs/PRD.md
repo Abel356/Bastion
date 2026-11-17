@@ -478,3 +478,8 @@ The final write-up and interview walkthrough should make these decisions explici
 - **Product judgment:** the prototype is intentionally narrow enough to finish, test, explain, and maintain.
 
 ## 20. Documentation deliverables
+
+- `README.md` with live demo, two-minute quick start, screenshots, and Deploy to Render button.
+- `docs/architecture.md` with request and trust-boundary diagrams.
+- `docs/threat-model.md` covering assets, actors, boundaries, attacks, mitigations, and residual risks.
+- `artifacts/eval/report.md` and `results.json`.
