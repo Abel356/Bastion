@@ -2,4 +2,4 @@
 name = "bastion-runtime"
 version = "0.1.0"
 requires-python = ">=3.12"
-dependencies = ["cohere>=5.20", "fastapi>=0.115", "pydantic-settings>=2.7", "pyjwt>=2.10", "sqlalchemy>=2.0", "uvicorn[standard]>=0.34"]
+dependencies = ["cohere>=5.20", "fastapi>=0.115", "pgvector>=0.3", "psycopg[binary]>=3.2", "pydantic-settings>=2.7", "pyjwt>=2.10", "sqlalchemy>=2.0", "uvicorn[standard]>=0.34"]
