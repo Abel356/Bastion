@@ -258,3 +258,8 @@ Create 48 version-controlled cases:
 Split the cases before defense tuning:
 
 - development: 32 cases;
+- held-out test: 16 cases.
+
+### 11.2 Conditions
+
+- `baseline`: ACL filtering remains enabled, because disabling data authorization would make a public demo unsafe; injection scanning, action gating beyond schemas, and output scanning are disabled.
