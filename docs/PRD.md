@@ -438,3 +438,8 @@ The prototype is complete when:
 If the schedule slips, cut in this order:
 
 1. email approval persistence; show a policy decision card instead;
+2. Rerank Context Focus visualization;
+3. live baseline toggle in the Security UI;
+4. evaluation latency charts;
+5. recorded-run replay tooling; keep only the video and committed report;
+6. persona switching polish.
