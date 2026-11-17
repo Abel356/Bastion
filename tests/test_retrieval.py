@@ -8,3 +8,6 @@ def chunk(identifier: str, department: str, text: str) -> Chunk:
     return Chunk(id=identifier, text=text, label=label)
 allowed = chunk("eng", "Engineering", "incident response policy")
 restricted = chunk("fin", "Finance", "secret compensation canary")
+def test_filters_before_ranking() -> None:
+    candidate_ids = {item.id for item in authorized_candidates(persona, [restricted, allowed])}
+    assert candidate_ids == {"eng"}
