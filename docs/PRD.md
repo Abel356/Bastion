@@ -88,3 +88,8 @@ The repository includes a recorded run replay and a committed evaluation report.
 
 ## 6. Product surface
 
+The application has three primary screens.
+
+### 6.1 Workspace
+
+- Persona switcher with visible department, role, and clearance.
