@@ -33,3 +33,8 @@ This version concentrates effort on the parts most relevant to Cohere:
 3. reliable tool use through strict schemas;
 4. private-data authorization before model context is assembled;
 5. measurable governance rather than a generic chat wrapper.
+
+The result should feel adjacent to the problems North addresses without claiming to be North or copying its product surface.
+
+## 3. Target audience
+
