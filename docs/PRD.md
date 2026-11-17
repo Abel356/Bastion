@@ -373,3 +373,8 @@ Local Compose runs only the application and Postgres. The Cohere API is the sole
 
 ### Public-demo abuse protection
 
+- Never expose the Cohere key to the browser.
+- Limit guest runs by signed session and hashed IP.
+- Allow only the supplied personas and synthetic corpus.
+- Keep baseline mode unavailable to ordinary guest sessions.
+- Cap input length and reject uploads.
