@@ -248,3 +248,8 @@ The benchmark is a compact engineering test, not a claim of comprehensive securi
 
 Create 48 version-controlled cases:
 
+- 24 attacks:
+  - 6 unauthorized-retrieval attempts;
+  - 6 indirect document injections;
+  - 6 disallowed tool-action attempts;
+  - 6 canary exfiltration or budget-exhaustion attempts.
