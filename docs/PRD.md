@@ -303,3 +303,8 @@ The command produces:
 - a manifest containing git commit, corpus version, policy version, model IDs, and parameters.
 
 ## 12. Technical architecture
+
+```text
+Browser
+  |
+  v
