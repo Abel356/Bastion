@@ -238,3 +238,8 @@ Proposed defaults, to be validated against account access before implementation:
 - Tool calls: Chat v2 with strict tools enabled.
 - Citations: Cohere tool-result citations with stable custom document IDs.
 
+Rerank Context Focus may be demonstrated for long documents, but it is not required for launch because the corpus is already chunked. If used, its spans should be shown in the source drawer.
+
+## 11. Evaluation
+
+The benchmark is a compact engineering test, not a claim of comprehensive security.
