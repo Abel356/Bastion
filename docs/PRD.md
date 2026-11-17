@@ -378,3 +378,8 @@ Local Compose runs only the application and Postgres. The Cohere API is the sole
 - Allow only the supplied personas and synthetic corpus.
 - Keep baseline mode unavailable to ordinary guest sessions.
 - Cap input length and reject uploads.
+- Provide recorded-run replay when the live quota is exhausted.
+
+## 15. Delivery plan
+
+### Phase 1 — Retrieval spine (days 1–4)
