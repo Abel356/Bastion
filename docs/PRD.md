@@ -198,3 +198,8 @@ This condition is enforced inside the retrieval query before vector ranking. Pos
 - **FR-28:** Record model, latency, billed token metadata, and termination reason for each call.
 
 ### 8.6 Audit trail
+
+- **FR-29:** Store an ordered event stream for every run.
+- **FR-30:** Events include the actor, policy version, authorized source IDs, tool proposals, policy decisions, usage, and released response.
+- **FR-31:** The application database role may insert audit events but may not update or delete them.
+- **FR-32:** The project describes this as tamper-resistant at the application layer, not a compliance-grade immutable ledger.
