@@ -368,3 +368,8 @@ cp .env.example .env
 docker compose up --build
 make seed
 ```
+
+Local Compose runs only the application and Postgres. The Cohere API is the sole required external dependency.
+
+### Public-demo abuse protection
+
