@@ -393,3 +393,8 @@ Local Compose runs only the application and Postgres. The Cohere API is the sole
 
 ### Phase 2 — Agent and governance (days 5–8)
 
+- Three-step Cohere tool loop with strict schemas.
+- Citations and source IDs.
+- Synthetic email proposal.
+- Retrieval scanner, action policy, output scanner, budgets, and audit events.
+
