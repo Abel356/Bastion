@@ -12,3 +12,7 @@ def test_allows_company_document() -> None:
     assert can_read(engineer, label("Company"))
 def test_denies_other_department() -> None:
     assert not can_read(engineer, label("Finance"))
+def test_denies_higher_clearance() -> None:
+    assert not can_read(engineer, label("Engineering", clearance=2))
+def test_denies_inactive_document() -> None:
+    assert not can_read(engineer, label("Engineering", active=False))
