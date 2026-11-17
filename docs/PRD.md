@@ -463,3 +463,8 @@ Do not cut:
 | Public demo consumes the API quota | Enforce strict guest limits and fall back to clearly labelled recorded runs. |
 | Hosting cold start hurts the demo | Use an always-on instance during active recruiting or open the health URL before a scheduled walkthrough. |
 | UI work crowds out evaluation | Build the API and report first; keep only three UI screens. |
+| Project is perceived as a North clone | Call it North-inspired, focus the write-up on implementation and measurement, and avoid copying brand language or UI. |
+
+## 19. Cohere-facing proof points
+
+The final write-up and interview walkthrough should make these decisions explicit:
