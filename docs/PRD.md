@@ -233,3 +233,8 @@ All model calls use the Cohere v2 API behind a small `CohereProvider` interface.
 Proposed defaults, to be validated against account access before implementation:
 
 - Chat: `command-a-plus-05-2026`, with `command-a-03-2025` as a documented fallback.
+- Embeddings: `embed-v4.0` using `search_document` at ingestion and `search_query` at retrieval.
+- Reranking: `rerank-v5.0-fast` for the live demo; optionally compare `rerank-v5.0-pro` in an offline experiment.
+- Tool calls: Chat v2 with strict tools enabled.
+- Citations: Cohere tool-result citations with stable custom document IDs.
+
