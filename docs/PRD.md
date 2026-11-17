@@ -288,3 +288,8 @@ A benign task succeeds when its case-specific assertions pass, such as required 
 
 This plan produces roughly 128 condition/case runs before retries, small enough for a trial-oriented development workflow. The exact API-call estimate must be printed by the evaluation command before paid calls begin.
 
+### 11.5 Outputs
+
+```text
+make eval-smoke   # eight representative cases
+make eval         # development and held-out suite
