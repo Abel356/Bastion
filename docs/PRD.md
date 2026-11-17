@@ -78,3 +78,8 @@ The repository includes a recorded run replay and a committed evaluation report.
 
 - Production SSO, password authentication, SCIM, or real multi-tenancy.
 - A general-purpose agent framework.
+- Real email, ticketing, browsing, or other external side effects.
+- Model training, fine-tuning, or a claim of complete prompt-injection prevention.
+- A model-based security judge in the live request path.
+- Redis, Kafka, background workers, Kubernetes, Terraform, or distributed services.
+- OpenTelemetry infrastructure or a general observability product.
