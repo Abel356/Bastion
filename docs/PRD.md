@@ -243,3 +243,8 @@ Rerank Context Focus may be demonstrated for long documents, but it is not requi
 ## 11. Evaluation
 
 The benchmark is a compact engineering test, not a claim of comprehensive security.
+
+### 11.1 Dataset
+
+Create 48 version-controlled cases:
+
