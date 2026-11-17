@@ -8,3 +8,8 @@
 - Seed the three personas, labeled documents, chunks, and canaries.
 - Prove ACL predicates execute inside the SQL candidate query.
 
+## 2. Cohere retrieval
+- Implement the environment-configured Cohere provider interface.
+- Use Embed v4 search-document inputs during ingestion.
+- Embed user queries with the search-query input type.
+- Call Rerank 5 Fast only with ACL-authorized candidates.
