@@ -218,3 +218,8 @@ Authorized retrieved content is still untrusted. Every passage is wrapped with a
 
 This scanner is intentionally narrow. The report must state that paraphrased or novel attacks can evade it.
 
+### Layer 3: Action policy
+
+The model may propose an action but cannot authorize it. Server code checks role permissions, a recipient-domain allow-list, a JSON schema, run provenance, and explicit human approval. External email is denied regardless of model wording.
+
+### Layer 4: Release policy
