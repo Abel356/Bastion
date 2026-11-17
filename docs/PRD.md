@@ -183,3 +183,8 @@ This condition is enforced inside the retrieval query before vector ranking. Pos
 
 - **FR-17:** Treat retrieved passages and tool outputs as untrusted data and attach source IDs and trust labels.
 - **FR-18:** Scan retrieved text for a documented, versioned set of suspicious instruction and exfiltration patterns.
+- **FR-19:** Quarantine high-confidence suspicious passages before they reach the chat model and record the rule that matched.
+- **FR-20:** Apply deterministic role, recipient-domain, argument, and approval policies to every proposed tool call.
+- **FR-21:** Scan final output for planted canaries, restricted-document markers, external URLs, and Markdown image exfiltration.
+- **FR-22:** If an output rule matches, replace the answer with a safe refusal and retain the original only in an access-restricted evaluation record.
+- **FR-23:** Support exactly two evaluation modes: `baseline` and `governed`. Public guest traffic always uses `governed`; only the evaluation harness and Security demo may invoke `baseline` on synthetic data.
