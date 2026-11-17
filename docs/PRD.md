@@ -323,3 +323,8 @@ FastAPI monolith ------------------------------------------------+
 ```
 
 ### Stack
+
+- Python 3.12, FastAPI, Pydantic, SQLAlchemy, Alembic.
+- Postgres 16 plus pgvector.
+- Cohere Python SDK using API v2.
+- React, TypeScript, Vite, and plain component-level CSS.
