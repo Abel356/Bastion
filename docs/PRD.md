@@ -383,3 +383,8 @@ Local Compose runs only the application and Postgres. The Cohere API is the sole
 ## 15. Delivery plan
 
 ### Phase 1 — Retrieval spine (days 1–4)
+
+- Repository, Docker Compose, schema, migrations, and CI.
+- Synthetic corpus generator and committed seed corpus.
+- Persona sessions and access policy.
+- Embed ingestion, ACL-filtered vector search, Rerank, and retrieval tests.
