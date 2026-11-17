@@ -348,3 +348,8 @@ One process is easier to deploy, observe, test, and explain. Service boundaries 
 - `evaluation_cases`: case metadata and assertions, or loaded from version-controlled YAML.
 
 ## 14. Hosting plan
+
+### Public demo
+
+- Deploy one Dockerized FastAPI web service to Render.
+- Serve the compiled React application from the same service and domain.
