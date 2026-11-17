@@ -108,3 +108,8 @@ The application has three primary screens.
   - candidates filtered;
   - documents reranked;
   - suspicious content flagged;
+  - model/tool calls proposed;
+  - policy decision applied;
+  - output released or blocked.
+- Filters for persona, outcome, and defense event.
+
