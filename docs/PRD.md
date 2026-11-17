@@ -318,3 +318,8 @@ FastAPI monolith ------------------------------------------------+
   +-- audit/evaluation API                                       |
   |                                                              |
   +----------------------> Cohere Chat / Embed / Rerank APIs -----+
+  |
+  +----------------------> Hosted Postgres + pgvector
+```
+
+### Stack
