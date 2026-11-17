@@ -18,3 +18,8 @@
 - Provide a clearly labeled local fallback when no API key exists.
 - Add provider contract and retrieval integration tests.
 
+## 3. Agent governance
+- Add search, read-document, and propose-email tools.
+- Enable Cohere strict tool schemas and validate arguments locally.
+- Enforce three-step, input-token, and output-token budgets.
+- Scan retrieved passages for versioned injection patterns.
