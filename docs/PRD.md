@@ -453,3 +453,8 @@ Do not cut:
 - the baseline-versus-governed report;
 - the public demo and clear documentation.
 
+## 18. Risks and mitigations
+
+| Risk | Mitigation |
+|---|---|
+| Trial API limits interrupt development | Cache embeddings and reranks, run an eight-case smoke suite, estimate calls before evaluation, and keep model IDs configurable. |
