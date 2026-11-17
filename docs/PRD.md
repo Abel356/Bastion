@@ -208,3 +208,8 @@ This condition is enforced inside the retrieval query before vector ranking. Pos
 
 The runtime does not rely on the model to police itself.
 
+### Layer 1: Authorization boundary
+
+Unauthorized chunks are excluded in SQL. This is the strongest and most testable control in the system. The model cannot disclose text it never receives.
+
+### Layer 2: Untrusted-content handling
