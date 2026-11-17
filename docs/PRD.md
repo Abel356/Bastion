@@ -148,3 +148,8 @@ AND document.status = active
 ```
 
 This condition is enforced inside the retrieval query before vector ranking. Post-filtering model results is not acceptable.
+
+## 8. Functional requirements
+
+### 8.1 Demo identity
+
