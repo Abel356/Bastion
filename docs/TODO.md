@@ -43,3 +43,6 @@
 
 ## Completion discipline
 - Keep every handwritten commit to five changed lines or fewer.
+- Isolate atomically generated files in clearly labeled commits.
+- Push every commit before beginning the next change.
+- Stop only after tests pass and the current slice is documented.
