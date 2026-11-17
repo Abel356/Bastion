@@ -7,3 +7,5 @@ class Settings(BaseSettings):
     database_url: str = "sqlite:///./bastion.db"
     jwt_secret: str = "development-only-change-me"
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+
+settings = Settings()
