@@ -7,3 +7,5 @@ def test_selects_persona() -> None:
     response = client.post("/api/session/maya")
     assert response.status_code == 200
     assert response.cookies.get("bastion_session")
+def test_rejects_unknown_persona() -> None:
+    assert client.post("/api/session/unknown").status_code == 404
