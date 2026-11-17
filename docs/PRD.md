@@ -18,3 +18,8 @@ The project is designed to be:
 
 - impressive in a three-minute product demo;
 - technically credible in a ten-minute engineering walkthrough;
+- runnable locally with one command;
+- accessible through a stable public demo URL;
+- small enough for one person to finish and polish.
+
+## 2. Why this version should exist
