@@ -153,3 +153,8 @@ This condition is enforced inside the retrieval query before vector ranking. Pos
 
 ### 8.1 Demo identity
 
+- **FR-1:** A visitor selects one of the three fictional personas.
+- **FR-2:** The server issues a signed, short-lived JWT in an HTTP-only cookie.
+- **FR-3:** The UI clearly labels this as demo identity rather than production authentication.
+
+### 8.2 Permission-aware retrieval
