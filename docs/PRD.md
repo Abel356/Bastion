@@ -163,3 +163,8 @@ This condition is enforced inside the retrieval query before vector ranking. Pos
 - **FR-5:** Chunk documents, generate Cohere embeddings, and store chunks plus ACL metadata in Postgres with pgvector.
 - **FR-6:** Embed the query using the search-query input type.
 - **FR-7:** Apply ACL and active-status filters in SQL before selecting the nearest 20 chunks.
+- **FR-8:** Rerank the authorized candidates with Cohere Rerank and send at most four passages to the chat model.
+- **FR-9:** Preserve stable document and chunk IDs so the answer can expose fine-grained citations.
+- **FR-10:** Log candidate counts but never log or return unauthorized document contents to the requester.
+
+### 8.3 Narrow agent loop
