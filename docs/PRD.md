@@ -423,3 +423,8 @@ Local Compose runs only the application and Postgres. The Cohere API is the sole
 The prototype is complete when:
 
 - a public URL exposes the governed demo without revealing credentials;
+- the canonical authorized query returns a cited answer;
+- deterministic tests prove unauthorized chunks never reach the model request;
+- the poisoned-document scenario produces a visible block and audit trail;
+- a safe internal-email request produces a pending approval card and never sends anything;
+- step, token, and request limits stop abusive runs;
