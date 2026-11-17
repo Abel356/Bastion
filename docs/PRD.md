@@ -83,3 +83,8 @@ The repository includes a recorded run replay and a committed evaluation report.
 - A model-based security judge in the live request path.
 - Redis, Kafka, background workers, Kubernetes, Terraform, or distributed services.
 - OpenTelemetry infrastructure or a general observability product.
+- A large synthetic benchmark or claims of statistical significance.
+- Offline/private model deployment in v1.
+
+## 6. Product surface
+
