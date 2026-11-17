@@ -8,3 +8,7 @@ class TrustLevel(StrEnum):
 
 class DocumentLabel(BaseModel):
     id: str
+    department: str
+    clearance: int
+    trust_level: TrustLevel = TrustLevel.INTERNAL
+    active: bool = True
