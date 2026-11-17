@@ -193,3 +193,8 @@ This condition is enforced inside the retrieval query before vector ranking. Pos
 
 - **FR-24:** Limit a run to three model calls, 8,000 accumulated input tokens, and 1,000 accumulated output tokens.
 - **FR-25:** Set an explicit output-token maximum on every generation call.
+- **FR-26:** Enforce a small fixed-window request limit per demo session and IP using Postgres; a distributed rate limiter is unnecessary for one application instance.
+- **FR-27:** Reject a call before execution when its remaining budget is insufficient.
+- **FR-28:** Record model, latency, billed token metadata, and termination reason for each call.
+
+### 8.6 Audit trail
