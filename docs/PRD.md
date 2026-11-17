@@ -468,3 +468,8 @@ Do not cut:
 ## 19. Cohere-facing proof points
 
 The final write-up and interview walkthrough should make these decisions explicit:
+
+- **Retrieval quality:** Embed narrows the corpus; Rerank selects the best authorized evidence.
+- **Grounding:** Cohere citations are preserved rather than reconstructed after generation.
+- **Reliable actions:** strict tool schemas reduce malformed calls, while server policy remains the final authority.
+- **Enterprise boundary:** ACL filtering happens before model context construction.
