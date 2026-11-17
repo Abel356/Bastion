@@ -8,3 +8,8 @@ dependencies = ["cohere>=5.20", "fastapi>=0.115", "pgvector>=0.3", "psycopg[bina
 dev = ["httpx>=0.28", "pytest>=8.3", "pytest-cov>=6.0", "ruff>=0.9"]
 
 [tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[build-system]
+requires = ["hatchling>=1.27"]
