@@ -23,3 +23,8 @@ The project is designed to be:
 - small enough for one person to finish and polish.
 
 ## 2. Why this version should exist
+
+The original Bastion concept was technically feasible but carried too many independent deliverables: a broad agent platform, four defense layers, multiple infrastructure services, a large red-team suite, observability, dashboards, and several tools.
+
+This version concentrates effort on the parts most relevant to Cohere:
+
