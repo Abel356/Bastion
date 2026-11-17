@@ -228,3 +228,8 @@ Before a response reaches the browser, the server checks for benchmark canaries,
 
 ## 10. Cohere implementation
 
+All model calls use the Cohere v2 API behind a small `CohereProvider` interface. Model IDs remain environment-configurable and are recorded with every evaluation run.
+
+Proposed defaults, to be validated against account access before implementation:
+
+- Chat: `command-a-plus-05-2026`, with `command-a-03-2025` as a documented fallback.
