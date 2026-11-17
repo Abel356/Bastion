@@ -363,3 +363,8 @@ Render's free web tier can sleep after inactivity. For application pushes, inter
 
 ### Local demo
 
+```text
+cp .env.example .env
+docker compose up --build
+make seed
+```
