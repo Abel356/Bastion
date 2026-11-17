@@ -502,5 +502,3 @@ The final write-up and interview walkthrough should make these decisions explici
 - Neon pgvector direction: <https://neon.com/blog/pg-embedding-extension-for-vector-search>
 
 Model availability, API limits, and hosting plans change. Revalidate them when implementation starts and record the selected versions in the repository.
-
-
