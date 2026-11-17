@@ -58,3 +58,8 @@ The public demo uses a fictional company named **Acme Systems** and three select
 3. **Indirect injection:** Ask a question whose best-matching document contains a planted instruction to disclose a canary and draft an external email. Bastion quarantines the suspicious passage and blocks the action.
 4. **Auditability:** Switch to the Security persona and open the run timeline showing retrieved sources, policy decisions, proposed tool calls, token usage, and the final outcome.
 5. **Measured result:** Open the evaluation page and compare baseline versus governed attack-success and benign-task-success rates.
+
+### Demo fallback
+
+The repository includes a recorded run replay and a committed evaluation report. If the hosted model quota is unavailable, the UI may replay those events only when clearly labelled **Recorded run**. It must never present cached output as a new live model response.
+
