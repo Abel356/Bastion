@@ -113,3 +113,8 @@ The application has three primary screens.
   - output released or blocked.
 - Filters for persona, outcome, and defense event.
 
+### 6.3 Evaluation
+
+- Baseline versus governed headline metrics.
+- Attack success by category.
+- Benign task success.
