@@ -73,3 +73,8 @@ The repository includes a recorded run replay and a committed evaluation report.
 - **G4:** Quantify the effect of governance using a small, reproducible adversarial benchmark.
 - **G5:** Provide an attractive public demo plus a one-command local setup.
 - **G6:** Keep recurring hosting cost low enough to leave the project online during recruiting.
+
+### Non-goals
+
+- Production SSO, password authentication, SCIM, or real multi-tenancy.
+- A general-purpose agent framework.
