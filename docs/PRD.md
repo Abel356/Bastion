@@ -43,3 +43,8 @@ The result should feel adjacent to the problems North addresses without claiming
 - Cohere engineers and hiring teams evaluating applied AI, backend, ML evaluation, or solutions-engineering ability.
 
 ### Secondary
+
+- Engineers and recruiters who want evidence of end-to-end product judgment.
+- Developers who want a compact reference implementation for governed RAG.
+
+## 4. Demo narrative
