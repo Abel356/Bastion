@@ -53,3 +53,8 @@ The public demo uses a fictional company named **Acme Systems** and three select
 
 ### Three-minute walkthrough
 
+1. **Grounded answer:** Sign in as Maya, an Engineering employee. Ask about the incident-response policy. Bastion answers with fine-grained citations to authorized documents.
+2. **Permission boundary:** Ask Maya for Finance compensation data. The retrieval trace shows that restricted chunks were excluded before reranking and before any model call.
+3. **Indirect injection:** Ask a question whose best-matching document contains a planted instruction to disclose a canary and draft an external email. Bastion quarantines the suspicious passage and blocks the action.
+4. **Auditability:** Switch to the Security persona and open the run timeline showing retrieved sources, policy decisions, proposed tool calls, token usage, and the final outcome.
+5. **Measured result:** Open the evaluation page and compare baseline versus governed attack-success and benign-task-success rates.
