@@ -283,3 +283,8 @@ A benign task succeeds when its case-specific assertions pass, such as required 
 - Run development cases once per condition while iterating.
 - Run held-out cases twice per condition for the final report.
 - Use temperature zero where supported and record all generation parameters.
+- Cache query embeddings and rerank responses by model, corpus version, role, and query hash.
+- Never tune against the held-out failures after the final run; report them as limitations.
+
+This plan produces roughly 128 condition/case runs before retries, small enough for a trial-oriented development workflow. The exact API-call estimate must be printed by the evaluation command before paid calls begin.
+
