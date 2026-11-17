@@ -8,3 +8,7 @@ def label(department: str, clearance: int = 1, active: bool = True) -> DocumentL
 
 def test_allows_department_document() -> None:
     assert can_read(engineer, label("Engineering"))
+def test_allows_company_document() -> None:
+    assert can_read(engineer, label("Company"))
+def test_denies_other_department() -> None:
+    assert not can_read(engineer, label("Finance"))
