@@ -28,3 +28,8 @@ The original Bastion concept was technically feasible but carried too many indep
 
 This version concentrates effort on the parts most relevant to Cohere:
 
+1. enterprise retrieval using Embed and Rerank;
+2. grounded generation with fine-grained citations;
+3. reliable tool use through strict schemas;
+4. private-data authorization before model context is assembled;
+5. measurable governance rather than a generic chat wrapper.
