@@ -448,3 +448,8 @@ Do not cut:
 
 - ACL filtering before ranking;
 - Cohere Embed, Rerank, Chat, citations, and strict tools;
+- the poisoned-document demonstration;
+- deterministic policy enforcement;
+- the baseline-versus-governed report;
+- the public demo and clear documentation.
+
