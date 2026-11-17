@@ -308,3 +308,8 @@ The command produces:
 Browser
   |
   v
+FastAPI monolith ------------------------------------------------+
+  |                                                              |
+  +-- React/Vite static UI                                       |
+  +-- demo session + JWT                                         |
+  +-- retrieval service --> ACL SQL --> pgvector --> Cohere Rerank
