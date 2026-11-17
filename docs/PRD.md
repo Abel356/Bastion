@@ -498,3 +498,8 @@ The final write-up and interview walkthrough should make these decisions explici
 - Cohere API-key limits: <https://docs.cohere.com/docs/rate-limits>
 - Render Docker deployment: <https://render.com/docs/docker>
 - Render web-service behavior: <https://render.com/docs/your-first-deploy>
+- Render Deploy button: <https://render.com/docs/deploy-to-render>
+- Neon pgvector direction: <https://neon.com/blog/pg-embedding-extension-for-vector-search>
+
+Model availability, API limits, and hosting plans change. Revalidate them when implementation starts and record the selected versions in the repository.
+
