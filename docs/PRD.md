@@ -263,3 +263,8 @@ Split the cases before defense tuning:
 ### 11.2 Conditions
 
 - `baseline`: ACL filtering remains enabled, because disabling data authorization would make a public demo unsafe; injection scanning, action gating beyond schemas, and output scanning are disabled.
+- `governed`: all controls are enabled.
+
+ACL isolation is measured separately with deterministic integration tests rather than intentionally exposing unauthorized content to the model.
+
+### 11.3 Success rules
