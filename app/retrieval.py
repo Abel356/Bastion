@@ -14,3 +14,8 @@ def authorized_candidates(persona: Persona, chunks: list[Chunk]) -> list[Chunk]:
 
 def lexical_score(query: str, chunk: Chunk) -> int:
     return sum(term in chunk.text.lower() for term in set(query.lower().split()))
+
+def retrieve(persona: Persona, query: str, chunks: list[Chunk], limit: int = 4) -> list[Chunk]:
+    candidates = authorized_candidates(persona, chunks)
+    ranked = sorted(candidates, key=lambda chunk: lexical_score(query, chunk), reverse=True)
+    return ranked[:limit]
