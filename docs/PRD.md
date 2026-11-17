@@ -388,3 +388,8 @@ Local Compose runs only the application and Postgres. The Cohere API is the sole
 - Synthetic corpus generator and committed seed corpus.
 - Persona sessions and access policy.
 - Embed ingestion, ACL-filtered vector search, Rerank, and retrieval tests.
+
+**Exit:** An API test proves unauthorized chunks never enter the authorized candidate set, and an authorized query returns reranked sources.
+
+### Phase 2 — Agent and governance (days 5–8)
+
