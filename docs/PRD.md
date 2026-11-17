@@ -138,3 +138,8 @@ Each document has:
 - `clearance`: 1, 2, or 3;
 - `trust_level`: internal, externally-supplied, or quarantined;
 - `contains_test_payload`: evaluation metadata never shown to the model.
+
+A user may retrieve a document only when:
+
+```text
+document.department is Company or in user.allowed_departments
