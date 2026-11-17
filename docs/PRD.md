@@ -118,3 +118,8 @@ The application has three primary screens.
 - Baseline versus governed headline metrics.
 - Attack success by category.
 - Benign task success.
+- Median latency and tokens per run.
+- Links to the generated Markdown report and raw JSON.
+- Clear limitations statement.
+
+An admin settings product surface is intentionally omitted. Demo policies live in version-controlled configuration so reviewers can inspect them.
