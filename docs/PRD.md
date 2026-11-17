@@ -408,3 +408,8 @@ Local Compose runs only the application and Postgres. The Cohere API is the sole
 - Run the held-out suite twice and publish limitations.
 
 **Exit:** `make eval` creates reproducible JSON and Markdown artifacts.
+
+### Phase 4 — Product and launch (days 12–15)
+
+- Build the three UI screens and scripted demo prompts.
+- Deploy Docker service and hosted Postgres.
