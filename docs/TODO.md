@@ -33,3 +33,8 @@
 - Add workspace, persona selector, citations, and budget meter.
 - Add the security audit timeline and policy outcome cards.
 - Implement 48 evaluation cases with frozen development/test splits.
+- Generate baseline-versus-governed JSON and Markdown reports.
+- Package the monolith with Docker Compose and seed commands.
+- Add GitHub Actions for lint, tests, build, and smoke evaluation.
+- Deploy the web service and pgvector database for the public demo.
+- Finish architecture, threat model, README, and limitations.
