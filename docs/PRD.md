@@ -98,3 +98,8 @@ The application has three primary screens.
 - Expandable source drawer showing document, passage, relevance score, and access label.
 - Governance result card showing allowed, flagged, approval required, or blocked.
 - Per-run budget meter showing steps and model tokens.
+
+### 6.2 Audit
+
+- List of recent runs available to the Security persona.
+- Timeline for one run:
