@@ -23,3 +23,8 @@
 - Enable Cohere strict tool schemas and validate arguments locally.
 - Enforce three-step, input-token, and output-token budgets.
 - Scan retrieved passages for versioned injection patterns.
+- Gate actions by role, recipient domain, provenance, and approval.
+- Scan released output for canaries, URLs, and Markdown images.
+- Persist append-only run events and policy decisions.
+- Add authenticated chat, approval, and audit APIs.
+
