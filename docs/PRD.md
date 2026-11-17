@@ -493,3 +493,8 @@ The final write-up and interview walkthrough should make these decisions explici
 - Cohere model overview: <https://docs.cohere.com/docs/models>
 - Cohere tool use: <https://docs.cohere.com/docs/tool-use-overview>
 - Cohere strict structured tool outputs: <https://docs.cohere.com/docs/structured-outputs>
+- Cohere tool-result citations: <https://docs.cohere.com/docs/tool-use-citations>
+- Cohere Rerank 5 and Context Focus: <https://docs.cohere.com/docs/rerank>
+- Cohere API-key limits: <https://docs.cohere.com/docs/rate-limits>
+- Render Docker deployment: <https://render.com/docs/docker>
+- Render web-service behavior: <https://render.com/docs/your-first-deploy>
