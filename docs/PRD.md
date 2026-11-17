@@ -223,3 +223,8 @@ This scanner is intentionally narrow. The report must state that paraphrased or 
 The model may propose an action but cannot authorize it. Server code checks role permissions, a recipient-domain allow-list, a JSON schema, run provenance, and explicit human approval. External email is denied regardless of model wording.
 
 ### Layer 4: Release policy
+
+Before a response reaches the browser, the server checks for benchmark canaries, restricted markers, URLs, and Markdown image syntax. A match blocks release and produces an auditable event.
+
+## 10. Cohere implementation
+
