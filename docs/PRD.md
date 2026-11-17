@@ -473,3 +473,8 @@ The final write-up and interview walkthrough should make these decisions explici
 - **Grounding:** Cohere citations are preserved rather than reconstructed after generation.
 - **Reliable actions:** strict tool schemas reduce malformed calls, while server policy remains the final authority.
 - **Enterprise boundary:** ACL filtering happens before model context construction.
+- **Honest safety:** defenses are measured against fixed cases and failures are published.
+- **Deployment judgment:** the architecture is private-data-friendly and self-hostable locally, while the portfolio demo stays cheap and accessible.
+- **Product judgment:** the prototype is intentionally narrow enough to finish, test, explain, and maintain.
+
+## 20. Documentation deliverables
