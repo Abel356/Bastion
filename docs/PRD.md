@@ -483,3 +483,8 @@ The final write-up and interview walkthrough should make these decisions explici
 - `docs/architecture.md` with request and trust-boundary diagrams.
 - `docs/threat-model.md` covering assets, actors, boundaries, attacks, mitigations, and residual risks.
 - `artifacts/eval/report.md` and `results.json`.
+- Two-to-three-minute demo video.
+- Blog post: **What the model should never be allowed to decide**.
+- Ten-minute interview walkthrough outline.
+- Resume bullets grounded in measured results rather than security superlatives.
+
