@@ -403,3 +403,8 @@ Local Compose runs only the application and Postgres. The Cohere API is the sole
 ### Phase 3 — Evaluation (days 9–11)
 
 - Finalize 48 cases and freeze the held-out split.
+- Build baseline/governed runner, assertions, cache, and report generator.
+- Run development cases and fix implementation defects.
+- Run the held-out suite twice and publish limitations.
+
+**Exit:** `make eval` creates reproducible JSON and Markdown artifacts.
