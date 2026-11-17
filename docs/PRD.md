@@ -93,3 +93,8 @@ The application has three primary screens.
 ### 6.1 Workspace
 
 - Persona switcher with visible department, role, and clearance.
+- Chat interface with suggested demo prompts.
+- Streaming answer with citation markers.
+- Expandable source drawer showing document, passage, relevance score, and access label.
+- Governance result card showing allowed, flagged, approval required, or blocked.
+- Per-run budget meter showing steps and model tokens.
