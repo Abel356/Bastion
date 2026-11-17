@@ -13,3 +13,8 @@ Bastion will be a small, public, North-inspired demonstration of how to build an
 The prototype will not attempt to reproduce an enterprise agent platform. It will prove one narrow claim:
 
 > An agent can answer from private company documents, cite its evidence, and remain inside deterministic permission, action, and budget boundaries—even when retrieved documents contain hostile instructions.
+
+The project is designed to be:
+
+- impressive in a three-minute product demo;
+- technically credible in a ten-minute engineering walkthrough;
