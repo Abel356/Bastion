@@ -68,3 +68,8 @@ The repository includes a recorded run replay and a committed evaluation report.
 ### Goals
 
 - **G1:** Demonstrate correct access-controlled retrieval with tests proving unauthorized chunks never enter model context.
+- **G2:** Showcase Cohere Chat, Embed, Rerank, strict tool schemas, and citations in one coherent workflow.
+- **G3:** Demonstrate a deterministic policy layer that remains authoritative over model behavior.
+- **G4:** Quantify the effect of governance using a small, reproducible adversarial benchmark.
+- **G5:** Provide an attractive public demo plus a one-command local setup.
+- **G6:** Keep recurring hosting cost low enough to leave the project online during recruiting.
