@@ -38,3 +38,8 @@ The result should feel adjacent to the problems North addresses without claiming
 
 ## 3. Target audience
 
+### Primary
+
+- Cohere engineers and hiring teams evaluating applied AI, backend, ML evaluation, or solutions-engineering ability.
+
+### Secondary
