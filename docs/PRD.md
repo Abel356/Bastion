@@ -168,3 +168,8 @@ This condition is enforced inside the retrieval query before vector ranking. Pos
 - **FR-10:** Log candidate counts but never log or return unauthorized document contents to the requester.
 
 ### 8.3 Narrow agent loop
+
+- **FR-11:** Support a maximum of three model steps per run.
+- **FR-12:** Expose only three tools:
+  - `search_documents(query)`;
+  - `read_document(document_id)`;
