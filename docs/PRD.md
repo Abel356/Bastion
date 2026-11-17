@@ -398,3 +398,8 @@ Local Compose runs only the application and Postgres. The Cohere API is the sole
 - Synthetic email proposal.
 - Retrieval scanner, action policy, output scanner, budgets, and audit events.
 
+**Exit:** The canonical poisoned-document scenario is blocked and fully represented in the audit timeline.
+
+### Phase 3 — Evaluation (days 9–11)
+
+- Finalize 48 cases and freeze the held-out split.
