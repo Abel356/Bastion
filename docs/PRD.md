@@ -353,3 +353,8 @@ One process is easier to deploy, observe, test, and explain. Service boundaries 
 
 - Deploy one Dockerized FastAPI web service to Render.
 - Serve the compiled React application from the same service and domain.
+- Use a small hosted Neon Postgres database with pgvector so the database does not expire with an ephemeral web-service filesystem.
+- Store `COHERE_API_KEY`, `DATABASE_URL`, `JWT_SECRET`, and demo limits as host-managed secrets.
+- Apply migrations and idempotent seed logic at startup for the prototype.
+- Expose `/health` without making a model call.
+- Add a `render.yaml` Blueprint and a Deploy to Render button to the README.
