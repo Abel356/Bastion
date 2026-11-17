@@ -443,3 +443,8 @@ If the schedule slips, cut in this order:
 4. evaluation latency charts;
 5. recorded-run replay tooling; keep only the video and committed report;
 6. persona switching polish.
+
+Do not cut:
+
+- ACL filtering before ranking;
+- Cohere Embed, Rerank, Chat, citations, and strict tools;
