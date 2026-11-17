@@ -143,3 +143,8 @@ A user may retrieve a document only when:
 
 ```text
 document.department is Company or in user.allowed_departments
+AND document.clearance <= user.clearance
+AND document.status = active
+```
+
+This condition is enforced inside the retrieval query before vector ranking. Post-filtering model results is not acceptable.
