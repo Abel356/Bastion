@@ -203,3 +203,8 @@ This condition is enforced inside the retrieval query before vector ranking. Pos
 - **FR-30:** Events include the actor, policy version, authorized source IDs, tool proposals, policy decisions, usage, and released response.
 - **FR-31:** The application database role may insert audit events but may not update or delete them.
 - **FR-32:** The project describes this as tamper-resistant at the application layer, not a compliance-grade immutable ledger.
+
+## 9. Defense design
+
+The runtime does not rely on the model to police itself.
+
