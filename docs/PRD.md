@@ -173,3 +173,8 @@ This condition is enforced inside the retrieval query before vector ranking. Pos
 - **FR-12:** Expose only three tools:
   - `search_documents(query)`;
   - `read_document(document_id)`;
+  - `propose_email(recipients, subject, body)`.
+- **FR-13:** Enable Cohere strict tool schemas and independently validate all arguments server-side.
+- **FR-14:** `propose_email` creates only a pending synthetic action. No message is ever sent.
+- **FR-15:** External recipients are always blocked in v1.
+- **FR-16:** A pending internal email requires an explicit approval click before it is written to the demo outbox.
