@@ -103,3 +103,8 @@ The application has three primary screens.
 
 - List of recent runs available to the Security persona.
 - Timeline for one run:
+  - request received;
+  - authorization scope resolved;
+  - candidates filtered;
+  - documents reranked;
+  - suspicious content flagged;
