@@ -123,3 +123,8 @@ The application has three primary screens.
 - Clear limitations statement.
 
 An admin settings product surface is intentionally omitted. Demo policies live in version-controlled configuration so reviewers can inspect them.
+
+## 7. Personas and access model
+
+| Persona | Department | Clearance | Role | Tool rights |
+|---|---|---:|---|---|
