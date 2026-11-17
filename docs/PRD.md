@@ -358,3 +358,8 @@ One process is easier to deploy, observe, test, and explain. Service boundaries 
 - Apply migrations and idempotent seed logic at startup for the prototype.
 - Expose `/health` without making a model call.
 - Add a `render.yaml` Blueprint and a Deploy to Render button to the README.
+
+Render's free web tier can sleep after inactivity. For application pushes, interviews, or a portfolio launch, use an always-on instance temporarily so the three-minute demo does not begin with a cold start.
+
+### Local demo
+
