@@ -488,3 +488,8 @@ The final write-up and interview walkthrough should make these decisions explici
 - Ten-minute interview walkthrough outline.
 - Resume bullets grounded in measured results rather than security superlatives.
 
+## 21. Source notes current at drafting
+
+- Cohere model overview: <https://docs.cohere.com/docs/models>
+- Cohere tool use: <https://docs.cohere.com/docs/tool-use-overview>
+- Cohere strict structured tool outputs: <https://docs.cohere.com/docs/structured-outputs>
