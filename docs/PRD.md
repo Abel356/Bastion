@@ -343,3 +343,8 @@ One process is easier to deploy, observe, test, and explain. Service boundaries 
 - `chunks`: document ID, text, ordinal, embedding, content hash.
 - `agent_runs`: actor, request, mode, status, policy/model versions, usage totals.
 - `run_events`: run ID, sequence, event type, redacted payload, timestamp.
+- `pending_actions`: proposed email, policy status, approval status.
+- `usage_windows`: session/IP hash, window start, request count.
+- `evaluation_cases`: case metadata and assertions, or loaded from version-controlled YAML.
+
+## 14. Hosting plan
