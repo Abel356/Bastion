@@ -28,3 +28,8 @@
 - Persist append-only run events and policy decisions.
 - Add authenticated chat, approval, and audit APIs.
 
+## 4. Product, evaluation, and deployment
+- Build the React and Vite public demo shell.
+- Add workspace, persona selector, citations, and budget meter.
+- Add the security audit timeline and policy outcome cards.
+- Implement 48 evaluation cases with frozen development/test splits.
