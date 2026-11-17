@@ -38,3 +38,8 @@
 - Add GitHub Actions for lint, tests, build, and smoke evaluation.
 - Deploy the web service and pgvector database for the public demo.
 - Finish architecture, threat model, README, and limitations.
+- Record the two-to-three-minute product demonstration.
+- Run final local, container, hosted, and fresh-clone verification.
+
+## Completion discipline
+- Keep every handwritten commit to five changed lines or fewer.
