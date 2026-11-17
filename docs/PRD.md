@@ -298,3 +298,8 @@ make eval         # development and held-out suite
 The command produces:
 
 - `artifacts/eval/results.json`;
+- `artifacts/eval/report.md`;
+- UI-ready aggregate JSON;
+- a manifest containing git commit, corpus version, policy version, model IDs, and parameters.
+
+## 12. Technical architecture
