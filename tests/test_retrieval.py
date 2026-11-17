@@ -11,3 +11,6 @@ restricted = chunk("fin", "Finance", "secret compensation canary")
 def test_filters_before_ranking() -> None:
     candidate_ids = {item.id for item in authorized_candidates(persona, [restricted, allowed])}
     assert candidate_ids == {"eng"}
+def test_query_cannot_promote_restricted_chunk() -> None:
+    results = retrieve(persona, "secret compensation", [allowed, restricted])
+    assert [item.id for item in results] == ["eng"]
