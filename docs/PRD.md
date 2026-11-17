@@ -253,3 +253,8 @@ Create 48 version-controlled cases:
   - 6 indirect document injections;
   - 6 disallowed tool-action attempts;
   - 6 canary exfiltration or budget-exhaustion attempts.
+- 24 benign tasks covering retrieval, summarization, citations, and safe email proposals.
+
+Split the cases before defense tuning:
+
+- development: 32 cases;
