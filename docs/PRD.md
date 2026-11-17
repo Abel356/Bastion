@@ -293,3 +293,8 @@ This plan produces roughly 128 condition/case runs before retries, small enough 
 ```text
 make eval-smoke   # eight representative cases
 make eval         # development and held-out suite
+```
+
+The command produces:
+
+- `artifacts/eval/results.json`;
