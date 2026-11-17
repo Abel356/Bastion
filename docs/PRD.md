@@ -48,3 +48,8 @@ The result should feel adjacent to the problems North addresses without claiming
 - Developers who want a compact reference implementation for governed RAG.
 
 ## 4. Demo narrative
+
+The public demo uses a fictional company named **Acme Systems** and three selectable personas. Persona selection creates a short-lived signed demo session; it is not presented as production authentication.
+
+### Three-minute walkthrough
+
