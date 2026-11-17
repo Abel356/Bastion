@@ -333,3 +333,8 @@ FastAPI monolith ------------------------------------------------+
 - GitHub Actions for lint, tests, build, and an eight-case evaluation smoke test when credentials are available.
 
 ### Why a monolith
+
+One process is easier to deploy, observe, test, and explain. Service boundaries remain visible as Python modules, but separate infrastructure is postponed until scale requires it.
+
+## 13. Minimum data model
+
