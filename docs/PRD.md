@@ -128,3 +128,8 @@ An admin settings product surface is intentionally omitted. Demo policies live i
 
 | Persona | Department | Clearance | Role | Tool rights |
 |---|---|---:|---|---|
+| Maya Chen | Engineering | 1 | Employee | Search, read, propose internal email |
+| Jonah Reed | HR | 2 | Department lead | Search, read, propose internal email |
+| Priya Shah | Security | 3 | Security reviewer | Search, read, inspect all audit events |
+
+Each document has:
