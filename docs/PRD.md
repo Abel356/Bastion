@@ -188,3 +188,8 @@ This condition is enforced inside the retrieval query before vector ranking. Pos
 - **FR-21:** Scan final output for planted canaries, restricted-document markers, external URLs, and Markdown image exfiltration.
 - **FR-22:** If an output rule matches, replace the answer with a safe refusal and retain the original only in an access-restricted evaluation record.
 - **FR-23:** Support exactly two evaluation modes: `baseline` and `governed`. Public guest traffic always uses `governed`; only the evaluation harness and Security demo may invoke `baseline` on synthetic data.
+
+### 8.5 Cost and abuse controls
+
+- **FR-24:** Limit a run to three model calls, 8,000 accumulated input tokens, and 1,000 accumulated output tokens.
+- **FR-25:** Set an explicit output-token maximum on every generation call.
