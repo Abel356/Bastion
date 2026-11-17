@@ -8,3 +8,8 @@ class Role(StrEnum):
     SECURITY = "security"
 
 class Persona(BaseModel):
+    id: str
+    name: str
+    departments: frozenset[str]
+    clearance: int
+    role: Role
