@@ -433,3 +433,8 @@ The prototype is complete when:
 - `docker compose up --build` starts a local copy from documented prerequisites;
 - CI passes and the README links the demo, report, architecture, threat model, and video.
 
+## 17. What gets cut first
+
+If the schedule slips, cut in this order:
+
+1. email approval persistence; show a policy decision card instead;
