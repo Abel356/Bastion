@@ -313,3 +313,8 @@ FastAPI monolith ------------------------------------------------+
   +-- React/Vite static UI                                       |
   +-- demo session + JWT                                         |
   +-- retrieval service --> ACL SQL --> pgvector --> Cohere Rerank
+  +-- three-step agent --> policy engine --> synthetic tools     |
+  +-- defense scanners                                           |
+  +-- audit/evaluation API                                       |
+  |                                                              |
+  +----------------------> Cohere Chat / Embed / Rerank APIs -----+
