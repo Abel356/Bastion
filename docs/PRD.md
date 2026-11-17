@@ -338,3 +338,8 @@ One process is easier to deploy, observe, test, and explain. Service boundaries 
 
 ## 13. Minimum data model
 
+- `demo_users`: persona, department memberships, role, clearance.
+- `documents`: title, department, clearance, trust level, status, corpus version.
+- `chunks`: document ID, text, ordinal, embedding, content hash.
+- `agent_runs`: actor, request, mode, status, policy/model versions, usage totals.
+- `run_events`: run ID, sequence, event type, redacted payload, timestamp.
