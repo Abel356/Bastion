@@ -213,3 +213,8 @@ The runtime does not rely on the model to police itself.
 Unauthorized chunks are excluded in SQL. This is the strongest and most testable control in the system. The model cannot disclose text it never receives.
 
 ### Layer 2: Untrusted-content handling
+
+Authorized retrieved content is still untrusted. Every passage is wrapped with a stable source ID and trust label. A deterministic scanner can quarantine passages containing patterns such as instruction-hierarchy overrides, requests to invoke tools, exfiltration URLs, or planted benchmark markers.
+
+This scanner is intentionally narrow. The report must state that paraphrased or novel attacks can evade it.
+
