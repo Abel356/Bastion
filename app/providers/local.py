@@ -28,3 +28,8 @@ class LocalProvider:
             )
             for index, document in enumerate(documents)
         ]
+        return sorted(scored, key=lambda item: item.score, reverse=True)[:top_n]
+
+    def chat(
+        self, messages: list[dict[str, Any]],
+        tools: list[dict[str, Any]] | None = None,
