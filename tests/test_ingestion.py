@@ -18,3 +18,8 @@ def test_manifest_labels_poisoned_documents() -> None:
     assert len(poisoned) == 3
     assert all(item["trust_level"] == "external" for item in poisoned)
 
+
+def test_chunk_text_preserves_content() -> None:
+    text = "First paragraph.\n\nSecond paragraph."
+    chunks = chunk_text(text, max_chars=20)
+    assert chunks == ["First paragraph.", "Second paragraph."]
