@@ -38,3 +38,8 @@ class LocalProvider:
         del tools, max_tokens
         latest = next(
             (message.get("content", "") for message in reversed(messages)), ""
+        )
+        return ChatResult(
+            text=f"Offline demo response: {latest}",
+            input_tokens=len(str(latest).split()),
+            output_tokens=len(str(latest).split()) + 3,
