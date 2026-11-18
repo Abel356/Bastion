@@ -33,3 +33,8 @@ def test_document_embeddings_use_search_document() -> None:
     assert client.last_embed["input_type"] == "search_document"
 
 
+def test_query_embeddings_use_search_query() -> None:
+    client = FakeClient()
+    result = CohereProvider(client=client).embed_query("policy")
+    assert result == [0.1, 0.2]
+    assert client.last_embed["input_type"] == "search_query"
