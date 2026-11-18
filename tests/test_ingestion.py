@@ -13,3 +13,8 @@ def test_manifest_contains_sixty_documents() -> None:
     assert len({item["department"] for item in manifest}) == 5
 
 
+def test_manifest_labels_poisoned_documents() -> None:
+    poisoned = [item for item in load_manifest() if item["contains_test_payload"]]
+    assert len(poisoned) == 3
+    assert all(item["trust_level"] == "external" for item in poisoned)
+
