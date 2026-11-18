@@ -18,3 +18,8 @@ class Citation(BaseModel):
 class ChatResult(BaseModel):
     text: str
     citations: list[Citation] = Field(default_factory=list)
+    tool_calls: list[dict[str, Any]] = Field(default_factory=list)
+    input_tokens: int = 0
+    output_tokens: int = 0
+    finish_reason: str | None = None
+
