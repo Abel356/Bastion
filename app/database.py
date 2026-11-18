@@ -23,3 +23,8 @@ SessionLocal = sessionmaker(bind=engine, expire_on_commit=False)
 def get_session() -> Generator[Session, None, None]:
     with SessionLocal() as session:
         yield session
+
+
+def create_schema() -> None:
+    from app import models  # noqa: F401
+
