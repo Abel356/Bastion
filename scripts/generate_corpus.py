@@ -28,3 +28,8 @@ def document_body(department: str, topic: str, variant: int, poisoned: bool) -> 
 
 def build_documents() -> list[dict]:
     documents: list[dict] = []
+    index = 0
+    for department, topics in DEPARTMENTS.items():
+        for topic in topics:
+            for variant in range(3):
+                identifier = f"{slug(department)}-{slug(topic)}-{variant + 1}"
