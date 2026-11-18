@@ -23,3 +23,8 @@ class FakeClient:
         citation = NS(start=0, end=4, text="fact", sources=[NS(id="doc-1")])
         message = NS(content=[NS(text="fact")], citations=[citation], tool_calls=[])
         usage = NS(tokens=NS(input_tokens=3, output_tokens=1))
+        return NS(message=message, usage=usage, finish_reason="COMPLETE")
+
+
+def test_document_embeddings_use_search_document() -> None:
+    client = FakeClient()
