@@ -8,3 +8,8 @@ from app.config import settings
 
 
 class Base(DeclarativeBase):
+    pass
+
+
+def build_engine(url: str) -> Engine:
+    connect_args = {"check_same_thread": False} if url.startswith("sqlite") else {}
