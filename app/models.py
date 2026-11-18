@@ -68,3 +68,8 @@ class AgentRunRow(Base):
 
 class RunEventRow(Base):
     __tablename__ = "run_events"
+
+    id: Mapped[str] = mapped_column(String(64), primary_key=True, default=new_id)
+    run_id: Mapped[str] = mapped_column(ForeignKey("agent_runs.id"), index=True)
+    sequence: Mapped[int] = mapped_column(Integer)
+    event_type: Mapped[str] = mapped_column(String(64), index=True)
