@@ -68,3 +68,8 @@ class CohereProvider:
         text = "".join(getattr(item, "text", "") for item in content)
         citations = [self._citation(item) for item in (response.message.citations or [])]
         tool_calls = [call.model_dump(mode="json") for call in (response.message.tool_calls or [])]
+        tokens = response.usage.tokens if response.usage else None
+        finish_reason = getattr(response.finish_reason, "value", response.finish_reason)
+        return ChatResult(
+            text=text, citations=citations, tool_calls=tool_calls,
+            input_tokens=getattr(tokens, "input_tokens", 0),
