@@ -8,3 +8,8 @@ class LocalProvider:
     """Deterministic offline provider for tests and recorded demos."""
 
     def _embedding(self, text: str) -> list[float]:
+        digest = sha256(text.encode("utf-8")).digest()
+        return [byte / 255 for byte in digest]
+
+    def embed_documents(self, texts: list[str]) -> list[list[float]]:
+        return [self._embedding(text) for text in texts]
