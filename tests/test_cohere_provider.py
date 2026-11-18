@@ -38,3 +38,8 @@ def test_query_embeddings_use_search_query() -> None:
     result = CohereProvider(client=client).embed_query("policy")
     assert result == [0.1, 0.2]
     assert client.last_embed["input_type"] == "search_query"
+
+
+def test_rerank_maps_scores_and_indexes() -> None:
+    client = FakeClient()
+    results = CohereProvider(client=client).rerank("query", ["a", "b"], 2)
