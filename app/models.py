@@ -33,3 +33,8 @@ class DocumentRow(Base):
     title: Mapped[str] = mapped_column(String(256))
     department: Mapped[str] = mapped_column(String(64), index=True)
     clearance: Mapped[int] = mapped_column(Integer, index=True)
+    trust_level: Mapped[str] = mapped_column(String(32), default="internal")
+    active: Mapped[bool] = mapped_column(Boolean, default=True, index=True)
+    content: Mapped[str] = mapped_column(Text)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
+
