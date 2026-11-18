@@ -48,3 +48,8 @@ class ChunkRow(Base):
     text: Mapped[str] = mapped_column(Text)
     embedding: Mapped[list[float] | None] = mapped_column(
         Vector(1024).with_variant(JSON, "sqlite"), nullable=True
+    )
+
+
+class AgentRunRow(Base):
+    __tablename__ = "agent_runs"
