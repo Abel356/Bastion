@@ -13,3 +13,8 @@ def add_document(
         id=identifier, title=identifier, department=department,
         clearance=clearance, active=active, content=text
     )
+    chunk = ChunkRow(id=f"{identifier}-0", document_id=identifier, ordinal=0, text=text)
+    session.add_all([document, chunk])
+    session.commit()
+    return chunk.id
+
