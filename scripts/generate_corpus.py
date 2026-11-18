@@ -43,3 +43,8 @@ def build_documents() -> list[dict]:
                     "contains_test_payload": poisoned,
                     "filename": f"{identifier}.md",
                     "content": document_body(department, topic, variant, poisoned),
+                })
+                index += 1
+    return documents
+
+
