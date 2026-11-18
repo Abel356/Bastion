@@ -28,3 +28,4 @@ def get_session() -> Generator[Session, None, None]:
 def create_schema() -> None:
     from app import models  # noqa: F401
 
+    Base.metadata.create_all(engine)
