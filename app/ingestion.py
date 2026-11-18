@@ -58,3 +58,4 @@ def seed_corpus(session: Session, root: Path = CORPUS_ROOT) -> int:
             ))
         inserted += 1
     session.commit()
+    return inserted
