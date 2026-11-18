@@ -13,3 +13,8 @@ class CohereProvider:
             raise ValueError("COHERE_API_KEY is required for the Cohere provider")
         self.client = client or cohere.ClientV2(key)
 
+    def embed_documents(self, texts: list[str]) -> list[list[float]]:
+        response = self.client.embed(
+            model=settings.cohere_embed_model,
+            input_type="search_document",
+            texts=texts,
