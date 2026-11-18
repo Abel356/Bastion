@@ -28,3 +28,8 @@ def chunk_text(text: str, max_chars: int = 800) -> list[str]:
         chunks.append(current)
     return chunks
 
+
+def seed_personas(session: Session) -> int:
+    for persona in PERSONAS.values():
+        session.merge(DemoUserRow(
+            id=persona.id, name=persona.name, departments=sorted(persona.departments),
