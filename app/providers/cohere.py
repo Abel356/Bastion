@@ -58,3 +58,8 @@ class CohereProvider:
     ) -> ChatResult:
         response = self.client.chat(
             model=settings.cohere_chat_model,
+            messages=messages,
+            tools=tools,
+            strict_tools=bool(tools),
+            max_tokens=max_tokens,
+            temperature=0.0,
