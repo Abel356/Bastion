@@ -8,3 +8,8 @@ from app.repositories.documents import list_authorized_chunks
 
 
 def test_manifest_contains_sixty_documents() -> None:
+    manifest = load_manifest()
+    assert len(manifest) == 60
+    assert len({item["department"] for item in manifest}) == 5
+
+
