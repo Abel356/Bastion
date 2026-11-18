@@ -43,3 +43,8 @@ def test_query_embeddings_use_search_query() -> None:
 def test_rerank_maps_scores_and_indexes() -> None:
     client = FakeClient()
     results = CohereProvider(client=client).rerank("query", ["a", "b"], 2)
+    assert [(item.index, item.score) for item in results] == [(1, 0.9), (0, 0.2)]
+    assert client.last_rerank["top_n"] == 2
+
+
+def test_chat_preserves_citations_and_usage() -> None:
