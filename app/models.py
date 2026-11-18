@@ -83,3 +83,6 @@ class PendingActionRow(Base):
     id: Mapped[str] = mapped_column(String(64), primary_key=True, default=new_id)
     run_id: Mapped[str] = mapped_column(ForeignKey("agent_runs.id"), index=True)
     kind: Mapped[str] = mapped_column(String(64))
+    status: Mapped[str] = mapped_column(String(32), default="pending")
+    payload: Mapped[dict] = mapped_column(JSON)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
