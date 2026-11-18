@@ -18,3 +18,8 @@ def build_engine(url: str) -> Engine:
 
 engine = build_engine(settings.database_url)
 SessionLocal = sessionmaker(bind=engine, expire_on_commit=False)
+
+
+def get_session() -> Generator[Session, None, None]:
+    with SessionLocal() as session:
+        yield session
