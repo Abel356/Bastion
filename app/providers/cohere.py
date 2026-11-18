@@ -23,3 +23,8 @@ class CohereProvider:
         )
         if response.embeddings.float_ is None:
             raise RuntimeError("Cohere returned no float embeddings")
+        return response.embeddings.float_
+
+    def embed_query(self, text: str) -> list[float]:
+        response = self.client.embed(
+            model=settings.cohere_embed_model,
