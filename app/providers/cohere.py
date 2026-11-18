@@ -43,3 +43,8 @@ class CohereProvider:
         response = self.client.rerank(
             model=settings.cohere_rerank_model,
             query=query,
+            documents=documents,
+            top_n=top_n,
+        )
+        return [
+            RerankItem(index=item.index, score=item.relevance_score)
