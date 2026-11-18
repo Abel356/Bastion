@@ -18,3 +18,8 @@ def authorized_chunk_statement(persona: Persona) -> Select:
         or_(
             DocumentRow.department == "Company",
             DocumentRow.department.in_(departments),
+        ),
+    ).order_by(DocumentRow.id, ChunkRow.ordinal)
+
+
+def row_to_chunk(chunk: ChunkRow, document: DocumentRow) -> Chunk:
