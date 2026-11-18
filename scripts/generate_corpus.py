@@ -48,3 +48,8 @@ def build_documents() -> list[dict]:
     return documents
 
 
+def main() -> None:
+    root = Path(__file__).resolve().parents[1] / "corpus"
+    root.mkdir(exist_ok=True)
+    documents = build_documents()
+    for document in documents:
