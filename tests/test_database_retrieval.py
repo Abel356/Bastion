@@ -38,3 +38,8 @@ def test_sql_filters_before_candidates(session: Session) -> None:
 
 def test_restricted_query_cannot_promote_sql_row(session: Session) -> None:
     allowed_id = add_document(session, "eng", "Engineering", "incident policy")
+    add_document(session, "fin", "Finance", "secret compensation canary")
+    results = retrieve_authorized(session, MAYA, "secret compensation")
+    assert [chunk.id for chunk in results] == [allowed_id]
+
+
