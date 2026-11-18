@@ -18,3 +18,8 @@ def chunk_text(text: str, max_chars: int = 800) -> list[str]:
     chunks: list[str] = []
     current = ""
     for paragraph in paragraphs:
+        candidate = f"{current}\n\n{paragraph}".strip()
+        if current and len(candidate) > max_chars:
+            chunks.append(current)
+            current = paragraph
+        else:
