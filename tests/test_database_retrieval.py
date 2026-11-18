@@ -23,3 +23,8 @@ def test_statement_contains_acl_predicates() -> None:
     sql = str(authorized_chunk_statement(MAYA))
     assert "documents.active" in sql
     assert "documents.clearance" in sql
+    assert "documents.department" in sql
+
+
+def test_sql_filters_before_candidates(session: Session) -> None:
+    allowed_id = add_document(session, "eng", "Engineering", "incident policy")
