@@ -53,3 +53,8 @@ def main() -> None:
     root.mkdir(exist_ok=True)
     documents = build_documents()
     for document in documents:
+        (root / document["filename"]).write_text(document["content"], encoding="utf-8")
+    manifest = [{key: value for key, value in document.items() if key != "content"} for document in documents]
+    (root / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+    print(f"Generated {len(documents)} documents in {root}")
+
