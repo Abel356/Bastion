@@ -33,3 +33,8 @@ def test_sql_filters_before_candidates(session: Session) -> None:
     add_document(session, "high", "Engineering", "restricted", clearance=2)
     add_document(session, "off", "Engineering", "revoked", active=False)
     ids = {chunk.id for chunk in list_authorized_chunks(session, MAYA)}
+    assert ids == {allowed_id, company_id}
+
+
+def test_restricted_query_cannot_promote_sql_row(session: Session) -> None:
+    allowed_id = add_document(session, "eng", "Engineering", "incident policy")
