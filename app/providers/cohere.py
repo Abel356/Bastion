@@ -18,3 +18,8 @@ class CohereProvider:
             model=settings.cohere_embed_model,
             input_type="search_document",
             texts=texts,
+            embedding_types=["float"],
+            output_dimension=1024,
+        )
+        if response.embeddings.float_ is None:
+            raise RuntimeError("Cohere returned no float embeddings")
