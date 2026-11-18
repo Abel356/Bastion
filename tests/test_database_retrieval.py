@@ -28,3 +28,8 @@ def test_statement_contains_acl_predicates() -> None:
 
 def test_sql_filters_before_candidates(session: Session) -> None:
     allowed_id = add_document(session, "eng", "Engineering", "incident policy")
+    company_id = add_document(session, "all", "Company", "holiday policy")
+    add_document(session, "fin", "Finance", "compensation canary")
+    add_document(session, "high", "Engineering", "restricted", clearance=2)
+    add_document(session, "off", "Engineering", "revoked", active=False)
+    ids = {chunk.id for chunk in list_authorized_chunks(session, MAYA)}
