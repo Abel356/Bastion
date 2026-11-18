@@ -23,3 +23,8 @@ def test_chunk_text_preserves_content() -> None:
     text = "First paragraph.\n\nSecond paragraph."
     chunks = chunk_text(text, max_chars=20)
     assert chunks == ["First paragraph.", "Second paragraph."]
+
+
+def test_seed_is_idempotent(session: Session) -> None:
+    assert seed_personas(session) == 3
+    assert seed_corpus(session) == 60
