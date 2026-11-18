@@ -8,3 +8,8 @@ from sqlalchemy.orm import Mapped, mapped_column
 from app.database import Base
 
 
+def new_id() -> str:
+    return str(uuid4())
+
+
+def utc_now() -> datetime:
