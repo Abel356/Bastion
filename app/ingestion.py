@@ -33,3 +33,8 @@ def seed_personas(session: Session) -> int:
     for persona in PERSONAS.values():
         session.merge(DemoUserRow(
             id=persona.id, name=persona.name, departments=sorted(persona.departments),
+            clearance=persona.clearance, role=persona.role.value
+        ))
+    session.commit()
+    return len(PERSONAS)
+
