@@ -53,3 +53,8 @@ class ChunkRow(Base):
 
 class AgentRunRow(Base):
     __tablename__ = "agent_runs"
+
+    id: Mapped[str] = mapped_column(String(64), primary_key=True, default=new_id)
+    user_id: Mapped[str] = mapped_column(String(64), index=True)
+    request: Mapped[str] = mapped_column(Text)
+    status: Mapped[str] = mapped_column(String(32), default="running")
