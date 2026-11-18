@@ -18,3 +18,8 @@ class LocalProvider:
         return self._embedding(text)
 
     def rerank(
+        self, query: str, documents: list[str], top_n: int
+    ) -> list[RerankItem]:
+        terms = set(query.lower().split())
+        scored = [
+            RerankItem(
