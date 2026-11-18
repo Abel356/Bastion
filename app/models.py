@@ -58,3 +58,8 @@ class AgentRunRow(Base):
     user_id: Mapped[str] = mapped_column(String(64), index=True)
     request: Mapped[str] = mapped_column(Text)
     status: Mapped[str] = mapped_column(String(32), default="running")
+    mode: Mapped[str] = mapped_column(String(32), default="governed")
+    model_id: Mapped[str | None] = mapped_column(String(128), nullable=True)
+    input_tokens: Mapped[int] = mapped_column(Integer, default=0)
+    output_tokens: Mapped[int] = mapped_column(Integer, default=0)
+    step_count: Mapped[int] = mapped_column(Integer, default=0)
