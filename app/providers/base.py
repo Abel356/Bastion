@@ -38,3 +38,7 @@ class ModelProvider(Protocol):
 
     def chat(
         self, messages: list[dict[str, Any]],
+        tools: list[dict[str, Any]] | None = None,
+        max_tokens: int = 800,
+    ) -> ChatResult:
+        ...
