@@ -13,3 +13,8 @@ def new_id() -> str:
 
 
 def utc_now() -> datetime:
+    return datetime.now(UTC)
+
+
+class DemoUserRow(Base):
+    __tablename__ = "demo_users"
