@@ -33,3 +33,8 @@ class ModelProvider(Protocol):
 
     def rerank(
         self, query: str, documents: list[str], top_n: int
+    ) -> list[RerankItem]:
+        ...
+
+    def chat(
+        self, messages: list[dict[str, Any]],
