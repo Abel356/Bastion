@@ -23,3 +23,8 @@ def chunk_text(text: str, max_chars: int = 800) -> list[str]:
             chunks.append(current)
             current = paragraph
         else:
+            current = candidate
+    if current:
+        chunks.append(current)
+    return chunks
+
