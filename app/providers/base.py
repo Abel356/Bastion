@@ -23,3 +23,8 @@ class ChatResult(BaseModel):
     output_tokens: int = 0
     finish_reason: str | None = None
 
+
+class ModelProvider(Protocol):
+    def embed_documents(self, texts: list[str]) -> list[list[float]]:
+        ...
+
