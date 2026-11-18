@@ -38,3 +38,8 @@ def list_authorized_chunks(session: Session, persona: Persona) -> list[Chunk]:
     return [row_to_chunk(chunk, document) for chunk, document in rows]
 
 
+def retrieve_authorized(
+    session: Session, persona: Persona, query: str, limit: int = 4
+) -> list[Chunk]:
+    chunks = list_authorized_chunks(session, persona)
+    return retrieve(persona, query, chunks, limit)
