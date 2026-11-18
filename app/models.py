@@ -73,3 +73,8 @@ class RunEventRow(Base):
     run_id: Mapped[str] = mapped_column(ForeignKey("agent_runs.id"), index=True)
     sequence: Mapped[int] = mapped_column(Integer)
     event_type: Mapped[str] = mapped_column(String(64), index=True)
+    payload: Mapped[dict] = mapped_column(JSON, default=dict)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
+
+
+class PendingActionRow(Base):
