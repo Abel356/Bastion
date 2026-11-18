@@ -13,3 +13,8 @@ def test_local_rerank_orders_matching_text() -> None:
     provider = LocalProvider()
     results = provider.rerank(
         "incident response", ["parking guide", "incident response policy"], 2
+    )
+    assert [item.index for item in results] == [1, 0]
+
+
+def test_local_chat_is_clearly_labeled() -> None:
