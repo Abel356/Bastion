@@ -18,3 +18,8 @@ class FakeClient:
         results = [NS(index=1, relevance_score=0.9), NS(index=0, relevance_score=0.2)]
         return NS(results=results)
 
+    def chat(self, **kwargs):
+        self.last_chat = kwargs
+        citation = NS(start=0, end=4, text="fact", sources=[NS(id="doc-1")])
+        message = NS(content=[NS(text="fact")], citations=[citation], tool_calls=[])
+        usage = NS(tokens=NS(input_tokens=3, output_tokens=1))
