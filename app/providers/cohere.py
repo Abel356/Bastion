@@ -73,3 +73,8 @@ class CohereProvider:
         return ChatResult(
             text=text, citations=citations, tool_calls=tool_calls,
             input_tokens=getattr(tokens, "input_tokens", 0),
+            output_tokens=getattr(tokens, "output_tokens", 0),
+            finish_reason=finish_reason,
+        )
+
+    @staticmethod
