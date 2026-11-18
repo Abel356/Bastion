@@ -23,3 +23,8 @@ def authorized_chunk_statement(persona: Persona) -> Select:
 
 
 def row_to_chunk(chunk: ChunkRow, document: DocumentRow) -> Chunk:
+    label = DocumentLabel(
+        id=document.id,
+        department=document.department,
+        clearance=document.clearance,
+        trust_level=TrustLevel(document.trust_level),
