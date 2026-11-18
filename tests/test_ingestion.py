@@ -28,3 +28,8 @@ def test_chunk_text_preserves_content() -> None:
 def test_seed_is_idempotent(session: Session) -> None:
     assert seed_personas(session) == 3
     assert seed_corpus(session) == 60
+    assert seed_corpus(session) == 0
+    assert session.scalar(select(func.count()).select_from(DemoUserRow)) == 3
+    assert session.scalar(select(func.count()).select_from(DocumentRow)) == 60
+    assert session.scalar(select(func.count()).select_from(ChunkRow)) >= 60
+
