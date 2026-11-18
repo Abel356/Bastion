@@ -33,3 +33,8 @@ def test_seed_is_idempotent(session: Session) -> None:
     assert session.scalar(select(func.count()).select_from(DocumentRow)) == 60
     assert session.scalar(select(func.count()).select_from(ChunkRow)) >= 60
 
+
+def test_seeded_acl_excludes_finance_for_engineer(session: Session) -> None:
+    seed_corpus(session)
+    chunks = list_authorized_chunks(session, MAYA)
+    departments = {chunk.label.department for chunk in chunks}
