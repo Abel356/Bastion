@@ -8,3 +8,8 @@ class FakeClient:
         self.last_embed: dict = {}
         self.last_rerank: dict = {}
         self.last_chat: dict = {}
+
+    def embed(self, **kwargs):
+        self.last_embed = kwargs
+        return NS(embeddings=NS(float_=[[0.1, 0.2]]))
+
