@@ -48,3 +48,8 @@ def seed_corpus(session: Session, root: Path = CORPUS_ROOT) -> int:
         content = (root / item["filename"]).read_text(encoding="utf-8")
         document = DocumentRow(
             id=item["id"], title=item["title"], department=item["department"],
+            clearance=item["clearance"], trust_level=item["trust_level"], content=content
+        )
+        session.add(document)
+        for ordinal, text in enumerate(chunk_text(content)):
+            session.add(ChunkRow(
