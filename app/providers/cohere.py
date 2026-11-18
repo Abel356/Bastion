@@ -48,3 +48,8 @@ class CohereProvider:
         )
         return [
             RerankItem(index=item.index, score=item.relevance_score)
+            for item in response.results
+        ]
+
+    def chat(
+        self, messages: list[dict[str, Any]],
