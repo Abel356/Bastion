@@ -13,3 +13,8 @@ class LocalProvider:
 
     def embed_documents(self, texts: list[str]) -> list[list[float]]:
         return [self._embedding(text) for text in texts]
+
+    def embed_query(self, text: str) -> list[float]:
+        return self._embedding(text)
+
+    def rerank(
