@@ -33,3 +33,8 @@ class LocalProvider:
     def chat(
         self, messages: list[dict[str, Any]],
         tools: list[dict[str, Any]] | None = None,
+        max_tokens: int = 800,
+    ) -> ChatResult:
+        del tools, max_tokens
+        latest = next(
+            (message.get("content", "") for message in reversed(messages)), ""
