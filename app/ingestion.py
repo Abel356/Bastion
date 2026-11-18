@@ -38,3 +38,8 @@ def seed_personas(session: Session) -> int:
     session.commit()
     return len(PERSONAS)
 
+
+def seed_corpus(session: Session, root: Path = CORPUS_ROOT) -> int:
+    manifest = load_manifest(root)
+    inserted = 0
+    for item in manifest:
