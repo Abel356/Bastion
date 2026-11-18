@@ -8,3 +8,8 @@ from app.retrieval import Chunk, retrieve
 
 
 def authorized_chunk_statement(persona: Persona) -> Select:
+    departments = tuple(persona.departments)
+    statement = select(ChunkRow, DocumentRow).join(
+        DocumentRow, ChunkRow.document_id == DocumentRow.id
+    )
+    return statement.where(
