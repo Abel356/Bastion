@@ -33,3 +33,8 @@ class CohereProvider:
             embedding_types=["float"],
             output_dimension=1024,
         )
+        if not response.embeddings.float_:
+            raise RuntimeError("Cohere returned no query embedding")
+        return response.embeddings.float_[0]
+
+    def rerank(
