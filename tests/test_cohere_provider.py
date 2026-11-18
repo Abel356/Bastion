@@ -48,3 +48,8 @@ def test_rerank_maps_scores_and_indexes() -> None:
 
 
 def test_chat_preserves_citations_and_usage() -> None:
+    client = FakeClient()
+    tools = [{"type": "function", "function": {"name": "search"}}]
+    result = CohereProvider(client=client).chat([{"role": "user", "content": "hi"}], tools)
+    assert result.text == "fact"
+    assert result.citations[0].source_ids == ["doc-1"]
