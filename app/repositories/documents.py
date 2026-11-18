@@ -33,3 +33,8 @@ def row_to_chunk(chunk: ChunkRow, document: DocumentRow) -> Chunk:
     return Chunk(id=chunk.id, text=chunk.text, label=label)
 
 
+def list_authorized_chunks(session: Session, persona: Persona) -> list[Chunk]:
+    rows = session.execute(authorized_chunk_statement(persona)).all()
+    return [row_to_chunk(chunk, document) for chunk, document in rows]
+
+
