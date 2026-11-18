@@ -8,3 +8,8 @@ def test_local_embeddings_are_deterministic() -> None:
     assert first == second
     assert len(first) == 32
 
+
+def test_local_rerank_orders_matching_text() -> None:
+    provider = LocalProvider()
+    results = provider.rerank(
+        "incident response", ["parking guide", "incident response policy"], 2
