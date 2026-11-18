@@ -28,3 +28,8 @@ class CohereProvider:
     def embed_query(self, text: str) -> list[float]:
         response = self.client.embed(
             model=settings.cohere_embed_model,
+            input_type="search_query",
+            texts=[text],
+            embedding_types=["float"],
+            output_dimension=1024,
+        )
