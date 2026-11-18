@@ -13,3 +13,8 @@ def load_manifest(root: Path = CORPUS_ROOT) -> list[dict]:
     return json.loads((root / "manifest.json").read_text(encoding="utf-8"))
 
 
+def chunk_text(text: str, max_chars: int = 800) -> list[str]:
+    paragraphs = [paragraph.strip() for paragraph in text.split("\n\n") if paragraph.strip()]
+    chunks: list[str] = []
+    current = ""
+    for paragraph in paragraphs:
