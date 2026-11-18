@@ -8,3 +8,8 @@ from app.providers.base import ChatResult, Citation, RerankItem
 
 class CohereProvider:
     def __init__(self, api_key: str | None = None, client: Any = None) -> None:
+        key = api_key or settings.cohere_api_key
+        if client is None and not key:
+            raise ValueError("COHERE_API_KEY is required for the Cohere provider")
+        self.client = client or cohere.ClientV2(key)
+
