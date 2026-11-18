@@ -43,3 +43,8 @@ def test_restricted_query_cannot_promote_sql_row(session: Session) -> None:
     assert [chunk.id for chunk in results] == [allowed_id]
 
 
+def test_company_evidence_can_rank_first(session: Session) -> None:
+    add_document(session, "eng", "Engineering", "office parking")
+    company_id = add_document(session, "all", "Company", "remote work policy")
+    results = retrieve_authorized(session, MAYA, "remote work")
+    assert results[0].id == company_id
