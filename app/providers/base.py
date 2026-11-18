@@ -8,3 +8,8 @@ class RerankItem(BaseModel):
     score: float
 
 
+class Citation(BaseModel):
+    start: int
+    end: int
+    text: str
+    source_ids: list[str] = Field(default_factory=list)
