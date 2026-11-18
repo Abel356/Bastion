@@ -78,3 +78,8 @@ class RunEventRow(Base):
 
 
 class PendingActionRow(Base):
+    __tablename__ = "pending_actions"
+
+    id: Mapped[str] = mapped_column(String(64), primary_key=True, default=new_id)
+    run_id: Mapped[str] = mapped_column(ForeignKey("agent_runs.id"), index=True)
+    kind: Mapped[str] = mapped_column(String(64))
