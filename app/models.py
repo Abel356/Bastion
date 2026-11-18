@@ -28,3 +28,8 @@ class DemoUserRow(Base):
 
 class DocumentRow(Base):
     __tablename__ = "documents"
+
+    id: Mapped[str] = mapped_column(String(64), primary_key=True, default=new_id)
+    title: Mapped[str] = mapped_column(String(256))
+    department: Mapped[str] = mapped_column(String(64), index=True)
+    clearance: Mapped[int] = mapped_column(Integer, index=True)
