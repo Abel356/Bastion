@@ -53,3 +53,8 @@ def seed_corpus(session: Session, root: Path = CORPUS_ROOT) -> int:
         session.add(document)
         for ordinal, text in enumerate(chunk_text(content)):
             session.add(ChunkRow(
+                id=f"{document.id}:{ordinal}", document_id=document.id,
+                ordinal=ordinal, text=text
+            ))
+        inserted += 1
+    session.commit()
