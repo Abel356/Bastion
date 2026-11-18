@@ -23,3 +23,8 @@ class DemoUserRow(Base):
     name: Mapped[str] = mapped_column(String(128))
     departments: Mapped[list[str]] = mapped_column(JSON)
     clearance: Mapped[int] = mapped_column(Integer)
+    role: Mapped[str] = mapped_column(String(64))
+
+
+class DocumentRow(Base):
+    __tablename__ = "documents"
