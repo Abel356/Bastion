@@ -78,3 +78,8 @@ class CohereProvider:
         )
 
     @staticmethod
+    def _citation(item: Any) -> Citation:
+        source_ids = [getattr(source, "id", "") for source in item.sources]
+        return Citation(
+            start=item.start, end=item.end, text=item.text, source_ids=source_ids
+        )
