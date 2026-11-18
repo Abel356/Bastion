@@ -38,3 +38,8 @@ class CohereProvider:
         return response.embeddings.float_[0]
 
     def rerank(
+        self, query: str, documents: list[str], top_n: int
+    ) -> list[RerankItem]:
+        response = self.client.rerank(
+            model=settings.cohere_rerank_model,
+            query=query,
