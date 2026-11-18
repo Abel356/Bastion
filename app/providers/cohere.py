@@ -63,3 +63,8 @@ class CohereProvider:
             strict_tools=bool(tools),
             max_tokens=max_tokens,
             temperature=0.0,
+        )
+        content = response.message.content or []
+        text = "".join(getattr(item, "text", "") for item in content)
+        citations = [self._citation(item) for item in (response.message.citations or [])]
+        tool_calls = [call.model_dump(mode="json") for call in (response.message.tool_calls or [])]
