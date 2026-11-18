@@ -53,3 +53,5 @@ def test_chat_preserves_citations_and_usage() -> None:
     result = CohereProvider(client=client).chat([{"role": "user", "content": "hi"}], tools)
     assert result.text == "fact"
     assert result.citations[0].source_ids == ["doc-1"]
+    assert (result.input_tokens, result.output_tokens) == (3, 1)
+    assert client.last_chat["strict_tools"] is True
