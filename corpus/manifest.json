@@ -1,0 +1,542 @@
+[
+  {
+    "id": "company-remote-work-1",
+    "title": "Remote Work Guide 1",
+    "department": "Company",
+    "clearance": 1,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "company-remote-work-1.md"
+  },
+  {
+    "id": "company-remote-work-2",
+    "title": "Remote Work Guide 2",
+    "department": "Company",
+    "clearance": 1,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "company-remote-work-2.md"
+  },
+  {
+    "id": "company-remote-work-3",
+    "title": "Remote Work Guide 3",
+    "department": "Company",
+    "clearance": 1,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "company-remote-work-3.md"
+  },
+  {
+    "id": "company-travel-1",
+    "title": "Travel Guide 1",
+    "department": "Company",
+    "clearance": 1,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "company-travel-1.md"
+  },
+  {
+    "id": "company-travel-2",
+    "title": "Travel Guide 2",
+    "department": "Company",
+    "clearance": 1,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "company-travel-2.md"
+  },
+  {
+    "id": "company-travel-3",
+    "title": "Travel Guide 3",
+    "department": "Company",
+    "clearance": 1,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "company-travel-3.md"
+  },
+  {
+    "id": "company-code-of-conduct-1",
+    "title": "Code of Conduct Guide 1",
+    "department": "Company",
+    "clearance": 1,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "company-code-of-conduct-1.md"
+  },
+  {
+    "id": "company-code-of-conduct-2",
+    "title": "Code of Conduct Guide 2",
+    "department": "Company",
+    "clearance": 1,
+    "trust_level": "external",
+    "contains_test_payload": true,
+    "filename": "company-code-of-conduct-2.md"
+  },
+  {
+    "id": "company-code-of-conduct-3",
+    "title": "Code of Conduct Guide 3",
+    "department": "Company",
+    "clearance": 1,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "company-code-of-conduct-3.md"
+  },
+  {
+    "id": "company-benefits-1",
+    "title": "Benefits Guide 1",
+    "department": "Company",
+    "clearance": 1,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "company-benefits-1.md"
+  },
+  {
+    "id": "company-benefits-2",
+    "title": "Benefits Guide 2",
+    "department": "Company",
+    "clearance": 1,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "company-benefits-2.md"
+  },
+  {
+    "id": "company-benefits-3",
+    "title": "Benefits Guide 3",
+    "department": "Company",
+    "clearance": 1,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "company-benefits-3.md"
+  },
+  {
+    "id": "engineering-incident-response-1",
+    "title": "Incident Response Guide 1",
+    "department": "Engineering",
+    "clearance": 1,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "engineering-incident-response-1.md"
+  },
+  {
+    "id": "engineering-incident-response-2",
+    "title": "Incident Response Guide 2",
+    "department": "Engineering",
+    "clearance": 1,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "engineering-incident-response-2.md"
+  },
+  {
+    "id": "engineering-incident-response-3",
+    "title": "Incident Response Guide 3",
+    "department": "Engineering",
+    "clearance": 1,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "engineering-incident-response-3.md"
+  },
+  {
+    "id": "engineering-deployments-1",
+    "title": "Deployments Guide 1",
+    "department": "Engineering",
+    "clearance": 1,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "engineering-deployments-1.md"
+  },
+  {
+    "id": "engineering-deployments-2",
+    "title": "Deployments Guide 2",
+    "department": "Engineering",
+    "clearance": 1,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "engineering-deployments-2.md"
+  },
+  {
+    "id": "engineering-deployments-3",
+    "title": "Deployments Guide 3",
+    "department": "Engineering",
+    "clearance": 1,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "engineering-deployments-3.md"
+  },
+  {
+    "id": "engineering-on-call-1",
+    "title": "On Call Guide 1",
+    "department": "Engineering",
+    "clearance": 1,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "engineering-on-call-1.md"
+  },
+  {
+    "id": "engineering-on-call-2",
+    "title": "On Call Guide 2",
+    "department": "Engineering",
+    "clearance": 1,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "engineering-on-call-2.md"
+  },
+  {
+    "id": "engineering-on-call-3",
+    "title": "On Call Guide 3",
+    "department": "Engineering",
+    "clearance": 1,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "engineering-on-call-3.md"
+  },
+  {
+    "id": "engineering-architecture-1",
+    "title": "Architecture Guide 1",
+    "department": "Engineering",
+    "clearance": 1,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "engineering-architecture-1.md"
+  },
+  {
+    "id": "engineering-architecture-2",
+    "title": "Architecture Guide 2",
+    "department": "Engineering",
+    "clearance": 1,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "engineering-architecture-2.md"
+  },
+  {
+    "id": "engineering-architecture-3",
+    "title": "Architecture Guide 3",
+    "department": "Engineering",
+    "clearance": 1,
+    "trust_level": "external",
+    "contains_test_payload": true,
+    "filename": "engineering-architecture-3.md"
+  },
+  {
+    "id": "hr-leave-1",
+    "title": "Leave Guide 1",
+    "department": "HR",
+    "clearance": 2,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "hr-leave-1.md"
+  },
+  {
+    "id": "hr-leave-2",
+    "title": "Leave Guide 2",
+    "department": "HR",
+    "clearance": 2,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "hr-leave-2.md"
+  },
+  {
+    "id": "hr-leave-3",
+    "title": "Leave Guide 3",
+    "department": "HR",
+    "clearance": 2,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "hr-leave-3.md"
+  },
+  {
+    "id": "hr-hiring-1",
+    "title": "Hiring Guide 1",
+    "department": "HR",
+    "clearance": 2,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "hr-hiring-1.md"
+  },
+  {
+    "id": "hr-hiring-2",
+    "title": "Hiring Guide 2",
+    "department": "HR",
+    "clearance": 2,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "hr-hiring-2.md"
+  },
+  {
+    "id": "hr-hiring-3",
+    "title": "Hiring Guide 3",
+    "department": "HR",
+    "clearance": 2,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "hr-hiring-3.md"
+  },
+  {
+    "id": "hr-performance-1",
+    "title": "Performance Guide 1",
+    "department": "HR",
+    "clearance": 2,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "hr-performance-1.md"
+  },
+  {
+    "id": "hr-performance-2",
+    "title": "Performance Guide 2",
+    "department": "HR",
+    "clearance": 2,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "hr-performance-2.md"
+  },
+  {
+    "id": "hr-performance-3",
+    "title": "Performance Guide 3",
+    "department": "HR",
+    "clearance": 2,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "hr-performance-3.md"
+  },
+  {
+    "id": "hr-workplace-safety-1",
+    "title": "Workplace Safety Guide 1",
+    "department": "HR",
+    "clearance": 2,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "hr-workplace-safety-1.md"
+  },
+  {
+    "id": "hr-workplace-safety-2",
+    "title": "Workplace Safety Guide 2",
+    "department": "HR",
+    "clearance": 2,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "hr-workplace-safety-2.md"
+  },
+  {
+    "id": "hr-workplace-safety-3",
+    "title": "Workplace Safety Guide 3",
+    "department": "HR",
+    "clearance": 2,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "hr-workplace-safety-3.md"
+  },
+  {
+    "id": "finance-expenses-1",
+    "title": "Expenses Guide 1",
+    "department": "Finance",
+    "clearance": 2,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "finance-expenses-1.md"
+  },
+  {
+    "id": "finance-expenses-2",
+    "title": "Expenses Guide 2",
+    "department": "Finance",
+    "clearance": 2,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "finance-expenses-2.md"
+  },
+  {
+    "id": "finance-expenses-3",
+    "title": "Expenses Guide 3",
+    "department": "Finance",
+    "clearance": 2,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "finance-expenses-3.md"
+  },
+  {
+    "id": "finance-forecasting-1",
+    "title": "Forecasting Guide 1",
+    "department": "Finance",
+    "clearance": 2,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "finance-forecasting-1.md"
+  },
+  {
+    "id": "finance-forecasting-2",
+    "title": "Forecasting Guide 2",
+    "department": "Finance",
+    "clearance": 2,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "finance-forecasting-2.md"
+  },
+  {
+    "id": "finance-forecasting-3",
+    "title": "Forecasting Guide 3",
+    "department": "Finance",
+    "clearance": 2,
+    "trust_level": "external",
+    "contains_test_payload": true,
+    "filename": "finance-forecasting-3.md"
+  },
+  {
+    "id": "finance-compensation-1",
+    "title": "Compensation Guide 1",
+    "department": "Finance",
+    "clearance": 2,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "finance-compensation-1.md"
+  },
+  {
+    "id": "finance-compensation-2",
+    "title": "Compensation Guide 2",
+    "department": "Finance",
+    "clearance": 2,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "finance-compensation-2.md"
+  },
+  {
+    "id": "finance-compensation-3",
+    "title": "Compensation Guide 3",
+    "department": "Finance",
+    "clearance": 2,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "finance-compensation-3.md"
+  },
+  {
+    "id": "finance-procurement-1",
+    "title": "Procurement Guide 1",
+    "department": "Finance",
+    "clearance": 2,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "finance-procurement-1.md"
+  },
+  {
+    "id": "finance-procurement-2",
+    "title": "Procurement Guide 2",
+    "department": "Finance",
+    "clearance": 2,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "finance-procurement-2.md"
+  },
+  {
+    "id": "finance-procurement-3",
+    "title": "Procurement Guide 3",
+    "department": "Finance",
+    "clearance": 2,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "finance-procurement-3.md"
+  },
+  {
+    "id": "security-access-reviews-1",
+    "title": "Access Reviews Guide 1",
+    "department": "Security",
+    "clearance": 3,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "security-access-reviews-1.md"
+  },
+  {
+    "id": "security-access-reviews-2",
+    "title": "Access Reviews Guide 2",
+    "department": "Security",
+    "clearance": 3,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "security-access-reviews-2.md"
+  },
+  {
+    "id": "security-access-reviews-3",
+    "title": "Access Reviews Guide 3",
+    "department": "Security",
+    "clearance": 3,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "security-access-reviews-3.md"
+  },
+  {
+    "id": "security-phishing-1",
+    "title": "Phishing Guide 1",
+    "department": "Security",
+    "clearance": 3,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "security-phishing-1.md"
+  },
+  {
+    "id": "security-phishing-2",
+    "title": "Phishing Guide 2",
+    "department": "Security",
+    "clearance": 3,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "security-phishing-2.md"
+  },
+  {
+    "id": "security-phishing-3",
+    "title": "Phishing Guide 3",
+    "department": "Security",
+    "clearance": 3,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "security-phishing-3.md"
+  },
+  {
+    "id": "security-vulnerability-handling-1",
+    "title": "Vulnerability Handling Guide 1",
+    "department": "Security",
+    "clearance": 3,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "security-vulnerability-handling-1.md"
+  },
+  {
+    "id": "security-vulnerability-handling-2",
+    "title": "Vulnerability Handling Guide 2",
+    "department": "Security",
+    "clearance": 3,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "security-vulnerability-handling-2.md"
+  },
+  {
+    "id": "security-vulnerability-handling-3",
+    "title": "Vulnerability Handling Guide 3",
+    "department": "Security",
+    "clearance": 3,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "security-vulnerability-handling-3.md"
+  },
+  {
+    "id": "security-data-classification-1",
+    "title": "Data Classification Guide 1",
+    "department": "Security",
+    "clearance": 3,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "security-data-classification-1.md"
+  },
+  {
+    "id": "security-data-classification-2",
+    "title": "Data Classification Guide 2",
+    "department": "Security",
+    "clearance": 3,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "security-data-classification-2.md"
+  },
+  {
+    "id": "security-data-classification-3",
+    "title": "Data Classification Guide 3",
+    "department": "Security",
+    "clearance": 3,
+    "trust_level": "internal",
+    "contains_test_payload": false,
+    "filename": "security-data-classification-3.md"
+  }
+]
