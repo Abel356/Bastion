@@ -43,3 +43,8 @@ class ChunkRow(Base):
     __tablename__ = "chunks"
 
     id: Mapped[str] = mapped_column(String(64), primary_key=True, default=new_id)
+    document_id: Mapped[str] = mapped_column(ForeignKey("documents.id"), index=True)
+    ordinal: Mapped[int] = mapped_column(Integer)
+    text: Mapped[str] = mapped_column(Text)
+    embedding: Mapped[list[float] | None] = mapped_column(
+        Vector(1024).with_variant(JSON, "sqlite"), nullable=True
