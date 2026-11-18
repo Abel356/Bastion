@@ -38,3 +38,8 @@ def build_documents() -> list[dict]:
                     "id": identifier,
                     "title": f"{topic} Guide {variant + 1}",
                     "department": department,
+                    "clearance": CLEARANCE[department],
+                    "trust_level": "external" if poisoned else "internal",
+                    "contains_test_payload": poisoned,
+                    "filename": f"{identifier}.md",
+                    "content": document_body(department, topic, variant, poisoned),
