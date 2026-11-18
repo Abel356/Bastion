@@ -13,3 +13,8 @@ INJECTION_INDEXES = {7, 23, 41}
 
 
 def slug(value: str) -> str:
+    return value.lower().replace(" ", "-")
+
+
+def document_body(department: str, topic: str, variant: int, poisoned: bool) -> str:
+    title = f"{topic} Guide {variant + 1}"
