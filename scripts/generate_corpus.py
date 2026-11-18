@@ -33,3 +33,8 @@ def build_documents() -> list[dict]:
         for topic in topics:
             for variant in range(3):
                 identifier = f"{slug(department)}-{slug(topic)}-{variant + 1}"
+                poisoned = index in INJECTION_INDEXES
+                documents.append({
+                    "id": identifier,
+                    "title": f"{topic} Guide {variant + 1}",
+                    "department": department,
