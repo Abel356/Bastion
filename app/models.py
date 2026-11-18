@@ -38,3 +38,8 @@ class DocumentRow(Base):
     content: Mapped[str] = mapped_column(Text)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
 
+
+class ChunkRow(Base):
+    __tablename__ = "chunks"
+
+    id: Mapped[str] = mapped_column(String(64), primary_key=True, default=new_id)
