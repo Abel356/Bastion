@@ -23,3 +23,8 @@ class LocalProvider:
         terms = set(query.lower().split())
         scored = [
             RerankItem(
+                index=index,
+                score=float(sum(term in document.lower() for term in terms)),
+            )
+            for index, document in enumerate(documents)
+        ]
