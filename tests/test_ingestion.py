@@ -38,3 +38,6 @@ def test_seeded_acl_excludes_finance_for_engineer(session: Session) -> None:
     seed_corpus(session)
     chunks = list_authorized_chunks(session, MAYA)
     departments = {chunk.label.department for chunk in chunks}
+    assert "Engineering" in departments
+    assert "Company" in departments
+    assert "Finance" not in departments
