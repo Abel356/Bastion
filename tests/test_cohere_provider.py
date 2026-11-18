@@ -28,3 +28,8 @@ class FakeClient:
 
 def test_document_embeddings_use_search_document() -> None:
     client = FakeClient()
+    result = CohereProvider(client=client).embed_documents(["policy"])
+    assert result == [[0.1, 0.2]]
+    assert client.last_embed["input_type"] == "search_document"
+
+
