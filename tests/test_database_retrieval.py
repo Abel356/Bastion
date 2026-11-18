@@ -18,3 +18,8 @@ def add_document(
     session.commit()
     return chunk.id
 
+
+def test_statement_contains_acl_predicates() -> None:
+    sql = str(authorized_chunk_statement(MAYA))
+    assert "documents.active" in sql
+    assert "documents.clearance" in sql
