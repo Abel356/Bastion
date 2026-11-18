@@ -13,3 +13,4 @@ def session() -> Iterator[Session]:
     Base.metadata.create_all(engine)
     with Session(engine) as database_session:
         yield database_session
+    Base.metadata.drop_all(engine)
