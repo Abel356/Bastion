@@ -28,3 +28,8 @@ def row_to_chunk(chunk: ChunkRow, document: DocumentRow) -> Chunk:
         department=document.department,
         clearance=document.clearance,
         trust_level=TrustLevel(document.trust_level),
+        active=document.active,
+    )
+    return Chunk(id=chunk.id, text=chunk.text, label=label)
+
+
