@@ -58,3 +58,6 @@ def main() -> None:
     (root / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     print(f"Generated {len(documents)} documents in {root}")
 
+
+if __name__ == "__main__":
+    main()
