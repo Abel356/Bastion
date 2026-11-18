@@ -43,3 +43,8 @@ def seed_corpus(session: Session, root: Path = CORPUS_ROOT) -> int:
     manifest = load_manifest(root)
     inserted = 0
     for item in manifest:
+        if session.get(DocumentRow, item["id"]):
+            continue
+        content = (root / item["filename"]).read_text(encoding="utf-8")
+        document = DocumentRow(
+            id=item["id"], title=item["title"], department=item["department"],
