@@ -13,3 +13,8 @@ def authorized_chunk_statement(persona: Persona) -> Select:
         DocumentRow, ChunkRow.document_id == DocumentRow.id
     )
     return statement.where(
+        DocumentRow.active.is_(True),
+        DocumentRow.clearance <= persona.clearance,
+        or_(
+            DocumentRow.department == "Company",
+            DocumentRow.department.in_(departments),
