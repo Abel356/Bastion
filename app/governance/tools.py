@@ -66,6 +66,9 @@ PROPOSE_EMAIL_SCHEMA = {
 
 TOOL_SCHEMAS = [
     SEARCH_DOCUMENTS_SCHEMA,
+    READ_DOCUMENT_SCHEMA,
+    PROPOSE_EMAIL_SCHEMA,
+]
 READ_DOCUMENT_SCHEMA = {
     "type": "function",
     "function": {
