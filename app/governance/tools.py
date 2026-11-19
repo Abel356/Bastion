@@ -46,6 +46,11 @@ PROPOSE_EMAIL_SCHEMA = {
     "function": {
         "name": ToolName.PROPOSE_EMAIL.value,
         "description": "Propose an internal email that requires human approval.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "recipients": {
+                    "type": "array",
 READ_DOCUMENT_SCHEMA = {
     "type": "function",
     "function": {
