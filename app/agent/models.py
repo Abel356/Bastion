@@ -23,3 +23,7 @@ class AgentRunResult(BaseModel):
     tool_results: list[ToolResult] = Field(default_factory=list)
     usage: BudgetUsage = Field(default_factory=BudgetUsage)
     blocked_reason: str | None = None
+
+    @property
+    def requires_approval(self) -> bool:
+        return self.status is RunStatus.APPROVAL_REQUIRED
