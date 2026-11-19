@@ -38,3 +38,8 @@ def transition(
     return ActionView.from_row(action)
 
 
+@router.get("", response_model=list[ActionView])
+def pending_actions(
+    session: SessionDependency, security: SecurityDependency
+) -> list[ActionView]:
+    del security
