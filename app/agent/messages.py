@@ -43,3 +43,8 @@ def tool_message(
 ) -> dict[str, Any]:
     documents = [
         {"id": source_id, "data": result.data}
+        for source_id in result.source_ids
+    ]
+    content = json.dumps({
+        "status": result.status,
+        "data": result.data,
