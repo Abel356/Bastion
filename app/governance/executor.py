@@ -68,3 +68,8 @@ def search_documents(
     return ToolResult(
         name=ToolName.SEARCH_DOCUMENTS, status="completed", data=data,
         source_ids=[chunk.id for chunk in safe_chunks],
+        trust_level="untrusted",
+    )
+
+
+def read_document(
