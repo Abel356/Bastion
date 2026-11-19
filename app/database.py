@@ -3,6 +3,7 @@ from collections.abc import Generator
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
+from sqlalchemy.pool import StaticPool
 
 from app.config import settings
 
@@ -13,6 +14,8 @@ class Base(DeclarativeBase):
 
 def build_engine(url: str) -> Engine:
     connect_args = {"check_same_thread": False} if url.startswith("sqlite") else {}
+    if url.endswith("/:memory:"):
+        return create_engine(url, connect_args=connect_args, poolclass=StaticPool)
     return create_engine(url, connect_args=connect_args, pool_pre_ping=True)
 
 
