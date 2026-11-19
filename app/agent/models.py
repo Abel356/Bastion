@@ -13,3 +13,8 @@ class RunStatus(StrEnum):
     APPROVAL_REQUIRED = "approval_required"
     BUDGET_EXCEEDED = "budget_exceeded"
     FAILED = "failed"
+
+
+class AgentRunResult(BaseModel):
+    run_id: str
+    status: RunStatus
