@@ -62,6 +62,7 @@ ARGUMENT_MODELS: dict[ToolName, type[BaseModel]] = {
     ToolName.SEARCH_DOCUMENTS: SearchDocumentsArgs,
     ToolName.READ_DOCUMENT: ReadDocumentArgs,
     ToolName.PROPOSE_EMAIL: ProposeEmailArgs,
+}
 PROPOSE_EMAIL_SCHEMA = {
     "type": "function",
     "function": {
