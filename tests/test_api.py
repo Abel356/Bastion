@@ -93,3 +93,8 @@ def test_security_can_approve_action(
     select(api_client, "priya")
     response = api_client.post(f"/api/actions/{action_id}/approve")
     assert response.status_code == 200
+    assert response.json()["status"] == "approved"
+
+
+def test_employee_cannot_approve_action(
+    api_client: TestClient, session: Session
