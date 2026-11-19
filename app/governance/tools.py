@@ -61,6 +61,11 @@ PROPOSE_EMAIL_SCHEMA = {
             "additionalProperties": False,
         },
     },
+}
+
+
+TOOL_SCHEMAS = [
+    SEARCH_DOCUMENTS_SCHEMA,
 READ_DOCUMENT_SCHEMA = {
     "type": "function",
     "function": {
