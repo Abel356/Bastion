@@ -28,3 +28,8 @@ def parse_tool_call(payload: dict[str, Any]) -> tuple[str, ToolCall]:
     return identifier, ToolCall(name=name, arguments=arguments)
 
 
+def assistant_message(result: ChatResult) -> dict[str, Any]:
+    message: dict[str, Any] = {
+        "role": "assistant",
+        "content": result.text,
+    }
