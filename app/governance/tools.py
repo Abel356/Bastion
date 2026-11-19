@@ -51,6 +51,11 @@ class SearchDocumentsArgs(BaseModel):
 class ReadDocumentArgs(BaseModel):
     document_id: str = Field(min_length=1)
 
+
+class ProposeEmailArgs(BaseModel):
+    recipients: list[str] = Field(min_length=1)
+    subject: str = Field(min_length=1)
+    body: str = Field(min_length=1)
 PROPOSE_EMAIL_SCHEMA = {
     "type": "function",
     "function": {
