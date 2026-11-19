@@ -68,3 +68,8 @@ def scan_untrusted(text: str) -> ScanResult:
 def scan_output(text: str, restricted_markers: tuple[str, ...] = ()) -> ScanResult:
     result = scan_rules(text, OUTPUT_RULES)
     for marker in restricted_markers:
+        if marker and marker.lower() in text.lower():
+            result.findings.append(ScanFinding(
+                kind=FindingType.EXFILTRATION,
+                rule="restricted_marker",
+                matched_text=marker,
