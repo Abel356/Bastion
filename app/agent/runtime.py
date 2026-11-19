@@ -33,3 +33,8 @@ class AgentRuntime:
         tool_results: list[ToolResult] = []
         untrusted_seen = False
         try:
+            while not budget.exhausted:
+                estimated = len(str(messages).split())
+                budget.before_call(estimated)
+                response = self.provider.chat(
+                    messages, TOOL_SCHEMAS,
