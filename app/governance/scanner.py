@@ -63,3 +63,8 @@ def scan_rules(text: str, rules: dict[FindingType, tuple[str, ...]]) -> ScanResu
 
 def scan_untrusted(text: str) -> ScanResult:
     return scan_rules(text, INJECTION_RULES)
+
+
+def scan_output(text: str, restricted_markers: tuple[str, ...] = ()) -> ScanResult:
+    result = scan_rules(text, OUTPUT_RULES)
+    for marker in restricted_markers:
