@@ -128,3 +128,8 @@ class AgentRuntime:
         finish_run(
             session, run, status.value, usage.input_tokens,
             usage.output_tokens, usage.steps
+        )
+        return AgentRunResult(
+            run_id=run.id, status=status, answer=answer,
+            citations=citations or [], tool_results=tool_results or [],
+            usage=usage, blocked_reason=blocked_reason
