@@ -43,3 +43,8 @@ class RunBudget:
         remaining = self.limits.max_output_tokens - self.usage.output_tokens
         return max(0, remaining)
 
+    @property
+    def exhausted(self) -> bool:
+        return (
+            self.usage.steps >= self.limits.max_steps
+            or self.usage.input_tokens >= self.limits.max_input_tokens
