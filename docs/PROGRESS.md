@@ -13,3 +13,8 @@
 - Persisted ordered audit events and terminal run usage.
 - Quarantined poisoned retrieval results before tool output.
 - Next: connect these controls through the three-step agent loop.
+
+## November 19, 2026
+- Added the governed three-step agent runtime and normalized tool messages.
+- Audited model calls, tool decisions, release decisions, and terminal usage.
+- Added authenticated chat, approval, and security audit APIs.
