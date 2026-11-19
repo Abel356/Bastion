@@ -18,3 +18,8 @@ class ScanFinding(BaseModel):
     severity: str = "high"
 
 
+class ScanResult(BaseModel):
+    safe: bool
+    findings: list[ScanFinding] = Field(default_factory=list)
+
+
