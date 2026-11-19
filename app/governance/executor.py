@@ -93,3 +93,8 @@ def read_document(
     if not scan.safe:
         return blocked(
             ToolCall(name=ToolName.READ_DOCUMENT), "Document was quarantined"
+        )
+    return ToolResult(
+        name=ToolName.READ_DOCUMENT, status="completed",
+        data={"document_id": document.id, "content": document.content},
+        source_ids=[document.id], trust_level=document.trust_level
