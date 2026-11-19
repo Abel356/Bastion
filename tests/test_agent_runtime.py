@@ -28,3 +28,8 @@ class ScriptedProvider:
 
 
 def tool_call(name: str, arguments: dict, identifier: str = "call-1") -> dict:
+    return {
+        "id": identifier,
+        "type": "function",
+        "function": {"name": name, "arguments": arguments},
+    }
