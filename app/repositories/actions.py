@@ -23,3 +23,8 @@ def get_action(session: Session, action_id: str) -> PendingActionRow | None:
 
 def approve_action(session: Session, action_id: str) -> PendingActionRow:
     action = session.get(PendingActionRow, action_id)
+    if action is None:
+        raise LookupError("Pending action not found")
+    if action.status != "pending":
+        raise ValueError("Action is no longer pending")
+    action.status = "approved"
