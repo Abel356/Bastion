@@ -48,3 +48,7 @@ def decide_tool(
         return PolicyDecision(status=PolicyStatus.DENY, reason="External recipients are blocked")
     if from_untrusted_content:
         return PolicyDecision(status=PolicyStatus.DENY, reason="Untrusted content requested action")
+    return PolicyDecision(
+        status=PolicyStatus.APPROVAL,
+        reason="Internal email proposals require human approval",
+    )
