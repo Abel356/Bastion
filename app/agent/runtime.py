@@ -43,3 +43,8 @@ class AgentRuntime:
                 budget.after_call(response.input_tokens, response.output_tokens)
                 self._record_model_call(session, run.id, response, budget)
                 if not response.tool_calls:
+                    return self._release(
+                        session, run, response, budget, tool_results
+                    )
+                messages.append(assistant_message(response))
+                for payload in response.tool_calls:
