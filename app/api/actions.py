@@ -48,3 +48,8 @@ def pending_actions(
 
 @router.post("/{action_id}/approve", response_model=ActionView)
 def approve(
+    action_id: str, session: SessionDependency, security: SecurityDependency
+) -> ActionView:
+    del security
+    return transition(action_id, session, approve_action)
+
