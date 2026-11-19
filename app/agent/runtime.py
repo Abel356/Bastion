@@ -68,3 +68,8 @@ class AgentRuntime:
                 session, run, RunStatus.BUDGET_EXCEEDED, budget,
                 tool_results=tool_results, blocked_reason=str(exc)
             )
+        except Exception as exc:
+            append_event(session, run.id, "run_failed", {"error": str(exc)})
+            return self._finish(
+                session, run, RunStatus.FAILED, budget,
+                tool_results=tool_results, blocked_reason="Agent execution failed"
