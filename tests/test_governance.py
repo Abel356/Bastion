@@ -33,3 +33,8 @@ def test_untrusted_email_instruction_is_blocked() -> None:
     assert decision.status is PolicyStatus.DENY
 
 
+def test_internal_email_requires_approval() -> None:
+    decision = decide_tool(MAYA, email(["team@acme.example"]))
+    assert decision.status is PolicyStatus.APPROVAL
+
+
