@@ -43,3 +43,8 @@ def execute_tool(
     return ToolResult(
         name=call.name, status=PolicyStatus.APPROVAL.value,
         data={"action_id": action.id}, requires_approval=True
+    )
+
+
+def search_documents(
+    session: Session, persona: Persona, query: str
