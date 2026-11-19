@@ -28,3 +28,8 @@ class RunView(BaseModel):
 
 
 class EventView(BaseModel):
+    sequence: int
+    event_type: str
+    payload: dict
+    created_at: datetime
+
