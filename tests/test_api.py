@@ -53,3 +53,8 @@ def test_chat_validates_message_length(api_client: TestClient) -> None:
 
 
 def test_employee_cannot_view_audit(api_client: TestClient) -> None:
+    select(api_client, "maya")
+    assert api_client.get("/api/audit/runs").status_code == 403
+
+
+def test_security_can_view_runs(
