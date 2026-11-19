@@ -38,3 +38,8 @@ def decide_tool(
     persona: Persona, call: ToolCall, from_untrusted_content: bool = False
 ) -> PolicyDecision:
     if call.name not in ALLOWED_TOOLS.get(persona.role, set()):
+        return PolicyDecision(status=PolicyStatus.DENY, reason="Tool is not allowed for role")
+    if call.name is not ToolName.PROPOSE_EMAIL:
+        return PolicyDecision(status=PolicyStatus.ALLOW, reason="Role permits read-only tool")
+    recipients = call.arguments.get("recipients", [])
+    if not recipients or not all(isinstance(item, str) for item in recipients):
