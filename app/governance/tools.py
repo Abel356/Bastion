@@ -41,6 +41,11 @@ SEARCH_DOCUMENTS_SCHEMA = {
 }
 
 
+PROPOSE_EMAIL_SCHEMA = {
+    "type": "function",
+    "function": {
+        "name": ToolName.PROPOSE_EMAIL.value,
+        "description": "Propose an internal email that requires human approval.",
 READ_DOCUMENT_SCHEMA = {
     "type": "function",
     "function": {
