@@ -38,3 +38,8 @@ class AgentRuntime:
                 budget.before_call(estimated)
                 response = self.provider.chat(
                     messages, TOOL_SCHEMAS,
+                    max_tokens=min(800, budget.remaining_output_tokens),
+                )
+                budget.after_call(response.input_tokens, response.output_tokens)
+                self._record_model_call(session, run.id, response, budget)
+                if not response.tool_calls:
