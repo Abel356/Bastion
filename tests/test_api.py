@@ -78,3 +78,8 @@ def test_security_can_view_ordered_events(
     assert [event["sequence"] for event in response.json()] == [1, 2]
 
 
+def pending_email(session: Session) -> str:
+    run = start_run(session, MAYA.id, "Draft email")
+    call = ToolCall(name=ToolName.PROPOSE_EMAIL, arguments={
+        "recipients": ["team@acme.example"], "subject": "Hi", "body": "Update"
+    })
