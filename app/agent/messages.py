@@ -48,3 +48,6 @@ def tool_message(
     content = json.dumps({
         "status": result.status,
         "data": result.data,
+        "documents": documents,
+    })
+    return {"role": "tool", "tool_call_id": call_id, "content": content}
