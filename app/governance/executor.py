@@ -98,3 +98,4 @@ def read_document(
         name=ToolName.READ_DOCUMENT, status="completed",
         data={"document_id": document.id, "content": document.content},
         source_ids=[document.id], trust_level=document.trust_level
+    )
