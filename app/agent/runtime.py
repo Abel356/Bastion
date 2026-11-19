@@ -28,3 +28,8 @@ class AgentRuntime:
             session, persona.id, request, mode, self.provider.__class__.__name__
         )
         append_event(session, run.id, "request_received", {"request": request})
+        budget = RunBudget(self.limits)
+        messages = initial_messages(request)
+        tool_results: list[ToolResult] = []
+        untrusted_seen = False
+        try:
