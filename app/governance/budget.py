@@ -18,3 +18,8 @@ class BudgetExceeded(RuntimeError):
 
 
 class RunBudget:
+    def __init__(self, limits: BudgetLimits | None = None) -> None:
+        self.limits = limits or BudgetLimits()
+        self.usage = BudgetUsage()
+
+    def before_call(self, estimated_input_tokens: int = 0) -> None:
