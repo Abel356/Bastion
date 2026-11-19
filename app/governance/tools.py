@@ -13,3 +13,8 @@ class ToolName(StrEnum):
 class ToolCall(BaseModel):
     name: ToolName
     arguments: dict[str, Any] = Field(default_factory=dict)
+
+
+class ToolResult(BaseModel):
+    name: ToolName
+    status: str
