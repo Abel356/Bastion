@@ -18,3 +18,8 @@ def create_pending_action(
 
 
 def get_action(session: Session, action_id: str) -> PendingActionRow | None:
+    return session.get(PendingActionRow, action_id)
+
+
+def approve_action(session: Session, action_id: str) -> PendingActionRow:
+    action = session.get(PendingActionRow, action_id)
