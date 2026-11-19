@@ -38,3 +38,8 @@ class RunBudget:
         if self.usage.output_tokens > self.limits.max_output_tokens:
             raise BudgetExceeded("Output token budget exceeded")
 
+    @property
+    def remaining_output_tokens(self) -> int:
+        remaining = self.limits.max_output_tokens - self.usage.output_tokens
+        return max(0, remaining)
+
