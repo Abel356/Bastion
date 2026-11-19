@@ -58,3 +58,8 @@ def test_runtime_stops_at_step_budget(session: Session) -> None:
     )])
     provider = ScriptedProvider([repeated, repeated, repeated])
     result = AgentRuntime(provider, BudgetLimits(max_steps=3)).run(
+        session, MAYA, "Loop forever"
+    )
+    assert result.status is RunStatus.BUDGET_EXCEEDED
+    assert result.usage.steps == 3
+
