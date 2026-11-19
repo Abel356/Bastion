@@ -18,3 +18,8 @@ from app.repositories.audit import append_event, start_run
 def api_client(session: Session) -> Iterator[TestClient]:
     def override_session() -> Iterator[Session]:
         yield session
+
+    app.dependency_overrides[get_session] = override_session
+    client = TestClient(app)
+    yield client
+    app.dependency_overrides.clear()
