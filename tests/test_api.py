@@ -103,3 +103,8 @@ def test_employee_cannot_approve_action(
     select(api_client, "maya")
     response = api_client.post(f"/api/actions/{action_id}/approve")
     assert response.status_code == 403
+
+
+def test_missing_action_returns_not_found(api_client: TestClient) -> None:
+    select(api_client, "priya")
+    response = api_client.post("/api/actions/missing/approve")
