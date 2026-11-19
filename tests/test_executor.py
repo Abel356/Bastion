@@ -18,3 +18,8 @@ def test_search_quarantines_poisoned_chunk(session: Session) -> None:
     call = ToolCall(
         name=ToolName.SEARCH_DOCUMENTS, arguments={"query": "code conduct"}
     )
+    result = execute_tool(session, MAYA, run.id, call)
+    assert result.status == "completed"
+    assert result.data["quarantined_ids"]
+
+
