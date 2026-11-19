@@ -25,6 +25,7 @@ class ScanResult(BaseModel):
 
 INJECTION_RULES = {
     FindingType.INSTRUCTION_OVERRIDE: (
+        r"ignore\s+all\s+(rules|instructions)",
         r"ignore\s+(all|any|the)?\s*(previous|prior|system)\s*(rules|instructions)?",
         r"override\s+(the\s+)?(system|developer|policy)",
         r"reveal\s+(the\s+)?system\s+prompt",
