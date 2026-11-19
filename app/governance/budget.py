@@ -28,3 +28,8 @@ class RunBudget:
         projected = self.usage.input_tokens + estimated_input_tokens
         if projected > self.limits.max_input_tokens:
             raise BudgetExceeded("Input token budget exhausted")
+        self.usage.steps += 1
+
+    def after_call(self, input_tokens: int, output_tokens: int) -> None:
+        self.usage.input_tokens += input_tokens
+        self.usage.output_tokens += output_tokens
