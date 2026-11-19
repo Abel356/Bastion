@@ -88,3 +88,8 @@ def read_document(
     if not can_read(persona, label):
         return blocked(
             ToolCall(name=ToolName.READ_DOCUMENT), "Document is unavailable"
+        )
+    scan = scan_untrusted(document.content)
+    if not scan.safe:
+        return blocked(
+            ToolCall(name=ToolName.READ_DOCUMENT), "Document was quarantined"
