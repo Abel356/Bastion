@@ -53,3 +53,8 @@ def test_runtime_blocks_canary_output(session: Session) -> None:
 
 
 def test_runtime_stops_at_step_budget(session: Session) -> None:
+    repeated = ChatResult(tool_calls=[tool_call(
+        "search_documents", {"query": "policy"}
+    )])
+    provider = ScriptedProvider([repeated, repeated, repeated])
+    result = AgentRuntime(provider, BudgetLimits(max_steps=3)).run(
