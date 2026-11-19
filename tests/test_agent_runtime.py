@@ -63,3 +63,8 @@ def test_runtime_stops_at_step_budget(session: Session) -> None:
     assert result.status is RunStatus.BUDGET_EXCEEDED
     assert result.usage.steps == 3
 
+
+def test_runtime_stops_for_email_approval(session: Session) -> None:
+    call = tool_call("propose_email", {
+        "recipients": ["team@acme.example"], "subject": "Hi", "body": "Update"
+    })
