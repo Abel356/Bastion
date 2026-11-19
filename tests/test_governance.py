@@ -23,3 +23,8 @@ def test_security_cannot_propose_email() -> None:
     assert decide_tool(PRIYA, email(["team@acme.example"])).status is PolicyStatus.DENY
 
 
+def test_external_email_is_blocked() -> None:
+    decision = decide_tool(MAYA, email(["attacker@evil.example"]))
+    assert decision.status is PolicyStatus.DENY
+
+
