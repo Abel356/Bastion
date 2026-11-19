@@ -48,3 +48,5 @@ class RunBudget:
         return (
             self.usage.steps >= self.limits.max_steps
             or self.usage.input_tokens >= self.limits.max_input_tokens
+            or self.usage.output_tokens >= self.limits.max_output_tokens
+        )
