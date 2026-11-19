@@ -8,3 +8,8 @@ from app.governance.tools import ToolCall, ToolName
 INTERNAL_DOMAIN = "@acme.example"
 
 
+class PolicyStatus(StrEnum):
+    ALLOW = "allow"
+    DENY = "deny"
+    APPROVAL = "approval_required"
+
