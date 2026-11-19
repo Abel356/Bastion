@@ -98,3 +98,8 @@ def test_provider_failure_is_audited(session: Session) -> None:
     events = list_events(session, result.run_id)
     assert events[-1].event_type == "run_failed"
 
+
+def test_runtime_audits_model_and_release(session: Session) -> None:
+    provider = ScriptedProvider([ChatResult(text="Safe answer")])
+    result = AgentRuntime(provider).run(session, MAYA, "Hello")
+    event_types = [event.event_type for event in list_events(session, result.run_id)]
