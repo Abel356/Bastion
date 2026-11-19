@@ -23,3 +23,8 @@ class RunBudget:
         self.usage = BudgetUsage()
 
     def before_call(self, estimated_input_tokens: int = 0) -> None:
+        if self.usage.steps >= self.limits.max_steps:
+            raise BudgetExceeded("Agent step limit reached")
+        projected = self.usage.input_tokens + estimated_input_tokens
+        if projected > self.limits.max_input_tokens:
+            raise BudgetExceeded("Input token budget exhausted")
