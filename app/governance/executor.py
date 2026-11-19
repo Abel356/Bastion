@@ -23,3 +23,8 @@ def validate_arguments(call: ToolCall) -> dict[str, Any]:
     validated = model.model_validate(call.arguments)
     return validated.model_dump()
 
+
+def execute_tool(
+    session: Session, persona: Persona, run_id: str, call: ToolCall,
+    from_untrusted_content: bool = False,
+) -> ToolResult:
