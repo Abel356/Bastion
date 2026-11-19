@@ -18,3 +18,8 @@ class ScriptedProvider:
 
     def chat(
         self, messages: list[dict[str, Any]], tools=None, max_tokens: int = 800
+    ) -> ChatResult:
+        del messages, tools, max_tokens
+        response = self.responses[self.calls]
+        self.calls += 1
+        if isinstance(response, Exception):
