@@ -8,6 +8,10 @@ from app.config import settings
 from app.startup import initialize_application
 
 app = FastAPI(title=settings.app_name, version="0.1.0")
+app.add_event_handler("startup", initialize_application)
+app.include_router(actions_router)
+app.include_router(audit_router)
+app.include_router(chat_router)
 app.include_router(session_router)
 @app.get("/health")
 def health() -> dict[str, str]: return {"status": "ok"}
