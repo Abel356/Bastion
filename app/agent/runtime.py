@@ -98,3 +98,8 @@ class AgentRuntime:
 
     def _release(
         self, session: Session, run: Any, response: ChatResult,
+        budget: RunBudget, tool_results: list[ToolResult],
+    ) -> AgentRunResult:
+        scan = scan_output(response.text, ("CANARY-BSTN-42",))
+        if not scan.safe:
+            append_event(session, run.id, "output_blocked", {
