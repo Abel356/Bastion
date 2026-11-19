@@ -38,3 +38,8 @@ class EventView(BaseModel):
         return cls.model_validate(row, from_attributes=True)
 
 
+@router.get("/runs", response_model=list[RunView])
+def runs(
+    session: SessionDependency, security: SecurityDependency
+) -> list[RunView]:
+    del security
