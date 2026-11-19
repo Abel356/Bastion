@@ -33,3 +33,8 @@ def tool_call(name: str, arguments: dict, identifier: str = "call-1") -> dict:
         "type": "function",
         "function": {"name": name, "arguments": arguments},
     }
+
+
+def test_runtime_releases_safe_answer(session: Session) -> None:
+    provider = ScriptedProvider([ChatResult(
+        text="The policy allows remote work.", input_tokens=10, output_tokens=6
