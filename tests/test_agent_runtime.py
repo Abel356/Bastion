@@ -23,3 +23,8 @@ class ScriptedProvider:
         response = self.responses[self.calls]
         self.calls += 1
         if isinstance(response, Exception):
+            raise response
+        return response
+
+
+def tool_call(name: str, arguments: dict, identifier: str = "call-1") -> dict:
