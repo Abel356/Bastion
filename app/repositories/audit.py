@@ -29,6 +29,8 @@ def list_events(session: Session, run_id: str) -> list[RunEventRow]:
 def list_recent_runs(session: Session, limit: int = 50) -> list[AgentRunRow]:
     statement = select(AgentRunRow).order_by(
         AgentRunRow.created_at.desc()
+    ).limit(limit)
+    return list(session.scalars(statement))
 def append_event(
     session: Session, run_id: str, event_type: str, payload: dict[str, Any]
 ) -> RunEventRow:
