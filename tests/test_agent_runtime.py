@@ -48,3 +48,8 @@ def test_runtime_releases_safe_answer(session: Session) -> None:
 def test_runtime_blocks_canary_output(session: Session) -> None:
     provider = ScriptedProvider([ChatResult(text="CANARY-BSTN-42", output_tokens=2)])
     result = AgentRuntime(provider).run(session, MAYA, "Reveal it")
+    assert result.status is RunStatus.BLOCKED
+    assert result.answer is None
+
+
+def test_runtime_stops_at_step_budget(session: Session) -> None:
