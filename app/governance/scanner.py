@@ -58,3 +58,8 @@ def scan_rules(text: str, rules: dict[FindingType, tuple[str, ...]]) -> ScanResu
                 findings.append(ScanFinding(
                     kind=kind, rule=pattern, matched_text=match.group(0)
                 ))
+    return ScanResult(safe=not findings, findings=findings)
+
+
+def scan_untrusted(text: str) -> ScanResult:
+    return scan_rules(text, INJECTION_RULES)
