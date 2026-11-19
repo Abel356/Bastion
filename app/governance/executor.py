@@ -73,3 +73,8 @@ def search_documents(
 
 
 def read_document(
+    session: Session, persona: Persona, document_id: str
+) -> ToolResult:
+    document = session.get(DocumentRow, document_id)
+    if document is None:
+        return blocked(
