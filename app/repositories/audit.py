@@ -19,6 +19,11 @@ def start_run(
     return run
 
 
+def list_events(session: Session, run_id: str) -> list[RunEventRow]:
+    statement = select(RunEventRow).where(
+        RunEventRow.run_id == run_id
+    ).order_by(RunEventRow.sequence)
+    return list(session.scalars(statement))
 def append_event(
     session: Session, run_id: str, event_type: str, payload: dict[str, Any]
 ) -> RunEventRow:
