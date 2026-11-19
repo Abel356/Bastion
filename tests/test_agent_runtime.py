@@ -13,3 +13,8 @@ from app.repositories.audit import list_events
 
 class ScriptedProvider:
     def __init__(self, responses: list[ChatResult | Exception]) -> None:
+        self.responses = responses
+        self.calls = 0
+
+    def chat(
+        self, messages: list[dict[str, Any]], tools=None, max_tokens: int = 800
