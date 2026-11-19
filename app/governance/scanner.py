@@ -73,3 +73,6 @@ def scan_output(text: str, restricted_markers: tuple[str, ...] = ()) -> ScanResu
                 kind=FindingType.EXFILTRATION,
                 rule="restricted_marker",
                 matched_text=marker,
+            ))
+    result.safe = not result.findings
+    return result
