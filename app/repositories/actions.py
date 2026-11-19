@@ -32,6 +32,8 @@ def reject_action(session: Session, action_id: str) -> PendingActionRow:
 def list_pending_actions(session: Session) -> list[PendingActionRow]:
     statement = select(PendingActionRow).where(
         PendingActionRow.status == "pending"
+    ).order_by(PendingActionRow.created_at)
+    return list(session.scalars(statement))
 def get_action(session: Session, action_id: str) -> PendingActionRow | None:
     return session.get(PendingActionRow, action_id)
 
