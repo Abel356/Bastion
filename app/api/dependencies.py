@@ -23,3 +23,8 @@ def current_persona(
 PersonaDependency = Annotated[Persona, Depends(current_persona)]
 
 
+def require_security(persona: PersonaDependency) -> Persona:
+    if persona.role is not Role.SECURITY:
+        raise HTTPException(status.HTTP_403_FORBIDDEN, "Security role required")
+    return persona
+
