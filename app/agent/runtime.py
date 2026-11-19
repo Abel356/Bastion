@@ -23,3 +23,8 @@ class AgentRuntime:
     def run(
         self, session: Session, persona: Persona, request: str,
         mode: str = "governed",
+    ) -> AgentRunResult:
+        run = start_run(
+            session, persona.id, request, mode, self.provider.__class__.__name__
+        )
+        append_event(session, run.id, "request_received", {"request": request})
