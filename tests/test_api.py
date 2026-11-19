@@ -48,3 +48,8 @@ def test_chat_runs_with_selected_persona(
 
 def test_chat_validates_message_length(api_client: TestClient) -> None:
     select(api_client, "maya")
+    response = api_client.post("/api/chat", json={"message": ""})
+    assert response.status_code == 422
+
+
+def test_employee_cannot_view_audit(api_client: TestClient) -> None:
