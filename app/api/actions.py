@@ -33,3 +33,8 @@ def transition(
         action = operation(session, action_id)
     except LookupError as exc:
         raise HTTPException(status.HTTP_404_NOT_FOUND, str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(status.HTTP_409_CONFLICT, str(exc)) from exc
+    return ActionView.from_row(action)
+
+
