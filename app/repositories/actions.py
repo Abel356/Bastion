@@ -13,3 +13,8 @@ def create_pending_action(
     )
     session.add(action)
     session.commit()
+    session.refresh(action)
+    return action
+
+
+def get_action(session: Session, action_id: str) -> PendingActionRow | None:
