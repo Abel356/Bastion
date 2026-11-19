@@ -13,3 +13,8 @@ def email(recipients: list[str]) -> ToolCall:
         arguments={"recipients": recipients, "subject": "Update", "body": "Hello"},
     )
 
+
+def test_employee_can_search() -> None:
+    call = ToolCall(name=ToolName.SEARCH_DOCUMENTS, arguments={"query": "policy"})
+    assert decide_tool(MAYA, call).status is PolicyStatus.ALLOW
+
