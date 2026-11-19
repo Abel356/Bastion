@@ -38,3 +38,8 @@ def append_event(
 def finish_run(
     session: Session, run: AgentRunRow, status: str,
     input_tokens: int, output_tokens: int, step_count: int
+) -> AgentRunRow:
+    run.status = status
+    run.input_tokens = input_tokens
+    run.output_tokens = output_tokens
+    run.step_count = step_count
