@@ -23,3 +23,8 @@ def api_client(session: Session) -> Iterator[TestClient]:
     client = TestClient(app)
     yield client
     app.dependency_overrides.clear()
+
+
+def select(client: TestClient, persona_id: str) -> None:
+    response = client.post(f"/api/session/{persona_id}")
+    assert response.status_code == 200
