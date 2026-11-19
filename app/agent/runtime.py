@@ -78,3 +78,8 @@ class AgentRuntime:
     def _record_model_call(
         self, session: Session, run_id: str, response: ChatResult,
         budget: RunBudget,
+    ) -> None:
+        append_event(session, run_id, "model_call", {
+            "input_tokens": response.input_tokens,
+            "output_tokens": response.output_tokens,
+            "tool_call_count": len(response.tool_calls),
