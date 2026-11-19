@@ -18,3 +18,5 @@ class ChatRequest(BaseModel):
 def chat(
     request: ChatRequest, session: SessionDependency, persona: PersonaDependency
 ) -> AgentRunResult:
+    runtime = AgentRuntime(get_provider())
+    return runtime.run(session, persona, request.message, request.mode)
