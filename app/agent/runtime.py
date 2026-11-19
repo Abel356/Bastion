@@ -123,3 +123,8 @@ class AgentRuntime:
         answer: str | None = None, citations: list | None = None,
         tool_results: list[ToolResult] | None = None,
         blocked_reason: str | None = None,
+    ) -> AgentRunResult:
+        usage = budget.usage
+        finish_run(
+            session, run, status.value, usage.input_tokens,
+            usage.output_tokens, usage.steps
