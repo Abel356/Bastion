@@ -48,3 +48,8 @@ READ_DOCUMENT_SCHEMA = {
         "description": "Read one authorized document by its stable identifier.",
         "parameters": {
             "type": "object",
+            "properties": {
+                "document_id": {"type": "string", "minLength": 1},
+            },
+            "required": ["document_id"],
+            "additionalProperties": False,
