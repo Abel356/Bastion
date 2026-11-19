@@ -18,3 +18,8 @@ class ToolCall(BaseModel):
 class ToolResult(BaseModel):
     name: ToolName
     status: str
+    data: dict[str, Any] = Field(default_factory=dict)
+    source_ids: list[str] = Field(default_factory=list)
+    trust_level: str = "internal"
+    requires_approval: bool = False
+
