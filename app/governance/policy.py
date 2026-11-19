@@ -43,3 +43,8 @@ def decide_tool(
         return PolicyDecision(status=PolicyStatus.ALLOW, reason="Role permits read-only tool")
     recipients = call.arguments.get("recipients", [])
     if not recipients or not all(isinstance(item, str) for item in recipients):
+        return PolicyDecision(status=PolicyStatus.DENY, reason="Recipients are invalid")
+    if not all(recipient_is_internal(item) for item in recipients):
+        return PolicyDecision(status=PolicyStatus.DENY, reason="External recipients are blocked")
+    if from_untrusted_content:
+        return PolicyDecision(status=PolicyStatus.DENY, reason="Untrusted content requested action")
