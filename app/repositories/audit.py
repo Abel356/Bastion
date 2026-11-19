@@ -43,3 +43,8 @@ def finish_run(
     run.input_tokens = input_tokens
     run.output_tokens = output_tokens
     run.step_count = step_count
+    session.commit()
+    session.refresh(run)
+    return run
+
+
