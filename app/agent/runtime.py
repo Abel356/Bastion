@@ -83,3 +83,8 @@ class AgentRuntime:
             "input_tokens": response.input_tokens,
             "output_tokens": response.output_tokens,
             "tool_call_count": len(response.tool_calls),
+            "step": budget.usage.steps,
+        })
+
+    def _record_tool(
+        self, session: Session, run_id: str, tool_name: str, result: ToolResult
