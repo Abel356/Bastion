@@ -98,3 +98,8 @@ def test_security_can_approve_action(
 
 def test_employee_cannot_approve_action(
     api_client: TestClient, session: Session
+) -> None:
+    action_id = pending_email(session)
+    select(api_client, "maya")
+    response = api_client.post(f"/api/actions/{action_id}/approve")
+    assert response.status_code == 403
