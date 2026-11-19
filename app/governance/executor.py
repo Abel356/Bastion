@@ -53,3 +53,8 @@ def search_documents(
     safe_chunks = []
     blocked_ids = []
     for chunk in chunks:
+        scan = scan_untrusted(chunk.text)
+        if scan.safe:
+            safe_chunks.append(chunk)
+        else:
+            blocked_ids.append(chunk.id)
