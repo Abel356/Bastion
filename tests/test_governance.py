@@ -18,3 +18,8 @@ def test_employee_can_search() -> None:
     call = ToolCall(name=ToolName.SEARCH_DOCUMENTS, arguments={"query": "policy"})
     assert decide_tool(MAYA, call).status is PolicyStatus.ALLOW
 
+
+def test_security_cannot_propose_email() -> None:
+    assert decide_tool(PRIYA, email(["team@acme.example"])).status is PolicyStatus.DENY
+
+
