@@ -73,3 +73,8 @@ class AgentRuntime:
             return self._finish(
                 session, run, RunStatus.FAILED, budget,
                 tool_results=tool_results, blocked_reason="Agent execution failed"
+            )
+
+    def _record_model_call(
+        self, session: Session, run_id: str, response: ChatResult,
+        budget: RunBudget,
