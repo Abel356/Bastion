@@ -28,3 +28,8 @@ def test_read_hides_unauthorized_document(session: Session) -> None:
     run = make_run(session)
     call = ToolCall(
         name=ToolName.READ_DOCUMENT, arguments={"document_id": "finance-expenses-1"}
+    )
+    result = execute_tool(session, MAYA, run.id, call)
+    assert result.status == "blocked"
+    assert result.data["reason"] == "Document is unavailable"
+
