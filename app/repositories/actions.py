@@ -27,6 +27,11 @@ def reject_action(session: Session, action_id: str) -> PendingActionRow:
     session.commit()
     session.refresh(action)
     return action
+
+
+def list_pending_actions(session: Session) -> list[PendingActionRow]:
+    statement = select(PendingActionRow).where(
+        PendingActionRow.status == "pending"
 def get_action(session: Session, action_id: str) -> PendingActionRow | None:
     return session.get(PendingActionRow, action_id)
 
