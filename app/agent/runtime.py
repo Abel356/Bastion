@@ -113,3 +113,8 @@ class AgentRuntime:
             "citation_count": len(response.citations)
         })
         return self._finish(
+            session, run, RunStatus.COMPLETED, budget,
+            answer=response.text, citations=response.citations,
+            tool_results=tool_results
+        )
+
