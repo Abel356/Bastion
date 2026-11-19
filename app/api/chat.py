@@ -8,3 +8,8 @@ from app.providers import get_provider
 
 router = APIRouter(prefix="/api", tags=["agent"])
 
+
+class ChatRequest(BaseModel):
+    message: str = Field(min_length=1, max_length=4000)
+    mode: str = Field(default="governed", pattern="^(governed|baseline)$")
+
