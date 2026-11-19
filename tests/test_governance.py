@@ -8,3 +8,8 @@ from app.personas import MAYA, PRIYA
 
 
 def email(recipients: list[str]) -> ToolCall:
+    return ToolCall(
+        name=ToolName.PROPOSE_EMAIL,
+        arguments={"recipients": recipients, "subject": "Update", "body": "Hello"},
+    )
+
