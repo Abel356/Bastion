@@ -103,3 +103,8 @@ class AgentRuntime:
         scan = scan_output(response.text, ("CANARY-BSTN-42",))
         if not scan.safe:
             append_event(session, run.id, "output_blocked", {
+                "rules": [finding.rule for finding in scan.findings]
+            })
+            return self._finish(
+                session, run, RunStatus.BLOCKED, budget,
+                tool_results=tool_results, blocked_reason="Output policy blocked response"
