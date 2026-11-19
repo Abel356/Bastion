@@ -63,3 +63,8 @@ def test_scanner_flags_indirect_injection() -> None:
     assert not result.safe
     assert {item.kind for item in result.findings} >= {FindingType.INSTRUCTION_OVERRIDE}
 
+
+def test_scanner_allows_benign_policy() -> None:
+    assert scan_untrusted("Employees record decisions and contact their lead.").safe
+
+
