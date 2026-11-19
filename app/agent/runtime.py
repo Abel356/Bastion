@@ -118,3 +118,8 @@ class AgentRuntime:
             tool_results=tool_results
         )
 
+    def _finish(
+        self, session: Session, run: Any, status: RunStatus, budget: RunBudget,
+        answer: str | None = None, citations: list | None = None,
+        tool_results: list[ToolResult] | None = None,
+        blocked_reason: str | None = None,
