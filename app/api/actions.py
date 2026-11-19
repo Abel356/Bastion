@@ -28,3 +28,8 @@ class ActionView(BaseModel):
 def transition(
     action_id: str, session: SessionDependency,
     operation: Callable,
+) -> ActionView:
+    try:
+        action = operation(session, action_id)
+    except LookupError as exc:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, str(exc)) from exc
