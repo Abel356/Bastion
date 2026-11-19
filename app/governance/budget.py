@@ -8,3 +8,8 @@ class BudgetLimits(BaseModel):
 
 
 class BudgetUsage(BaseModel):
+    steps: int = 0
+    input_tokens: int = 0
+    output_tokens: int = 0
+
+
