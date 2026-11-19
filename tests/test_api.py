@@ -73,3 +73,8 @@ def test_security_can_view_ordered_events(
     run = start_run(session, MAYA.id, "Inspect events")
     append_event(session, run.id, "first", {})
     append_event(session, run.id, "second", {})
+    select(api_client, "priya")
+    response = api_client.get(f"/api/audit/runs/{run.id}/events")
+    assert [event["sequence"] for event in response.json()] == [1, 2]
+
+
