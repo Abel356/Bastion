@@ -33,3 +33,8 @@ INJECTION_RULES = {
         r"propose_email\s*\(",
         r"call\s+(the\s+)?(email|tool|function)",
         r"send\s+.*@",
+    ),
+    FindingType.EXFILTRATION: (
+        r"https?://[^\s]+\?.*(data|secret|token)=",
+        r"!\[[^\]]*\]\(https?://",
+    ),
