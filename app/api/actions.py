@@ -8,3 +8,8 @@ from app.models import PendingActionRow
 from app.repositories.actions import approve_action, list_pending_actions, reject_action
 
 router = APIRouter(prefix="/api/actions", tags=["actions"])
+
+
+class ActionView(BaseModel):
+    id: str
+    run_id: str
