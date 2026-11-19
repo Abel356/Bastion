@@ -83,3 +83,8 @@ def pending_email(session: Session) -> str:
     call = ToolCall(name=ToolName.PROPOSE_EMAIL, arguments={
         "recipients": ["team@acme.example"], "subject": "Hi", "body": "Update"
     })
+    return create_pending_action(session, run.id, call).id
+
+
+def test_security_can_approve_action(
+    api_client: TestClient, session: Session
