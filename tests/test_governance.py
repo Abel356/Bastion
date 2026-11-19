@@ -48,3 +48,8 @@ def test_step_budget_stops_fourth_call() -> None:
 
 def test_input_budget_stops_estimated_overage() -> None:
     budget = RunBudget(BudgetLimits(max_input_tokens=10))
+    with pytest.raises(BudgetExceeded, match="Input token"):
+        budget.before_call(11)
+
+
+def test_output_budget_records_hard_failure() -> None:
