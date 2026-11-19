@@ -58,3 +58,8 @@ def test_employee_cannot_view_audit(api_client: TestClient) -> None:
 
 
 def test_security_can_view_runs(
+    api_client: TestClient, session: Session
+) -> None:
+    start_run(session, MAYA.id, "Inspect me")
+    select(api_client, "priya")
+    response = api_client.get("/api/audit/runs")
