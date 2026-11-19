@@ -68,3 +68,8 @@ def test_security_can_view_runs(
 
 
 def test_security_can_view_ordered_events(
+    api_client: TestClient, session: Session
+) -> None:
+    run = start_run(session, MAYA.id, "Inspect events")
+    append_event(session, run.id, "first", {})
+    append_event(session, run.id, "second", {})
