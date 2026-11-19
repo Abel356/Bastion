@@ -13,3 +13,8 @@ from app.providers.base import ChatResult, ModelProvider
 from app.repositories.audit import append_event, finish_run, start_run
 
 
+class AgentRuntime:
+    def __init__(
+        self, provider: ModelProvider, limits: BudgetLimits | None = None
+    ) -> None:
+        self.provider = provider
