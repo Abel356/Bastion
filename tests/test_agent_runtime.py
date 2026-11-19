@@ -93,3 +93,8 @@ def test_untrusted_retrieval_blocks_followup_action(session: Session) -> None:
 def test_provider_failure_is_audited(session: Session) -> None:
     result = AgentRuntime(ScriptedProvider([RuntimeError("offline")])).run(
         session, MAYA, "Hello"
+    )
+    assert result.status is RunStatus.FAILED
+    events = list_events(session, result.run_id)
+    assert events[-1].event_type == "run_failed"
+
