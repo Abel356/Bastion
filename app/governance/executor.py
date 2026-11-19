@@ -38,3 +38,8 @@ def execute_tool(
     if call.name is ToolName.SEARCH_DOCUMENTS:
         return search_documents(session, persona, arguments["query"])
     if call.name is ToolName.READ_DOCUMENT:
+        return read_document(session, persona, arguments["document_id"])
+    action = create_pending_action(session, run_id, call)
+    return ToolResult(
+        name=call.name, status=PolicyStatus.APPROVAL.value,
+        data={"action_id": action.id}, requires_approval=True
