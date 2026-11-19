@@ -133,3 +133,4 @@ class AgentRuntime:
             run_id=run.id, status=status, answer=answer,
             citations=citations or [], tool_results=tool_results or [],
             usage=usage, blocked_reason=blocked_reason
+        )
