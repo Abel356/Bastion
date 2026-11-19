@@ -43,3 +43,8 @@ INJECTION_RULES = {
 OUTPUT_RULES = {
     FindingType.CANARY: (r"CANARY-[A-Z0-9-]+",),
     FindingType.EXFILTRATION: (
+        r"!\[[^\]]*\]\(https?://",
+        r"https?://[^\s]+\?.*(data|secret|token)=",
+    ),
+}
+
