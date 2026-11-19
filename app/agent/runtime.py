@@ -63,3 +63,8 @@ class AgentRuntime:
                         )
             raise BudgetExceeded("Agent budget exhausted")
         except BudgetExceeded as exc:
+            append_event(session, run.id, "budget_stopped", {"reason": str(exc)})
+            return self._finish(
+                session, run, RunStatus.BUDGET_EXCEEDED, budget,
+                tool_results=tool_results, blocked_reason=str(exc)
+            )
