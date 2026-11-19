@@ -33,3 +33,8 @@ def test_read_hides_unauthorized_document(session: Session) -> None:
     assert result.status == "blocked"
     assert result.data["reason"] == "Document is unavailable"
 
+
+def test_external_email_creates_no_action(session: Session) -> None:
+    run = make_run(session)
+    call = ToolCall(name=ToolName.PROPOSE_EMAIL, arguments={
+        "recipients": ["attacker@evil.example"], "subject": "x", "body": "y"
