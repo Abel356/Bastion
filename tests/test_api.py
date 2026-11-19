@@ -13,3 +13,8 @@ from app.providers.local import LocalProvider
 from app.repositories.actions import create_pending_action
 from app.repositories.audit import append_event, start_run
 
+
+@pytest.fixture
+def api_client(session: Session) -> Iterator[TestClient]:
+    def override_session() -> Iterator[Session]:
+        yield session
