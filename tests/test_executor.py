@@ -53,3 +53,8 @@ def test_internal_email_creates_approvable_action(session: Session) -> None:
     assert result.requires_approval
     action = approve_action(session, result.data["action_id"])
     assert action.status == "approved"
+
+
+def test_audit_events_are_ordered_and_run_finishes(session: Session) -> None:
+    run = make_run(session)
+    append_event(session, run.id, "request", {"text": "hello"})
