@@ -53,3 +53,8 @@ def approve(
     del security
     return transition(action_id, session, approve_action)
 
+
+@router.post("/{action_id}/reject", response_model=ActionView)
+def reject(
+    action_id: str, session: SessionDependency, security: SecurityDependency
+) -> ActionView:
