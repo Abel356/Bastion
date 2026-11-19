@@ -38,3 +38,8 @@ INJECTION_RULES = {
         r"https?://[^\s]+\?.*(data|secret|token)=",
         r"!\[[^\]]*\]\(https?://",
     ),
+}
+
+OUTPUT_RULES = {
+    FindingType.CANARY: (r"CANARY-[A-Z0-9-]+",),
+    FindingType.EXFILTRATION: (
