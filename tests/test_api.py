@@ -33,3 +33,8 @@ def select(client: TestClient, persona_id: str) -> None:
 def test_chat_requires_session(api_client: TestClient) -> None:
     response = api_client.post("/api/chat", json={"message": "Hello"})
     assert response.status_code == 401
+
+
+def test_chat_runs_with_selected_persona(
+    api_client: TestClient, monkeypatch: pytest.MonkeyPatch
+) -> None:
