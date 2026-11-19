@@ -17,6 +17,11 @@ def create_pending_action(
     return action
 
 
+def reject_action(session: Session, action_id: str) -> PendingActionRow:
+    action = session.get(PendingActionRow, action_id)
+    if action is None:
+        raise LookupError("Pending action not found")
+    if action.status != "pending":
 def get_action(session: Session, action_id: str) -> PendingActionRow | None:
     return session.get(PendingActionRow, action_id)
 
