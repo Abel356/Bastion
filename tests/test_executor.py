@@ -48,3 +48,8 @@ def test_internal_email_creates_approvable_action(session: Session) -> None:
     run = make_run(session)
     call = ToolCall(name=ToolName.PROPOSE_EMAIL, arguments={
         "recipients": ["team@acme.example"], "subject": "x", "body": "y"
+    })
+    result = execute_tool(session, MAYA, run.id, call)
+    assert result.requires_approval
+    action = approve_action(session, result.data["action_id"])
+    assert action.status == "approved"
