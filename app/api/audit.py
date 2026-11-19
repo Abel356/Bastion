@@ -53,3 +53,5 @@ def events(
     del security
     rows = list_events(session, run_id)
     if not rows:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Run not found")
+    return [EventView.from_row(row) for row in rows]
