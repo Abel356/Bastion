@@ -38,3 +38,8 @@ def test_internal_email_requires_approval() -> None:
     assert decision.status is PolicyStatus.APPROVAL
 
 
+def test_step_budget_stops_fourth_call() -> None:
+    budget = RunBudget(BudgetLimits(max_steps=3))
+    for _ in range(3):
+        budget.before_call()
+    with pytest.raises(BudgetExceeded, match="step limit"):
