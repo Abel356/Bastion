@@ -23,3 +23,8 @@ def parse_tool_call(payload: dict[str, Any]) -> tuple[str, ToolCall]:
     name = function.get("name") or payload.get("name")
     arguments = function.get("arguments", payload.get("arguments", {}))
     if isinstance(arguments, str):
+        arguments = json.loads(arguments)
+    identifier = payload.get("id", f"{name}-call")
+    return identifier, ToolCall(name=name, arguments=arguments)
+
+
