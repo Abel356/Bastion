@@ -18,3 +18,8 @@ def current_persona(
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Demo session required")
     persona_id = decode_token(bastion_session)
     return PERSONAS[persona_id]
+
+
+PersonaDependency = Annotated[Persona, Depends(current_persona)]
+
+
