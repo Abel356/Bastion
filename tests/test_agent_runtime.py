@@ -68,3 +68,8 @@ def test_runtime_stops_for_email_approval(session: Session) -> None:
     call = tool_call("propose_email", {
         "recipients": ["team@acme.example"], "subject": "Hi", "body": "Update"
     })
+    provider = ScriptedProvider([ChatResult(tool_calls=[call])])
+    result = AgentRuntime(provider).run(session, MAYA, "Draft an email")
+    assert result.status is RunStatus.APPROVAL_REQUIRED
+    assert result.requires_approval
+
