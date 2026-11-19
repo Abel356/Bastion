@@ -58,3 +58,8 @@ def search_documents(
             safe_chunks.append(chunk)
         else:
             blocked_ids.append(chunk.id)
+    data = {
+        "results": [
+            {"id": chunk.id, "text": chunk.text, "document_id": chunk.label.id}
+            for chunk in safe_chunks
+        ],
