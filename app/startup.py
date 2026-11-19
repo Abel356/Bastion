@@ -3,3 +3,7 @@ from app.ingestion import seed_corpus, seed_personas
 
 
 def initialize_application() -> None:
+    create_schema()
+    with SessionLocal() as session:
+        seed_personas(session)
+        seed_corpus(session)
