@@ -88,3 +88,8 @@ def test_untrusted_retrieval_blocks_followup_action(session: Session) -> None:
     )
     assert result.status is RunStatus.COMPLETED
     assert result.tool_results[-1].status == "blocked"
+
+
+def test_provider_failure_is_audited(session: Session) -> None:
+    result = AgentRuntime(ScriptedProvider([RuntimeError("offline")])).run(
+        session, MAYA, "Hello"
