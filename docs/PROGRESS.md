@@ -3,3 +3,8 @@
 - Enforced department, clearance, and revocation in the SQL candidate query.
 - Generated and seeded 60 documents, including three labeled poisoned documents.
 - Added tested Cohere and deterministic offline provider implementations.
+
+## November 18, 2026
+- Added strict schemas and validators for all three agent tools.
+- Added role, recipient-domain, provenance, and approval policies.
+- Added hard step, input-token, and output-token budgets.
