@@ -28,3 +28,8 @@ def append_event(
     event = RunEventRow(
         run_id=run_id, sequence=(current or 0) + 1,
         event_type=event_type, payload=payload
+    )
+    session.add(event)
+    session.commit()
+    session.refresh(event)
+    return event
