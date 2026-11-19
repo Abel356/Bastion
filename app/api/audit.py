@@ -43,3 +43,8 @@ def runs(
     session: SessionDependency, security: SecurityDependency
 ) -> list[RunView]:
     del security
+    return [RunView.from_row(row) for row in list_recent_runs(session)]
+
+
+@router.get("/runs/{run_id}/events", response_model=list[EventView])
+def events(
