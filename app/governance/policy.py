@@ -33,3 +33,8 @@ ALLOWED_TOOLS = {
 def recipient_is_internal(recipient: str) -> bool:
     return recipient.lower().endswith(INTERNAL_DOMAIN)
 
+
+def decide_tool(
+    persona: Persona, call: ToolCall, from_untrusted_content: bool = False
+) -> PolicyDecision:
+    if call.name not in ALLOWED_TOOLS.get(persona.role, set()):
