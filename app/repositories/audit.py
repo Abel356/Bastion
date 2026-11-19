@@ -18,3 +18,8 @@ def start_run(
     session.refresh(run)
     return run
 
+
+def append_event(
+    session: Session, run_id: str, event_type: str, payload: dict[str, Any]
+) -> RunEventRow:
+    current = session.scalar(
