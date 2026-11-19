@@ -33,3 +33,8 @@ def assistant_message(result: ChatResult) -> dict[str, Any]:
         "role": "assistant",
         "content": result.text,
     }
+    if result.tool_calls:
+        message["tool_calls"] = result.tool_calls
+    return message
+
+
