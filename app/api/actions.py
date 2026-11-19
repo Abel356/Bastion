@@ -23,3 +23,8 @@ class ActionView(BaseModel):
             id=row.id, run_id=row.run_id, kind=row.kind,
             status=row.status, payload=row.payload
         )
+
+
+def transition(
+    action_id: str, session: SessionDependency,
+    operation: Callable,
