@@ -58,3 +58,5 @@ def approve(
 def reject(
     action_id: str, session: SessionDependency, security: SecurityDependency
 ) -> ActionView:
+    del security
+    return transition(action_id, session, reject_action)
