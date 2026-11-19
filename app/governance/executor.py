@@ -48,3 +48,8 @@ def execute_tool(
 
 def search_documents(
     session: Session, persona: Persona, query: str
+) -> ToolResult:
+    chunks = retrieve_authorized(session, persona, query, limit=6)
+    safe_chunks = []
+    blocked_ids = []
+    for chunk in chunks:
