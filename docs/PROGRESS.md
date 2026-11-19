@@ -8,3 +8,8 @@
 - Added strict schemas and validators for all three agent tools.
 - Added role, recipient-domain, provenance, and approval policies.
 - Added hard step, input-token, and output-token budgets.
+- Added versioned injection and output-exfiltration scanners.
+- Added pending-action approval and rejection persistence.
+- Persisted ordered audit events and terminal run usage.
+- Quarantined poisoned retrieval results before tool output.
+- Next: connect these controls through the three-step agent loop.
