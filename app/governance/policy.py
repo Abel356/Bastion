@@ -18,3 +18,8 @@ class PolicyDecision(BaseModel):
     status: PolicyStatus
     reason: str
 
+
+ALLOWED_TOOLS = {
+    Role.EMPLOYEE: {
+        ToolName.SEARCH_DOCUMENTS, ToolName.READ_DOCUMENT, ToolName.PROPOSE_EMAIL
+    },
