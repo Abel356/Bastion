@@ -18,3 +18,8 @@ class RunStatus(StrEnum):
 class AgentRunResult(BaseModel):
     run_id: str
     status: RunStatus
+    answer: str | None = None
+    citations: list[Citation] = Field(default_factory=list)
+    tool_results: list[ToolResult] = Field(default_factory=list)
+    usage: BudgetUsage = Field(default_factory=BudgetUsage)
+    blocked_reason: str | None = None
