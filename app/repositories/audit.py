@@ -33,3 +33,8 @@ def append_event(
     session.commit()
     session.refresh(event)
     return event
+
+
+def finish_run(
+    session: Session, run: AgentRunRow, status: str,
+    input_tokens: int, output_tokens: int, step_count: int
