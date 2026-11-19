@@ -13,3 +13,8 @@ class PolicyStatus(StrEnum):
     DENY = "deny"
     APPROVAL = "approval_required"
 
+
+class PolicyDecision(BaseModel):
+    status: PolicyStatus
+    reason: str
+
