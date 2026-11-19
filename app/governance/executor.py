@@ -33,3 +33,8 @@ def execute_tool(
         return blocked(call, decision.reason)
     try:
         arguments = validate_arguments(call)
+    except ValidationError as exc:
+        return blocked(call, str(exc), status="invalid")
+    if call.name is ToolName.SEARCH_DOCUMENTS:
+        return search_documents(session, persona, arguments["query"])
+    if call.name is ToolName.READ_DOCUMENT:
