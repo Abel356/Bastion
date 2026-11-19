@@ -11,12 +11,12 @@ class RerankItem(BaseModel):
 class Citation(BaseModel):
     start: int
     end: int
-    text: str = ""
+    text: str
     source_ids: list[str] = Field(default_factory=list)
 
 
 class ChatResult(BaseModel):
-    text: str
+    text: str = ""
     citations: list[Citation] = Field(default_factory=list)
     tool_calls: list[dict[str, Any]] = Field(default_factory=list)
     input_tokens: int = 0
