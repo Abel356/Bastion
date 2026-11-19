@@ -18,3 +18,8 @@ class AgentRuntime:
         self, provider: ModelProvider, limits: BudgetLimits | None = None
     ) -> None:
         self.provider = provider
+        self.limits = limits or BudgetLimits()
+
+    def run(
+        self, session: Session, persona: Persona, request: str,
+        mode: str = "governed",
