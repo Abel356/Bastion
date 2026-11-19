@@ -53,3 +53,8 @@ READ_DOCUMENT_SCHEMA = {
             },
             "required": ["document_id"],
             "additionalProperties": False,
+        },
+    },
+}
+
+
