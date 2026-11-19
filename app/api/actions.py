@@ -13,3 +13,8 @@ router = APIRouter(prefix="/api/actions", tags=["actions"])
 class ActionView(BaseModel):
     id: str
     run_id: str
+    kind: str
+    status: str
+    payload: dict
+
+    @classmethod
