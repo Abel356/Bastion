@@ -48,3 +48,8 @@ class AgentRuntime:
                     )
                 messages.append(assistant_message(response))
                 for payload in response.tool_calls:
+                    call_id, call = parse_tool_call(payload)
+                    result = execute_tool(
+                        session, persona, run.id, call, untrusted_seen
+                    )
+                    tool_results.append(result)
