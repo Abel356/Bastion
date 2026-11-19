@@ -13,3 +13,8 @@ SYSTEM_PROMPT = (
 
 def initial_messages(request: str) -> list[dict[str, Any]]:
     return [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user", "content": request},
+    ]
+
+
