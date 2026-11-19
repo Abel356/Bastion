@@ -8,3 +8,8 @@ from app.models import AgentRunRow, RunEventRow
 
 def start_run(
     session: Session, user_id: str, request: str,
+    mode: str = "governed", model_id: str | None = None
+) -> AgentRunRow:
+    run = AgentRunRow(
+        user_id=user_id, request=request, mode=mode, model_id=model_id
+    )
