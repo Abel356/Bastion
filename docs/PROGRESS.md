@@ -18,3 +18,6 @@
 - Added the governed three-step agent runtime and normalized tool messages.
 - Audited model calls, tool decisions, release decisions, and terminal usage.
 - Added authenticated chat, approval, and security audit APIs.
+- Added idempotent lifespan startup for schema, personas, and corpus.
+- Verified role enforcement and approval transitions across 60 passing tests.
+- Next: build the React demo shell and evaluation harness.
