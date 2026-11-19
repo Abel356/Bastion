@@ -13,3 +13,8 @@ from app.models import DocumentRow
 from app.repositories.actions import create_pending_action
 from app.repositories.documents import retrieve_authorized
 
+
+def blocked(call: ToolCall, reason: str, status: str = "blocked") -> ToolResult:
+    return ToolResult(name=call.name, status=status, data={"reason": reason})
+
+
