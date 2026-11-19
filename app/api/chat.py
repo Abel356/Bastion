@@ -13,3 +13,8 @@ class ChatRequest(BaseModel):
     message: str = Field(min_length=1, max_length=4000)
     mode: str = Field(default="governed", pattern="^(governed|baseline)$")
 
+
+@router.post("/chat", response_model=AgentRunResult)
+def chat(
+    request: ChatRequest, session: SessionDependency, persona: PersonaDependency
+) -> AgentRunResult:
