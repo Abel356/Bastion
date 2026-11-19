@@ -28,3 +28,8 @@ ALLOWED_TOOLS = {
     },
     Role.SECURITY: {ToolName.SEARCH_DOCUMENTS, ToolName.READ_DOCUMENT},
 }
+
+
+def recipient_is_internal(recipient: str) -> bool:
+    return recipient.lower().endswith(INTERNAL_DOMAIN)
+
