@@ -63,3 +63,8 @@ def search_documents(
             {"id": chunk.id, "text": chunk.text, "document_id": chunk.label.id}
             for chunk in safe_chunks
         ],
+        "quarantined_ids": blocked_ids,
+    }
+    return ToolResult(
+        name=ToolName.SEARCH_DOCUMENTS, status="completed", data=data,
+        source_ids=[chunk.id for chunk in safe_chunks],
