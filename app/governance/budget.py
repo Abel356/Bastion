@@ -33,3 +33,8 @@ class RunBudget:
     def after_call(self, input_tokens: int, output_tokens: int) -> None:
         self.usage.input_tokens += input_tokens
         self.usage.output_tokens += output_tokens
+        if self.usage.input_tokens > self.limits.max_input_tokens:
+            raise BudgetExceeded("Input token budget exceeded")
+        if self.usage.output_tokens > self.limits.max_output_tokens:
+            raise BudgetExceeded("Output token budget exceeded")
+
