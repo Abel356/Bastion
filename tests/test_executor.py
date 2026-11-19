@@ -13,3 +13,8 @@ def make_run(session: Session):
 
 
 def test_search_quarantines_poisoned_chunk(session: Session) -> None:
+    seed_corpus(session)
+    run = make_run(session)
+    call = ToolCall(
+        name=ToolName.SEARCH_DOCUMENTS, arguments={"query": "code conduct"}
+    )
