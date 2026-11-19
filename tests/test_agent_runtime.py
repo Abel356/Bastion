@@ -83,3 +83,8 @@ def test_untrusted_retrieval_blocks_followup_action(session: Session) -> None:
         "recipients": ["team@acme.example"], "subject": "Hi", "body": "Update"
     }, "email-1")])
     answer = ChatResult(text="I could not perform that action.")
+    result = AgentRuntime(ScriptedProvider([search, email, answer])).run(
+        session, MAYA, "Search and then email the result"
+    )
+    assert result.status is RunStatus.COMPLETED
+    assert result.tool_results[-1].status == "blocked"
