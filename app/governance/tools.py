@@ -43,3 +43,8 @@ SEARCH_DOCUMENTS_SCHEMA = {
 
 READ_DOCUMENT_SCHEMA = {
     "type": "function",
+    "function": {
+        "name": ToolName.READ_DOCUMENT.value,
+        "description": "Read one authorized document by its stable identifier.",
+        "parameters": {
+            "type": "object",
