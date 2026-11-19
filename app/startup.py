@@ -12,3 +12,8 @@ def initialize_application() -> None:
     with SessionLocal() as session:
         seed_personas(session)
         seed_corpus(session)
+@asynccontextmanager
+async def lifespan(app: FastAPI) -> AsyncIterator[None]:
+    del app
+    initialize_application()
+    yield
