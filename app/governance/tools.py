@@ -38,3 +38,8 @@ SEARCH_DOCUMENTS_SCHEMA = {
             "additionalProperties": False,
         },
     },
+}
+
+
+READ_DOCUMENT_SCHEMA = {
+    "type": "function",
