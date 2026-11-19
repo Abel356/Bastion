@@ -23,3 +23,8 @@ def append_event(
     session: Session, run_id: str, event_type: str, payload: dict[str, Any]
 ) -> RunEventRow:
     current = session.scalar(
+        select(func.max(RunEventRow.sequence)).where(RunEventRow.run_id == run_id)
+    )
+    event = RunEventRow(
+        run_id=run_id, sequence=(current or 0) + 1,
+        event_type=event_type, payload=payload
