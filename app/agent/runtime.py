@@ -53,3 +53,8 @@ class AgentRuntime:
                         session, persona, run.id, call, untrusted_seen
                     )
                     tool_results.append(result)
+                    self._record_tool(session, run.id, call.name.value, result)
+                    untrusted_seen = untrusted_seen or result.trust_level == "untrusted"
+                    messages.append(tool_message(call_id, result))
+                    if result.requires_approval:
+                        return self._finish(
