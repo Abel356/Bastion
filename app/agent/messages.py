@@ -18,3 +18,8 @@ def initial_messages(request: str) -> list[dict[str, Any]]:
     ]
 
 
+def parse_tool_call(payload: dict[str, Any]) -> tuple[str, ToolCall]:
+    function = payload.get("function", payload)
+    name = function.get("name") or payload.get("name")
+    arguments = function.get("arguments", payload.get("arguments", {}))
+    if isinstance(arguments, str):
