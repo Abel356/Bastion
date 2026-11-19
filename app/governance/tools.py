@@ -46,6 +46,11 @@ SEARCH_DOCUMENTS_SCHEMA = {
 
 class SearchDocumentsArgs(BaseModel):
     query: str = Field(min_length=1)
+
+
+class ReadDocumentArgs(BaseModel):
+    document_id: str = Field(min_length=1)
+
 PROPOSE_EMAIL_SCHEMA = {
     "type": "function",
     "function": {
