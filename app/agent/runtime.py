@@ -58,3 +58,8 @@ class AgentRuntime:
                     messages.append(tool_message(call_id, result))
                     if result.requires_approval:
                         return self._finish(
+                            session, run, RunStatus.APPROVAL_REQUIRED,
+                            budget, tool_results=tool_results
+                        )
+            raise BudgetExceeded("Agent budget exhausted")
+        except BudgetExceeded as exc:
