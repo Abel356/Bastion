@@ -13,3 +13,8 @@ class FindingType(StrEnum):
 
 class ScanFinding(BaseModel):
     kind: FindingType
+    rule: str
+    matched_text: str
+    severity: str = "high"
+
+
