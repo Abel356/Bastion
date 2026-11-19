@@ -78,3 +78,8 @@ def read_document(
     document = session.get(DocumentRow, document_id)
     if document is None:
         return blocked(
+            ToolCall(name=ToolName.READ_DOCUMENT), "Document is unavailable"
+        )
+    label = DocumentLabel(
+        id=document.id, department=document.department,
+        clearance=document.clearance,
