@@ -53,3 +53,8 @@ def scan_rules(text: str, rules: dict[FindingType, tuple[str, ...]]) -> ScanResu
     findings: list[ScanFinding] = []
     for kind, patterns in rules.items():
         for pattern in patterns:
+            match = re.search(pattern, text, flags=re.IGNORECASE)
+            if match:
+                findings.append(ScanFinding(
+                    kind=kind, rule=pattern, matched_text=match.group(0)
+                ))
