@@ -33,3 +33,8 @@ class EventView(BaseModel):
     payload: dict
     created_at: datetime
 
+    @classmethod
+    def from_row(cls, row: RunEventRow) -> "EventView":
+        return cls.model_validate(row, from_attributes=True)
+
+
