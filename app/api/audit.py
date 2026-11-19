@@ -23,3 +23,8 @@ class RunView(BaseModel):
     created_at: datetime
 
     @classmethod
+    def from_row(cls, row: AgentRunRow) -> "RunView":
+        return cls.model_validate(row, from_attributes=True)
+
+
+class EventView(BaseModel):
