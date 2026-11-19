@@ -28,3 +28,8 @@ def execute_tool(
     session: Session, persona: Persona, run_id: str, call: ToolCall,
     from_untrusted_content: bool = False,
 ) -> ToolResult:
+    decision = decide_tool(persona, call, from_untrusted_content)
+    if decision.status is PolicyStatus.DENY:
+        return blocked(call, decision.reason)
+    try:
+        arguments = validate_arguments(call)
