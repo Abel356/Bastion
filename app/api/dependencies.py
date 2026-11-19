@@ -13,3 +13,8 @@ SessionDependency = Annotated[Session, Depends(get_session)]
 
 def current_persona(
     bastion_session: Annotated[str | None, Cookie()] = None,
+) -> Persona:
+    if not bastion_session:
+        raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Demo session required")
+    persona_id = decode_token(bastion_session)
+    return PERSONAS[persona_id]
