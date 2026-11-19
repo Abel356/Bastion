@@ -8,3 +8,8 @@ from app.models import AgentRunRow, RunEventRow
 from app.repositories.audit import list_events, list_recent_runs
 
 router = APIRouter(prefix="/api/audit", tags=["audit"])
+
+
+class RunView(BaseModel):
+    id: str
+    user_id: str
