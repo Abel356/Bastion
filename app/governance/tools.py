@@ -23,3 +23,8 @@ class ToolResult(BaseModel):
     trust_level: str = "internal"
     requires_approval: bool = False
 
+
+SEARCH_DOCUMENTS_SCHEMA = {
+    "type": "function",
+    "function": {
+        "name": ToolName.SEARCH_DOCUMENTS.value,
