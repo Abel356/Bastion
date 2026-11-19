@@ -88,3 +88,8 @@ class AgentRuntime:
 
     def _record_tool(
         self, session: Session, run_id: str, tool_name: str, result: ToolResult
+    ) -> None:
+        append_event(session, run_id, "tool_decision", {
+            "tool": tool_name,
+            "status": result.status,
+            "source_ids": result.source_ids,
