@@ -93,3 +93,8 @@ class AgentRuntime:
             "tool": tool_name,
             "status": result.status,
             "source_ids": result.source_ids,
+            "requires_approval": result.requires_approval,
+        })
+
+    def _release(
+        self, session: Session, run: Any, response: ChatResult,
