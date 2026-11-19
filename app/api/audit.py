@@ -48,3 +48,8 @@ def runs(
 
 @router.get("/runs/{run_id}/events", response_model=list[EventView])
 def events(
+    run_id: str, session: SessionDependency, security: SecurityDependency
+) -> list[EventView]:
+    del security
+    rows = list_events(session, run_id)
+    if not rows:
