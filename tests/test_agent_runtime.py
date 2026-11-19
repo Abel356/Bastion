@@ -73,3 +73,8 @@ def test_runtime_stops_for_email_approval(session: Session) -> None:
     assert result.status is RunStatus.APPROVAL_REQUIRED
     assert result.requires_approval
 
+
+def test_untrusted_retrieval_blocks_followup_action(session: Session) -> None:
+    seed_corpus(session)
+    search = ChatResult(tool_calls=[tool_call(
+        "search_documents", {"query": "remote work"}, "search-1"
