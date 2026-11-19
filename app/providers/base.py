@@ -11,7 +11,7 @@ class RerankItem(BaseModel):
 class Citation(BaseModel):
     start: int
     end: int
-    text: str
+    text: str = ""
     source_ids: list[str] = Field(default_factory=list)
 
 
