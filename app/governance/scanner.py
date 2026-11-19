@@ -48,3 +48,8 @@ OUTPUT_RULES = {
     ),
 }
 
+
+def scan_rules(text: str, rules: dict[FindingType, tuple[str, ...]]) -> ScanResult:
+    findings: list[ScanFinding] = []
+    for kind, patterns in rules.items():
+        for pattern in patterns:
