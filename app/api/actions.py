@@ -18,3 +18,8 @@ class ActionView(BaseModel):
     payload: dict
 
     @classmethod
+    def from_row(cls, row: PendingActionRow) -> "ActionView":
+        return cls(
+            id=row.id, run_id=row.run_id, kind=row.kind,
+            status=row.status, payload=row.payload
+        )
