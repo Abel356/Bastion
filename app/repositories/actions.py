@@ -22,6 +22,11 @@ def reject_action(session: Session, action_id: str) -> PendingActionRow:
     if action is None:
         raise LookupError("Pending action not found")
     if action.status != "pending":
+        raise ValueError("Action is no longer pending")
+    action.status = "rejected"
+    session.commit()
+    session.refresh(action)
+    return action
 def get_action(session: Session, action_id: str) -> PendingActionRow | None:
     return session.get(PendingActionRow, action_id)
 
