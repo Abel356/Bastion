@@ -28,3 +28,8 @@ def approve_action(session: Session, action_id: str) -> PendingActionRow:
     if action.status != "pending":
         raise ValueError("Action is no longer pending")
     action.status = "approved"
+    session.commit()
+    session.refresh(action)
+    return action
+
+
