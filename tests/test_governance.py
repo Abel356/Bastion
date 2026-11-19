@@ -68,3 +68,7 @@ def test_scanner_allows_benign_policy() -> None:
     assert scan_untrusted("Employees record decisions and contact their lead.").safe
 
 
+def test_output_scanner_blocks_canaries_and_markers() -> None:
+    result = scan_output("CANARY-BSTN-42 contains SECRET-PHRASE", ("SECRET-PHRASE",))
+    assert not result.safe
+    assert len(result.findings) == 2
