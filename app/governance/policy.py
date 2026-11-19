@@ -23,3 +23,8 @@ ALLOWED_TOOLS = {
     Role.EMPLOYEE: {
         ToolName.SEARCH_DOCUMENTS, ToolName.READ_DOCUMENT, ToolName.PROPOSE_EMAIL
     },
+    Role.DEPARTMENT_LEAD: {
+        ToolName.SEARCH_DOCUMENTS, ToolName.READ_DOCUMENT, ToolName.PROPOSE_EMAIL
+    },
+    Role.SECURITY: {ToolName.SEARCH_DOCUMENTS, ToolName.READ_DOCUMENT},
+}
