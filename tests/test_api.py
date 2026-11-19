@@ -38,3 +38,8 @@ def test_chat_requires_session(api_client: TestClient) -> None:
 def test_chat_runs_with_selected_persona(
     api_client: TestClient, monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    monkeypatch.setattr(chat_api, "get_provider", LocalProvider)
+    select(api_client, "maya")
+    response = api_client.post("/api/chat", json={"message": "Hello"})
+    assert response.status_code == 200
+    assert response.json()["status"] == "completed"
