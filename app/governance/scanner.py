@@ -28,3 +28,8 @@ INJECTION_RULES = {
         r"ignore\s+(all|any|the)?\s*(previous|prior|system)\s*(rules|instructions)?",
         r"override\s+(the\s+)?(system|developer|policy)",
         r"reveal\s+(the\s+)?system\s+prompt",
+    ),
+    FindingType.TOOL_INJECTION: (
+        r"propose_email\s*\(",
+        r"call\s+(the\s+)?(email|tool|function)",
+        r"send\s+.*@",
