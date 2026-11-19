@@ -23,3 +23,8 @@ def test_search_quarantines_poisoned_chunk(session: Session) -> None:
     assert result.data["quarantined_ids"]
 
 
+def test_read_hides_unauthorized_document(session: Session) -> None:
+    seed_corpus(session)
+    run = make_run(session)
+    call = ToolCall(
+        name=ToolName.READ_DOCUMENT, arguments={"document_id": "finance-expenses-1"}
