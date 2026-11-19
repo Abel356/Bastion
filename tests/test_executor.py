@@ -58,3 +58,8 @@ def test_internal_email_creates_approvable_action(session: Session) -> None:
 def test_audit_events_are_ordered_and_run_finishes(session: Session) -> None:
     run = make_run(session)
     append_event(session, run.id, "request", {"text": "hello"})
+    append_event(session, run.id, "policy", {"status": "allow"})
+    events = list_events(session, run.id)
+    assert [event.sequence for event in events] == [1, 2]
+    finished = finish_run(session, run, "completed", 10, 4, 2)
+    assert (finished.status, finished.step_count) == ("completed", 2)
