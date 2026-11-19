@@ -78,3 +78,8 @@ def test_untrusted_retrieval_blocks_followup_action(session: Session) -> None:
     seed_corpus(session)
     search = ChatResult(tool_calls=[tool_call(
         "search_documents", {"query": "remote work"}, "search-1"
+    )])
+    email = ChatResult(tool_calls=[tool_call("propose_email", {
+        "recipients": ["team@acme.example"], "subject": "Hi", "body": "Update"
+    }, "email-1")])
+    answer = ChatResult(text="I could not perform that action.")
