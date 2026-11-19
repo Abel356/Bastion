@@ -8,3 +8,8 @@ from app.providers.base import Citation
 
 
 class RunStatus(StrEnum):
+    COMPLETED = "completed"
+    BLOCKED = "blocked"
+    APPROVAL_REQUIRED = "approval_required"
+    BUDGET_EXCEEDED = "budget_exceeded"
+    FAILED = "failed"
