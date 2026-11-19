@@ -56,6 +56,12 @@ class ProposeEmailArgs(BaseModel):
     recipients: list[str] = Field(min_length=1)
     subject: str = Field(min_length=1)
     body: str = Field(min_length=1)
+
+
+ARGUMENT_MODELS: dict[ToolName, type[BaseModel]] = {
+    ToolName.SEARCH_DOCUMENTS: SearchDocumentsArgs,
+    ToolName.READ_DOCUMENT: ReadDocumentArgs,
+    ToolName.PROPOSE_EMAIL: ProposeEmailArgs,
 PROPOSE_EMAIL_SCHEMA = {
     "type": "function",
     "function": {
