@@ -103,3 +103,6 @@ def test_runtime_audits_model_and_release(session: Session) -> None:
     provider = ScriptedProvider([ChatResult(text="Safe answer")])
     result = AgentRuntime(provider).run(session, MAYA, "Hello")
     event_types = [event.event_type for event in list_events(session, result.run_id)]
+    assert event_types == [
+        "request_received", "model_call", "response_released"
+    ]
