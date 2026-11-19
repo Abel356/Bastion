@@ -13,3 +13,8 @@ def start_run(
     run = AgentRunRow(
         user_id=user_id, request=request, mode=mode, model_id=model_id
     )
+    session.add(run)
+    session.commit()
+    session.refresh(run)
+    return run
+
