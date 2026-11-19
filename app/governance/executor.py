@@ -83,3 +83,8 @@ def read_document(
     label = DocumentLabel(
         id=document.id, department=document.department,
         clearance=document.clearance,
+        trust_level=TrustLevel(document.trust_level), active=document.active
+    )
+    if not can_read(persona, label):
+        return blocked(
+            ToolCall(name=ToolName.READ_DOCUMENT), "Document is unavailable"
