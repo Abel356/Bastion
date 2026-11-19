@@ -43,3 +43,8 @@ def pending_actions(
     session: SessionDependency, security: SecurityDependency
 ) -> list[ActionView]:
     del security
+    return [ActionView.from_row(row) for row in list_pending_actions(session)]
+
+
+@router.post("/{action_id}/approve", response_model=ActionView)
+def approve(
