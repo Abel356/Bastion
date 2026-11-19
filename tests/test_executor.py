@@ -8,3 +8,8 @@ from app.repositories.actions import approve_action, list_pending_actions
 from app.repositories.audit import append_event, finish_run, list_events, start_run
 
 
+def make_run(session: Session):
+    return start_run(session, MAYA.id, "test request")
+
+
+def test_search_quarantines_poisoned_chunk(session: Session) -> None:
