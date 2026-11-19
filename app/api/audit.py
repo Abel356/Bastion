@@ -18,3 +18,8 @@ class RunView(BaseModel):
     mode: str
     model_id: str | None
     input_tokens: int
+    output_tokens: int
+    step_count: int
+    created_at: datetime
+
+    @classmethod
