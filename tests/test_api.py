@@ -63,3 +63,8 @@ def test_security_can_view_runs(
     start_run(session, MAYA.id, "Inspect me")
     select(api_client, "priya")
     response = api_client.get("/api/audit/runs")
+    assert response.status_code == 200
+    assert response.json()[0]["request"] == "Inspect me"
+
+
+def test_security_can_view_ordered_events(
