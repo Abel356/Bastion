@@ -18,3 +18,8 @@ def blocked(call: ToolCall, reason: str, status: str = "blocked") -> ToolResult:
     return ToolResult(name=call.name, status=status, data={"reason": reason})
 
 
+def validate_arguments(call: ToolCall) -> dict[str, Any]:
+    model = ARGUMENT_MODELS[call.name]
+    validated = model.model_validate(call.arguments)
+    return validated.model_dump()
+
