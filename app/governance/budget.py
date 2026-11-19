@@ -13,3 +13,8 @@ class BudgetUsage(BaseModel):
     output_tokens: int = 0
 
 
+class BudgetExceeded(RuntimeError):
+    pass
+
+
+class RunBudget:
