@@ -43,3 +43,8 @@ def test_external_email_creates_no_action(session: Session) -> None:
     assert result.status == "blocked"
     assert list_pending_actions(session) == []
 
+
+def test_internal_email_creates_approvable_action(session: Session) -> None:
+    run = make_run(session)
+    call = ToolCall(name=ToolName.PROPOSE_EMAIL, arguments={
+        "recipients": ["team@acme.example"], "subject": "x", "body": "y"
