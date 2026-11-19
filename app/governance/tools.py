@@ -28,3 +28,8 @@ SEARCH_DOCUMENTS_SCHEMA = {
     "type": "function",
     "function": {
         "name": ToolName.SEARCH_DOCUMENTS.value,
+        "description": "Search only documents authorized for the active persona.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "query": {"type": "string", "minLength": 1},
