@@ -23,3 +23,8 @@ class ScanResult(BaseModel):
     findings: list[ScanFinding] = Field(default_factory=list)
 
 
+INJECTION_RULES = {
+    FindingType.INSTRUCTION_OVERRIDE: (
+        r"ignore\s+(all|any|the)?\s*(previous|prior|system)\s*(rules|instructions)?",
+        r"override\s+(the\s+)?(system|developer|policy)",
+        r"reveal\s+(the\s+)?system\s+prompt",
