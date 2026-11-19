@@ -38,3 +38,8 @@ def assistant_message(result: ChatResult) -> dict[str, Any]:
     return message
 
 
+def tool_message(
+    call_id: str, result: ToolResult
+) -> dict[str, Any]:
+    documents = [
+        {"id": source_id, "data": result.data}
