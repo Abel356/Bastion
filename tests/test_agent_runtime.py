@@ -38,3 +38,8 @@ def tool_call(name: str, arguments: dict, identifier: str = "call-1") -> dict:
 def test_runtime_releases_safe_answer(session: Session) -> None:
     provider = ScriptedProvider([ChatResult(
         text="The policy allows remote work.", input_tokens=10, output_tokens=6
+    )])
+    result = AgentRuntime(provider).run(session, MAYA, "What is the policy?")
+    assert result.status is RunStatus.COMPLETED
+    assert result.answer == "The policy allows remote work."
+    assert result.usage.steps == 1
