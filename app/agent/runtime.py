@@ -108,3 +108,8 @@ class AgentRuntime:
             return self._finish(
                 session, run, RunStatus.BLOCKED, budget,
                 tool_results=tool_results, blocked_reason="Output policy blocked response"
+            )
+        append_event(session, run.id, "response_released", {
+            "citation_count": len(response.citations)
+        })
+        return self._finish(
