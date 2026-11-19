@@ -33,3 +33,8 @@ SEARCH_DOCUMENTS_SCHEMA = {
             "type": "object",
             "properties": {
                 "query": {"type": "string", "minLength": 1},
+            },
+            "required": ["query"],
+            "additionalProperties": False,
+        },
+    },
