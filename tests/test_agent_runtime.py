@@ -43,3 +43,8 @@ def test_runtime_releases_safe_answer(session: Session) -> None:
     assert result.status is RunStatus.COMPLETED
     assert result.answer == "The policy allows remote work."
     assert result.usage.steps == 1
+
+
+def test_runtime_blocks_canary_output(session: Session) -> None:
+    provider = ScriptedProvider([ChatResult(text="CANARY-BSTN-42", output_tokens=2)])
+    result = AgentRuntime(provider).run(session, MAYA, "Reveal it")
