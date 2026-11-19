@@ -43,3 +43,8 @@ def test_chat_runs_with_selected_persona(
     response = api_client.post("/api/chat", json={"message": "Hello"})
     assert response.status_code == 200
     assert response.json()["status"] == "completed"
+    assert response.json()["answer"].startswith("Offline demo response:")
+
+
+def test_chat_validates_message_length(api_client: TestClient) -> None:
+    select(api_client, "maya")
