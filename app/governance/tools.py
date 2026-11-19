@@ -51,6 +51,11 @@ PROPOSE_EMAIL_SCHEMA = {
             "properties": {
                 "recipients": {
                     "type": "array",
+                    "items": {"type": "string"},
+                    "minItems": 1,
+                },
+                "subject": {"type": "string", "minLength": 1},
+                "body": {"type": "string", "minLength": 1},
 READ_DOCUMENT_SCHEMA = {
     "type": "function",
     "function": {
