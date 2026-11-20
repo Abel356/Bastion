@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react'
 import { api } from './api'
 import type { AuditRun, AuditEvent } from './types'
 
+function Timeline({ runId }: { runId: string }) {
+  return <section><h3>Run timeline</h3><p>{runId}</p></section>
+}
+
 export function Audit() {
   const [runs, setRuns] = useState<AuditRun[]>([])
   const [error, setError] = useState('')
