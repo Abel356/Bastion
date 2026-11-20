@@ -10,3 +10,6 @@ CASES = {
 class FixtureProvider:
     def __init__(self, text: str) -> None:
         self.text = text
+
+    def chat(self, messages, tools=None, max_tokens: int = 800) -> ChatResult:
+        return ChatResult(text=self.text, output_tokens=len(self.text.split()))
