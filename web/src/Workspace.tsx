@@ -21,5 +21,6 @@ export function Workspace() {
       <label>Ask Bastion<textarea value={message} onChange={event => setMessage(event.target.value)} maxLength={4000} required /></label>
       <button disabled={busy || !message.trim()}>{busy ? 'Running…' : 'Run request'}</button>
     </form>
+    {error && <p role="alert">{error}</p>}
   </section>
 }
