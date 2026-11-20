@@ -1,5 +1,6 @@
-# Tomorrow's TODO — November 17, 2026
+# TODO — November 21, 2026
 
+**First**, pass only SQL-authorized pgvector candidates to Cohere Rerank and verify live tool citations. **Then**, enforce atomic approval and append-only audit evidence, and complete offline token reporting. **Finally**, freeze the evaluation split, publish the comparison in the UI, and package the same-origin demo for Compose and hosted smoke tests.
 ## 1. Persistence and corpus
 - Add SQLAlchemy database sessions and application startup wiring.
 - Create Postgres models for users, documents, chunks, runs, and events.
