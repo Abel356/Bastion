@@ -14,5 +14,9 @@ app.include_router(chat_router)
 app.include_router(session_router)
 @app.get("/health")
 def health() -> dict[str, str]: return {"status": "ok"}
+@app.get("/api/runtime")
+def runtime_info() -> dict[str, str]:
+    return {"provider": "cohere" if settings.cohere_api_key else "offline"}
+
 @app.get("/")
 def root() -> dict[str, str]: return {"name": settings.app_name, "docs": "/docs"}
