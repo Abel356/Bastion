@@ -15,6 +15,7 @@ export function Approvals() {
   }
   return <section><h3>Pending approvals</h3>
     {error && <p role="alert">{error}</p>}
+    {!error && drafts.length === 0 && <p>No pending drafts.</p>}
     <ul>{drafts.map(draft => <li key={draft.id}><strong>{draft.payload.subject}</strong><p>To {draft.payload.recipients.join(', ')}</p><p>{draft.payload.body}</p>
       <button disabled={busy} onClick={() => decide(draft.id, 'approve')}>Approve draft</button>{' '}
       <button disabled={busy} onClick={() => decide(draft.id, 'reject')}>Reject draft</button>
