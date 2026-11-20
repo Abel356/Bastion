@@ -60,7 +60,9 @@ def search_documents(
             blocked_ids.append(chunk.id)
     data = {
         "results": [
-            {"id": chunk.id, "text": chunk.text, "document_id": chunk.label.id}
+            {"id": chunk.id, "text": chunk.text, "document_id": chunk.label.id,
+             "department": chunk.label.department, "clearance": chunk.label.clearance,
+             "trust_level": chunk.label.trust_level.value}
             for chunk in safe_chunks
         ],
         "quarantined_ids": blocked_ids,
