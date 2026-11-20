@@ -16,5 +16,8 @@ export function Workspace() {
       .catch(() => setError('Could not run the request. Check your session and try again.'))
       .finally(() => setBusy(false))
   }
-  return <section className="workspace"><h2>Knowledge workspace</h2></section>
+  return <section className="workspace"><h2>Knowledge workspace</h2>
+    <form onSubmit={submit}>
+    </form>
+  </section>
 }
