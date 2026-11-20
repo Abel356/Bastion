@@ -1,3 +1,5 @@
+import re
+
 from pydantic import BaseModel
 
 from app.domain.document import DocumentLabel
