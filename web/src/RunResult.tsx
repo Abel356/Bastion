@@ -5,6 +5,7 @@ export function RunResult({ run }: { run: Run }) {
     <h3>Run result <span className="status" data-status={run.status}>{run.status.replaceAll('_', ' ')}</span></h3>
     {run.answer && <p className="answer">{run.answer}</p>}
     {run.blocked_reason && <p>{run.blocked_reason}</p>}
+    {run.status === 'approval_required' && <p>Switch to Priya Shah and open Audit to review the synthetic draft.</p>}
     {run.citations.length > 0 && <details><summary>Sources ({run.citations.length})</summary>
       <ol>{run.citations.map(citation => <li key={`${citation.start}-${citation.end}`}><p>{citation.text}</p><small>{citation.source_ids.join(', ')}</small></li>)}</ol>
     </details>}
