@@ -23,5 +23,6 @@ export function Workspace() {
       <button disabled={busy || !message.trim()}>{busy ? 'Running…' : 'Run request'}</button>
     </form>
     {error && <p role="alert">{error}</p>}
+    {run && <RunResult key={run.run_id} run={run} />}
   </section>
 }
