@@ -42,6 +42,11 @@ def document_content(source: dict[str, Any]) -> dict[str, Any]:
     return {"type": "document", "document": {"id": source["id"], "data": json.dumps(source)}}
 
 
+def evidence_sources(result: ToolResult) -> list[dict[str, Any]]:
+    return result.data.get("results", []) if "results" in result.data else [
+        {"id": source_id, **result.data, "trust_level": result.trust_level} for source_id in result.source_ids
+    ]
+
 def tool_message(
     call_id: str, result: ToolResult
 ) -> dict[str, Any]:
