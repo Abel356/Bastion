@@ -23,5 +23,6 @@ def health() -> dict[str, str]: return {"status": "ok"}
 def runtime_info() -> dict[str, str]:
     return {"provider": "cohere" if settings.cohere_api_key else "offline"}
 
-@app.get("/")
-def root() -> dict[str, str]: return {"name": settings.app_name, "docs": "/docs"}
+@app.get("/", response_model=None)
+def root() -> FileResponse | dict[str, str]:
+    return FileResponse(WEB_DIST / "index.html") if (WEB_DIST / "index.html").is_file() else {"name": settings.app_name, "docs": "/docs"}
