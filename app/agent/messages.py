@@ -61,4 +61,4 @@ def tool_message(
         "data": result.data,
         "documents": documents,
     })
-    return {"role": "tool", "tool_call_id": call_id, "content": content}
+    return {"role": "tool", "tool_call_id": call_id, "content": documents}
