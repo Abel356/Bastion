@@ -9,6 +9,7 @@ export function useDemoSession() {
   const [busy, setBusy] = useState(false)
   const [provider, setProvider] = useState<string>()
   useEffect(() => {
+    api<{ provider: string }>('/api/runtime').then(result => setProvider(result.provider)).catch(() => setProvider(undefined))
     api<Persona[]>('/api/personas').then(setPeople).catch(() => setError('Could not load demo personas.'))
   }, [])
   async function select(id: string) {
