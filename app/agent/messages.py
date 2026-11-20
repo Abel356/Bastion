@@ -56,9 +56,4 @@ def tool_message(
     call_id: str, result: ToolResult
 ) -> dict[str, Any]:
     documents = cohere_tool_content(result)
-    content = json.dumps({
-        "status": result.status,
-        "data": result.data,
-        "documents": documents,
-    })
     return {"role": "tool", "tool_call_id": call_id, "content": documents}
