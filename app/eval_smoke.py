@@ -18,3 +18,8 @@ class FixtureProvider:
 
     def chat(self, messages, tools=None, max_tokens: int = 800) -> ChatResult:
         return ChatResult(text=self.text, output_tokens=len(self.text.split()))
+
+
+def compare(session: Session, name: str, text: str) -> dict[str, str]:
+    runtime = AgentRuntime(FixtureProvider(text))
+    return {mode: runtime.run(session, MAYA, name, mode).status.value for mode in ("baseline", "governed")}
