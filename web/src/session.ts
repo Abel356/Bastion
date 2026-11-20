@@ -14,6 +14,9 @@ export function useDemoSession() {
     setBusy(true)
     setError('')
     await api(`/api/session/${id}`, { method: 'POST' })
+      .then(() => setCurrent(people.find(person => person.id === id)))
+      .catch(() => setError('Could not start the demo session.'))
+      .finally(() => setBusy(false))
   }
   return { people, error }
 }
