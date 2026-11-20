@@ -18,7 +18,8 @@ def authorized_candidates(persona: Persona, chunks: list[Chunk]) -> list[Chunk]:
 
 
 def lexical_score(query: str, chunk: Chunk) -> int:
-    return sum(term in chunk.text.lower() for term in set(query.lower().split()))
+    terms = set(re.findall(r"[a-z0-9]+", query.lower())) - {"a", "about", "are", "for", "is", "of", "on", "the", "to", "what"}
+    return len(terms.intersection(re.findall(r"[a-z0-9]+", chunk.text.lower())))
 
 def retrieve(persona: Persona, query: str, chunks: list[Chunk], limit: int = 4) -> list[Chunk]:
     candidates = authorized_candidates(persona, chunks)
