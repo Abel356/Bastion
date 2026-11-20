@@ -10,6 +10,11 @@ def offline_request(prompt: str) -> ChatResult:
         return tool_request("propose_email", {"recipients": ["team@acme.example"], "subject": "Tomorrow’s review", "body": "Please bring your notes to tomorrow’s review."})
     return tool_request("search_documents", {"query": prompt})
 
+def summarize(document: dict, max_tokens: int) -> ChatResult:
+    passage = document.get("text") or document.get("content") or ""
+    answer = " ".join(passage.split()[:max_tokens])
+    citation = Citation(start=0, end=len(answer), text=answer, source_ids=[document["id"]])
+    return ChatResult(text=answer, citations=[citation], output_tokens=len(answer.split()), finish_reason="COMPLETE")
 def offline_evidence(content: list[dict], max_tokens: int) -> ChatResult:
     documents = [json.loads(item["document"]["data"]) for item in content if item["type"] == "document"]
     if not documents:
