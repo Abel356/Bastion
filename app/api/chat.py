@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field
 
 from app.agent.models import AgentRunResult
 from app.agent.runtime import AgentRuntime
-from app.api.dependencies import PersonaDependency, SessionDependency
+from app.api.dependencies import PersonaDependency, SessionDependency, require_security
 from app.providers import get_provider
 
 router = APIRouter(prefix="/api", tags=["agent"])
@@ -18,5 +18,7 @@ class ChatRequest(BaseModel):
 def chat(
     request: ChatRequest, session: SessionDependency, persona: PersonaDependency
 ) -> AgentRunResult:
+    if request.mode == "baseline":
+        require_security(persona)
     runtime = AgentRuntime(get_provider())
     return runtime.run(session, persona, request.message, request.mode)
