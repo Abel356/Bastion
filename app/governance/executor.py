@@ -12,6 +12,7 @@ from app.governance.tools import ARGUMENT_MODELS, ToolCall, ToolName, ToolResult
 from app.models import DocumentRow
 from app.repositories.actions import create_pending_action
 from app.repositories.documents import retrieve_authorized
+from app.retrieval import lexical_score
 
 
 def blocked(call: ToolCall, reason: str, status: str = "blocked") -> ToolResult:
