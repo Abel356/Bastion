@@ -30,3 +30,8 @@ def require_security(persona: PersonaDependency) -> Persona:
 
 
 SecurityDependency = Annotated[Persona, Depends(require_security)]
+
+
+def require_governed(mode: str) -> None:
+    if mode != "governed":
+        raise HTTPException(status.HTTP_403_FORBIDDEN, "Baseline is available only in the local evaluation harness")
