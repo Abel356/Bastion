@@ -10,6 +10,8 @@ export function Workspace() {
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     if (busy || !message.trim()) return
+    setBusy(true)
+    setError('')
     await post<Run>('/api/chat', { message: message.trim() }).then(setRun)
   }
   return <section className="workspace"><h2>Knowledge workspace</h2></section>
