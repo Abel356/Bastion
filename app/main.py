@@ -9,6 +9,8 @@ from app.api.session import router as session_router
 from app.config import settings
 from app.startup import lifespan
 
+WEB_DIST = Path(__file__).resolve().parents[1] / "web" / "dist"
+
 app = FastAPI(title=settings.app_name, version="0.1.0", lifespan=lifespan)
 app.include_router(actions_router)
 app.include_router(audit_router)
