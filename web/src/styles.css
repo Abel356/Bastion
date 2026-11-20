@@ -9,6 +9,10 @@ header { display: flex; justify-content: space-between; align-items: center; gap
 header h1 { margin: 0; font-size: 1.8rem; letter-spacing: -.045em; }
 header label { display: flex; align-items: center; gap: .7rem; color: #a8b9ca; }
 button, select, textarea { font: inherit; }
+button, select, textarea { border: 1px solid #32475a; color: #ecf5fb; background: #142231; border-radius: .55rem; padding: .55rem .75rem; }
+textarea { display: block; width: 100%; min-height: 6rem; resize: vertical; margin: .45rem 0 .8rem; }
+.suggestions { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: 1.35rem; }
+.suggestions button, header label { font-size: .87rem; }
 .workspace, .result, .audit { background: #111a26; border: 1px solid #273646; border-radius: 1rem; padding: clamp(1rem, 4vw, 2rem); }
 .workspace h2, .audit h2 { margin: 0 0 1rem; font-size: clamp(1.5rem, 3.8vw, 2.35rem); letter-spacing: -.04em; }
 .result { margin-top: 1.35rem; background: #0f1722; }
