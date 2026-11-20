@@ -74,7 +74,7 @@ class AgentRuntime:
                 tool_results=tool_results, blocked_reason=str(exc)
             )
         except Exception as exc:  # noqa: BLE001 - provider failures become audited run failures
-            append_event(session, run.id, "run_failed", {"error": str(exc)})
+            append_event(session, run.id, "run_failed", {"error_type": type(exc).__name__})
             return self._finish(
                 session, run, RunStatus.FAILED, budget,
                 tool_results=tool_results, blocked_reason="Agent execution failed"
