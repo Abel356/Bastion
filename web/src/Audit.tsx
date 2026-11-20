@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { api } from './api'
+import { Approvals } from './Approvals'
 import type { AuditRun, AuditEvent } from './types'
 
 function Timeline({ runId }: { runId: string }) {
@@ -22,5 +23,6 @@ export function Audit() {
     {!error && runs.length === 0 && <p>No recent runs.</p>}
     <ul>{runs.map(run => <li key={run.id}><button type="button" aria-pressed={selected === run.id} onClick={() => setSelected(run.id)}>{run.user_id} · {run.status.replaceAll('_', ' ')} · {run.request}</button></li>)}</ul>
     {selected && <Timeline key={selected} runId={selected} />}
+    <Approvals />
   </section>
 }
