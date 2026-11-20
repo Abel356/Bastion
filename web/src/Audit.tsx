@@ -6,7 +6,10 @@ function Timeline({ runId }: { runId: string }) {
   const [events, setEvents] = useState<AuditEvent[]>([])
   const [error, setError] = useState('')
   useEffect(() => { api<AuditEvent[]>(`/api/audit/runs/${runId}/events`).then(setEvents).catch(() => setError('Could not load run details.')) }, [runId])
-  return <section><h3>Run timeline</h3><p>{runId}</p></section>
+  return <section><h3>Run timeline</h3>
+    {error && <p role="alert">{error}</p>}
+    <ol>{events.map(event => <li key={event.sequence}><details><summary>{event.event_type.replaceAll('_', ' ')}</summary><pre>{JSON.stringify(event.payload, null, 2)}</pre></details></li>)}</ol>
+  </section>
 }
 
 export function Audit() {
