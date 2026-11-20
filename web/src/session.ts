@@ -7,6 +7,7 @@ export function useDemoSession() {
   const [error, setError] = useState('')
   const [current, setCurrent] = useState<Persona>()
   const [busy, setBusy] = useState(false)
+  const [provider, setProvider] = useState<string>()
   useEffect(() => {
     api<Persona[]>('/api/personas').then(setPeople).catch(() => setError('Could not load demo personas.'))
   }, [])
