@@ -19,6 +19,7 @@ export function Workspace() {
   return <section className="workspace"><h2>Knowledge workspace</h2>
     <form onSubmit={submit}>
       <label>Ask Bastion<textarea value={message} onChange={event => setMessage(event.target.value)} maxLength={4000} required /></label>
+      <button disabled={busy || !message.trim()}>{busy ? 'Running…' : 'Run request'}</button>
     </form>
   </section>
 }
