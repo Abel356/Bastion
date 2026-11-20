@@ -10,5 +10,10 @@ export function useDemoSession() {
   useEffect(() => {
     api<Persona[]>('/api/personas').then(setPeople).catch(() => setError('Could not load demo personas.'))
   }, [])
+  async function select(id: string) {
+    setBusy(true)
+    setError('')
+    await api(`/api/session/${id}`, { method: 'POST' })
+  }
   return { people, error }
 }
