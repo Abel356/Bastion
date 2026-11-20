@@ -18,3 +18,7 @@ textarea { display: block; width: 100%; min-height: 6rem; resize: vertical; marg
 .result { margin-top: 1.35rem; background: #0f1722; }
 .result h3 { margin: 0; display: flex; gap: .75rem; flex-wrap: wrap; align-items: baseline; }
 button:not(:disabled), select:not(:disabled), summary { cursor: pointer; }
+form button { background: #9df0d3; color: #0d201c; border-color: transparent; font-weight: 700; }
+button:disabled { opacity: .52; }
+button:not(:disabled):hover, select:not(:disabled):hover { border-color: #9df0d3; }
+:focus-visible { outline: 2px solid #9df0d3; outline-offset: 3px; }
