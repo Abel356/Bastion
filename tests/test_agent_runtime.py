@@ -97,6 +97,7 @@ def test_provider_failure_is_audited(session: Session) -> None:
     assert result.status is RunStatus.FAILED
     events = list_events(session, result.run_id)
     assert events[-1].event_type == "run_failed"
+    assert events[-1].payload == {"error_type": "RuntimeError"}
 
 
 def test_runtime_audits_model_and_release(session: Session) -> None:
