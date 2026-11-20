@@ -21,5 +21,6 @@ export function Audit() {
     {error && <p role="alert">{error}</p>}
     {!error && runs.length === 0 && <p>No recent runs.</p>}
     <ul>{runs.map(run => <li key={run.id}><button type="button" aria-pressed={selected === run.id} onClick={() => setSelected(run.id)}>{run.user_id} · {run.status.replaceAll('_', ' ')} · {run.request}</button></li>)}</ul>
+    {selected && <Timeline key={selected} runId={selected} />}
   </section>
 }
