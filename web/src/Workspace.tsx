@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { post } from './api'
+import { RunResult } from './RunResult'
 import type { Run } from './types'
 
 export function Workspace() {
