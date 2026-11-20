@@ -1,5 +1,9 @@
 :root { font-family: 'Inter', system-ui, sans-serif; color: #e8f0f7; background: #0c1119; color-scheme: dark; }
 * { box-sizing: border-box; }
 body { margin: 0; }
+main { width: min(100% - 2rem, 68rem); margin: 0 auto; padding: 2.8rem 0 3rem; }
+header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-bottom: 1.1rem; border-bottom: 1px solid #273646; }
+header h1 { margin: 0; font-size: 1.8rem; letter-spacing: -.045em; }
+header label { display: flex; align-items: center; gap: .7rem; color: #a8b9ca; }
 button, select, textarea { font: inherit; }
 button:not(:disabled), select:not(:disabled), summary { cursor: pointer; }
