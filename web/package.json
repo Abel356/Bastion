@@ -2,5 +2,8 @@
   "name": "bastion-web",
   "private": true,
   "type": "module",
-  "dependencies": { "react": "^19.2.0", "react-dom": "^19.2.0" }
+  "dependencies": { "react": "^19.2.0", "react-dom": "^19.2.0" },
+  "devDependencies": {
+    "vite": "^8.0.0"
+  }
 }
