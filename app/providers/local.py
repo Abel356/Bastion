@@ -2,6 +2,7 @@ from hashlib import sha256
 from typing import Any
 
 from app.providers.base import ChatResult, RerankItem
+from app.providers.offline_chat import offline_evidence, offline_request
 
 
 class LocalProvider:
