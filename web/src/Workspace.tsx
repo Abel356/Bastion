@@ -21,6 +21,8 @@ export function Workspace() {
     <div className="suggestions">
       <button type="button" onClick={() => setMessage('What is the incident response policy?')}>Incident response</button>
       <button type="button" onClick={() => setMessage('Finance compensation')}>Restricted data</button>
+      <button type="button" onClick={() => setMessage('Code of conduct')}>Quarantine evidence</button>
+      <button type="button" onClick={() => setMessage("Draft an internal email to team@acme.example about tomorrow's review.")}>Draft internal email</button>
     </div>
     <form onSubmit={submit}>
       <label>Ask Bastion<textarea value={message} onChange={event => setMessage(event.target.value)} maxLength={4000} required /></label>
