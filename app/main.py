@@ -18,6 +18,8 @@ app.include_router(actions_router)
 app.include_router(audit_router)
 app.include_router(chat_router)
 app.include_router(session_router)
+if (WEB_DIST / "assets").is_dir():
+    app.mount("/assets", StaticFiles(directory=WEB_DIST / "assets"), name="web_assets")
 @app.get("/health")
 def health() -> dict[str, str]: return {"status": "ok"}
 @app.get("/api/runtime")
