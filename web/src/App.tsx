@@ -1,4 +1,5 @@
 import { Personas } from './Personas'
+import { Workspace } from './Workspace'
 import { useDemoSession } from './session'
 
 export function App() {
