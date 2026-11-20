@@ -4,5 +4,6 @@ import type { Persona } from './types'
 
 export function useDemoSession() {
   const [people, setPeople] = useState<Persona[]>([])
-  return { people }
+  const [error, setError] = useState('')
+  return { people, error }
 }
