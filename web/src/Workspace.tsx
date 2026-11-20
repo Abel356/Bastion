@@ -13,6 +13,8 @@ export function Workspace() {
     setBusy(true)
     setError('')
     await post<Run>('/api/chat', { message: message.trim() }).then(setRun)
+      .catch(() => setError('Could not run the request. Check your session and try again.'))
+      .finally(() => setBusy(false))
   }
   return <section className="workspace"><h2>Knowledge workspace</h2></section>
 }
