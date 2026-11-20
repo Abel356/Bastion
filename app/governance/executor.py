@@ -100,6 +100,8 @@ def read_document(
         )
     return ToolResult(
         name=ToolName.READ_DOCUMENT, status="completed",
-        data={"document_id": document.id, "content": document.content},
+        data={"document_id": document.id, "content": document.content,
+              "department": document.department, "clearance": document.clearance,
+              "source_trust": document.trust_level},
         source_ids=[document.id], trust_level="untrusted"
     )
