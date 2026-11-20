@@ -22,6 +22,10 @@ textarea { display: block; width: 100%; min-height: 6rem; resize: vertical; marg
 .status[data-status="blocked"], .status[data-status="failed"], [role="alert"] { color: #fda7a7; }
 .result h3 { margin: 0; display: flex; gap: .75rem; flex-wrap: wrap; align-items: baseline; }
 button:not(:disabled), select:not(:disabled), summary { cursor: pointer; }
+@media (max-width: 36rem) {
+  main { padding: 1.25rem 0 2rem; }
+  header, header label { align-items: flex-start; flex-direction: column; }
+}
 form button { background: #9df0d3; color: #0d201c; border-color: transparent; font-weight: 700; }
 button:disabled { opacity: .52; }
 button:not(:disabled):hover, select:not(:disabled):hover { border-color: #9df0d3; }
