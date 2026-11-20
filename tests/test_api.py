@@ -55,6 +55,8 @@ def test_chat_validates_message_length(api_client: TestClient) -> None:
 def test_employee_cannot_request_baseline(api_client: TestClient) -> None:
     select(api_client, "maya")
     assert api_client.post("/api/chat", json={"message": "Hello", "mode": "baseline"}).status_code == 403
+    select(api_client, "priya")
+    assert api_client.post("/api/chat", json={"message": "Hello", "mode": "baseline"}).status_code == 403
 
 
 def test_employee_cannot_view_audit(api_client: TestClient) -> None:

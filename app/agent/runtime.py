@@ -107,7 +107,7 @@ class AgentRuntime:
         budget: RunBudget, tool_results: list[ToolResult],
     ) -> AgentRunResult:
         scan = scan_output(response.text, ("CANARY-BSTN-42",))
-        if not scan.safe:
+        if not scan.safe and run.mode != "baseline":
             append_event(session, run.id, "output_blocked", {
                 "rules": [finding.rule for finding in scan.findings]
             })
