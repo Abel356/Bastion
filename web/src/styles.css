@@ -1,6 +1,9 @@
 :root { font-family: 'Inter', system-ui, sans-serif; color: #e8f0f7; background: #0c1119; color-scheme: dark; }
 * { box-sizing: border-box; }
 body { margin: 0; }
+.eyebrow { color: #9df0d3; font-size: .85rem; letter-spacing: .045em; margin: 1.2rem 0 .35rem; }
+.identity, .usage { color: #a8b9ca; font-size: .88rem; }
+.identity { margin: 0 0 1.3rem; text-transform: capitalize; }
 main { width: min(100% - 2rem, 68rem); margin: 0 auto; padding: 2.8rem 0 3rem; }
 header { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-bottom: 1.1rem; border-bottom: 1px solid #273646; }
 header h1 { margin: 0; font-size: 1.8rem; letter-spacing: -.045em; }
