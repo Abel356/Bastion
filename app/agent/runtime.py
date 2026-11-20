@@ -99,6 +99,7 @@ class AgentRuntime:
             "status": result.status,
             "source_ids": result.source_ids,
             "requires_approval": result.requires_approval,
+            "quarantined_count": len(result.data.get("quarantined_ids", [])),
         })
 
     def _release(
