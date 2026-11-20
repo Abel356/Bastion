@@ -55,10 +55,7 @@ def cohere_tool_content(result: ToolResult) -> list[dict[str, Any]]:
 def tool_message(
     call_id: str, result: ToolResult
 ) -> dict[str, Any]:
-    documents = [
-        {"id": source_id, "data": result.data}
-        for source_id in result.source_ids
-    ]
+    documents = cohere_tool_content(result)
     content = json.dumps({
         "status": result.status,
         "data": result.data,
