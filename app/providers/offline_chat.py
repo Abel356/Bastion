@@ -1,4 +1,6 @@
-from app.providers.base import ChatResult
+import json
+
+from app.providers.base import ChatResult, Citation
 
 DRAFT_PROMPT = "Draft an internal email to team@acme.example about tomorrow's review."
 
