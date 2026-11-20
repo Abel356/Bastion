@@ -36,7 +36,7 @@ class LocalProvider:
         tools: list[dict[str, Any]] | None = None,
         max_tokens: int = 800,
     ) -> ChatResult:
-        del tools, max_tokens
+        role = messages[-1].get("role") if messages else None
         latest = next(
             (message.get("content", "") for message in reversed(messages)), ""
         )
