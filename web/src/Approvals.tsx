@@ -6,6 +6,7 @@ type Draft = { id: string; run_id: string; payload: { recipients: string[]; subj
 export function Approvals() {
   const [drafts, setDrafts] = useState<Draft[]>([])
   const [error, setError] = useState('')
+  const [busy, setBusy] = useState(false)
   useEffect(() => { api<Draft[]>('/api/actions').then(setDrafts).catch(() => setError('Could not load approvals.')) }, [])
   return <section><h3>Pending approvals</h3>
     {error && <p role="alert">{error}</p>}
