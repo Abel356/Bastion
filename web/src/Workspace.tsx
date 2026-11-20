@@ -18,7 +18,10 @@ export function Workspace() {
       .finally(() => setBusy(false))
   }
   return <section className="workspace"><h2>Knowledge workspace</h2>
-    <div className="suggestions"><button type="button" onClick={() => setMessage('What is the incident response policy?')}>Incident response</button></div>
+    <div className="suggestions">
+      <button type="button" onClick={() => setMessage('What is the incident response policy?')}>Incident response</button>
+      <button type="button" onClick={() => setMessage('Finance compensation')}>Restricted data</button>
+    </div>
     <form onSubmit={submit}>
       <label>Ask Bastion<textarea value={message} onChange={event => setMessage(event.target.value)} maxLength={4000} required /></label>
       <button disabled={busy || !message.trim()}>{busy ? 'Running…' : 'Run request'}</button>
