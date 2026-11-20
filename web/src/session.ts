@@ -18,5 +18,5 @@ export function useDemoSession() {
       .catch(() => setError('Could not start the demo session.'))
       .finally(() => setBusy(false))
   }
-  return { people, error }
+  return { people, error, current, busy, select }
 }
