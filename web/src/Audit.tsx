@@ -3,6 +3,9 @@ import { api } from './api'
 import type { AuditRun, AuditEvent } from './types'
 
 function Timeline({ runId }: { runId: string }) {
+  const [events, setEvents] = useState<AuditEvent[]>([])
+  const [error, setError] = useState('')
+  useEffect(() => { api<AuditEvent[]>(`/api/audit/runs/${runId}/events`).then(setEvents).catch(() => setError('Could not load run details.')) }, [runId])
   return <section><h3>Run timeline</h3><p>{runId}</p></section>
 }
 
