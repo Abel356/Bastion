@@ -23,3 +23,8 @@ class FixtureProvider:
 def compare(session: Session, name: str, text: str) -> dict[str, str]:
     runtime = AgentRuntime(FixtureProvider(text))
     return {mode: runtime.run(session, MAYA, name, mode).status.value for mode in ("baseline", "governed")}
+
+if __name__ == "__main__":
+    with Session(build_engine("sqlite:///:memory:")) as session:
+        Base.metadata.create_all(session.bind)
+        print(json.dumps({name: compare(session, name, text) for name, text in CASES.items()}, indent=2))
