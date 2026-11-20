@@ -47,6 +47,11 @@ def evidence_sources(result: ToolResult) -> list[dict[str, Any]]:
         {"id": source_id, **result.data, "trust_level": result.trust_level} for source_id in result.source_ids
     ]
 
+def cohere_tool_content(result: ToolResult) -> list[dict[str, Any]]:
+    content = [document_content(source) for source in evidence_sources(result)]
+    return content or [{"type": "text", "text": json.dumps({"status": result.status, "data": result.data})}]
+
+
 def tool_message(
     call_id: str, result: ToolResult
 ) -> dict[str, Any]:
