@@ -31,7 +31,9 @@ def list_recent_runs(session: Session, limit: int = 50) -> list[AgentRunRow]:
         AgentRunRow.created_at.desc()
     ).limit(limit)
     return list(session.scalars(statement))
-def append_event(
+
+
+def stage_event(
     session: Session, run_id: str, event_type: str, payload: dict[str, Any]
 ) -> RunEventRow:
     current = session.scalar(
@@ -42,6 +44,13 @@ def append_event(
         event_type=event_type, payload=payload
     )
     session.add(event)
+    return event
+
+
+def append_event(
+    session: Session, run_id: str, event_type: str, payload: dict[str, Any]
+) -> RunEventRow:
+    event = stage_event(session, run_id, event_type, payload)
     session.commit()
     session.refresh(event)
     return event
