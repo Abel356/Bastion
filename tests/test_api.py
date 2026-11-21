@@ -93,14 +93,17 @@ def pending_email(session: Session) -> str:
     return create_pending_action(session, run.id, call).id
 
 
-def test_security_can_approve_action(
-    api_client: TestClient, session: Session
+@pytest.mark.parametrize(("operation", "decision"), [("approve", "approved"), ("reject", "rejected")])
+def test_security_can_review_action(
+    api_client: TestClient, session: Session, operation: str, decision: str,
 ) -> None:
     action_id = pending_email(session)
     select(api_client, "priya")
-    response = api_client.post(f"/api/actions/{action_id}/approve")
+    url = f"/api/actions/{action_id}/{operation}"
+    response = api_client.post(url)
     assert response.status_code == 200
-    assert response.json()["status"] == "approved"
+    assert response.json()["status"] == decision
+    assert api_client.post(url).status_code == 409
 
 
 def test_employee_cannot_approve_action(
