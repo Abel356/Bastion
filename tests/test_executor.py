@@ -8,6 +8,7 @@ from app.governance.tools import ToolCall, ToolName
 from app.ingestion import seed_corpus
 from app.personas import MAYA
 from app.repositories.actions import (
+    ReviewDecision,
     create_pending_action,
     get_action,
     list_pending_actions,
@@ -81,6 +82,15 @@ def test_audit_events_are_ordered_and_run_finishes(session: Session) -> None:
     assert (finished.status, finished.step_count) == ("completed", 2)
 
 
+def review_from_session(file_sessions: sessionmaker[Session], action_id: str, decision: ReviewDecision) -> str:
+    with file_sessions() as session:
+        try:
+            return review_action(session, action_id, decision, "priya").status
+        except ValueError as exc:
+            assert str(exc) == "Action is no longer pending"
+            return "conflict"
+
+
 def test_review_persists_with_audit_evidence(file_sessions: sessionmaker[Session]) -> None:
     call = ToolCall(name=ToolName.PROPOSE_EMAIL, arguments={
         "recipients": ["team@acme.example"], "subject": "Update", "body": "Hello"
@@ -88,8 +98,7 @@ def test_review_persists_with_audit_evidence(file_sessions: sessionmaker[Session
     with file_sessions() as session:
         run_id = make_run(session).id
         action_id = create_pending_action(session, run_id, call).id
-    with file_sessions() as session:
-        review_action(session, action_id, "approved", "priya")
+    assert review_from_session(file_sessions, action_id, "approved") == "approved"
     with file_sessions() as session:
         action = get_action(session, action_id)
         assert action is not None and action.status == "approved"
