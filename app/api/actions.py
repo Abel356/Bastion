@@ -1,11 +1,9 @@
-from collections.abc import Callable
-
 from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel
 
 from app.api.dependencies import SecurityDependency, SessionDependency
 from app.models import PendingActionRow
-from app.repositories.actions import approve_action, list_pending_actions, reject_action
+from app.repositories.actions import ReviewDecision, list_pending_actions, review_action
 
 router = APIRouter(prefix="/api/actions", tags=["actions"])
 
@@ -27,10 +25,10 @@ class ActionView(BaseModel):
 
 def transition(
     action_id: str, session: SessionDependency,
-    operation: Callable,
+    decision: ReviewDecision,
 ) -> ActionView:
     try:
-        action = operation(session, action_id)
+        action = review_action(session, action_id, decision)
     except LookupError as exc:
         raise HTTPException(status.HTTP_404_NOT_FOUND, str(exc)) from exc
     except ValueError as exc:
@@ -51,7 +49,7 @@ def approve(
     action_id: str, session: SessionDependency, security: SecurityDependency
 ) -> ActionView:
     del security
-    return transition(action_id, session, approve_action)
+    return transition(action_id, session, "approved")
 
 
 @router.post("/{action_id}/reject", response_model=ActionView)
@@ -59,4 +57,4 @@ def reject(
     action_id: str, session: SessionDependency, security: SecurityDependency
 ) -> ActionView:
     del security
-    return transition(action_id, session, reject_action)
+    return transition(action_id, session, "rejected")
