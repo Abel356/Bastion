@@ -36,11 +36,15 @@ def list_recent_runs(session: Session, limit: int = 50) -> list[AgentRunRow]:
 def stage_event(
     session: Session, run_id: str, event_type: str, payload: dict[str, Any]
 ) -> RunEventRow:
-    current = session.scalar(
-        select(func.max(RunEventRow.sequence)).where(RunEventRow.run_id == run_id)
-    )
+    if session.get_bind().dialect.name == "postgresql":
+        run = select(AgentRunRow.id).where(AgentRunRow.id == run_id)
+        session.execute(run.with_for_update(key_share=True))
+    # Allocate the sequence inside the write so SQLite serializes it with other inserts.
+    sequence = select(func.coalesce(func.max(RunEventRow.sequence), 0) + 1).where(
+        RunEventRow.run_id == run_id
+    ).scalar_subquery()
     event = RunEventRow(
-        run_id=run_id, sequence=(current or 0) + 1,
+        run_id=run_id, sequence=sequence,
         event_type=event_type, payload=payload
     )
     session.add(event)
