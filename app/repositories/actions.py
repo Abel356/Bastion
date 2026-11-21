@@ -1,8 +1,12 @@
+from typing import Literal
+
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.governance.tools import ToolCall
 from app.models import PendingActionRow
+
+ReviewDecision = Literal["approved", "rejected"]
 
 
 def create_pending_action(
@@ -39,12 +43,18 @@ def get_action(session: Session, action_id: str) -> PendingActionRow | None:
 
 
 def approve_action(session: Session, action_id: str) -> PendingActionRow:
+    return review_action(session, action_id, "approved")
+
+
+def review_action(
+    session: Session, action_id: str, decision: ReviewDecision,
+) -> PendingActionRow:
     action = session.get(PendingActionRow, action_id)
     if action is None:
         raise LookupError("Pending action not found")
     if action.status != "pending":
         raise ValueError("Action is no longer pending")
-    action.status = "approved"
+    action.status = decision
     session.commit()
     session.refresh(action)
     return action
