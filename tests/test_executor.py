@@ -1,3 +1,6 @@
+from concurrent.futures import ThreadPoolExecutor
+from threading import Barrier
+
 import pytest
 from sqlalchemy import text
 from sqlalchemy.exc import IntegrityError
@@ -98,8 +101,17 @@ def test_review_persists_with_audit_evidence(file_sessions: sessionmaker[Session
     with file_sessions() as session:
         run_id = make_run(session).id
         action_id = create_pending_action(session, run_id, call).id
-    assert review_from_session(file_sessions, action_id, "approved") == "approved"
+    ready = Barrier(2)
+
+    def compete(decision: ReviewDecision) -> str:
+        ready.wait(timeout=5)
+        return review_from_session(file_sessions, action_id, decision)
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        outcomes = set(pool.map(compete, ("approved", "rejected")))
+    assert "conflict" in outcomes
+    [winner] = outcomes - {"conflict"}
     with file_sessions() as session:
         action = get_action(session, action_id)
-        assert action is not None and action.status == "approved"
+        assert action is not None and action.status == winner
         assert len(list_events(session, run_id)) == 1
