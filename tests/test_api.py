@@ -104,6 +104,12 @@ def test_security_can_review_action(
     assert response.status_code == 200
     assert response.json()["status"] == decision
     assert api_client.post(url).status_code == 409
+    run_id = response.json()["run_id"]
+    timeline = api_client.get(f"/api/audit/runs/{run_id}/events")
+    assert timeline.status_code == 200
+    [event] = timeline.json()
+    assert event["event_type"] == "action_reviewed"
+    assert event["payload"] == {"action_id": action_id, "reviewer_id": "priya", "decision": decision}
 
 
 def test_employee_cannot_approve_action(
