@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.governance.tools import ToolCall
 from app.models import PendingActionRow
+from app.repositories.audit import stage_event
 
 ReviewDecision = Literal["approved", "rejected"]
 
@@ -33,17 +34,24 @@ def get_action(session: Session, action_id: str) -> PendingActionRow | None:
 def review_action(
     session: Session, action_id: str, decision: ReviewDecision, reviewer_id: str,
 ) -> PendingActionRow:
-    statement = update(PendingActionRow).where(
-        PendingActionRow.id == action_id, PendingActionRow.status == "pending"
-    ).values(status=decision)
-    updated = session.execute(statement).rowcount
-    action = session.get(PendingActionRow, action_id)
-    if action is None:
-        raise LookupError("Pending action not found")
-    if updated != 1:
-        raise ValueError("Action is no longer pending")
-    session.commit()
-    session.refresh(action)
+    try:
+        statement = update(PendingActionRow).where(
+            PendingActionRow.id == action_id, PendingActionRow.status == "pending"
+        ).values(status=decision)
+        updated = session.execute(statement).rowcount
+        action = session.get(PendingActionRow, action_id)
+        if action is None:
+            raise LookupError("Pending action not found")
+        if updated != 1:
+            raise ValueError("Action is no longer pending")
+        stage_event(
+            session, action.run_id, "action_reviewed",
+            {"action_id": action.id, "reviewer_id": reviewer_id, "decision": decision},
+        )
+        session.commit()
+    except Exception:
+        session.rollback()
+        raise
     return action
 
 
