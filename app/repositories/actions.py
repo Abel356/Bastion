@@ -22,15 +22,7 @@ def create_pending_action(
 
 
 def reject_action(session: Session, action_id: str) -> PendingActionRow:
-    action = session.get(PendingActionRow, action_id)
-    if action is None:
-        raise LookupError("Pending action not found")
-    if action.status != "pending":
-        raise ValueError("Action is no longer pending")
-    action.status = "rejected"
-    session.commit()
-    session.refresh(action)
-    return action
+    return review_action(session, action_id, "rejected")
 
 
 def list_pending_actions(session: Session) -> list[PendingActionRow]:
