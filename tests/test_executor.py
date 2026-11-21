@@ -1,3 +1,6 @@
+import pytest
+from sqlalchemy import text
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.governance.executor import execute_tool
@@ -51,7 +54,15 @@ def test_internal_email_creates_approvable_action(session: Session) -> None:
     })
     result = execute_tool(session, MAYA, run.id, call)
     assert result.requires_approval
-    action = review_action(session, result.data["action_id"], "approved", "priya")
+    action_id = result.data["action_id"]
+    session.execute(text("CREATE TEMP TRIGGER fail_audit BEFORE INSERT ON run_events "
+                         "BEGIN SELECT RAISE(ABORT, 'audit unavailable'); END"))
+    with pytest.raises(IntegrityError, match="audit unavailable"):
+        review_action(session, action_id, "approved", "priya")
+    assert [action.id for action in list_pending_actions(session)] == [action_id]
+    assert list_events(session, run.id) == []
+    session.execute(text("DROP TRIGGER fail_audit"))
+    action = review_action(session, action_id, "approved", "priya")
     assert action.status == "approved"
 
 
