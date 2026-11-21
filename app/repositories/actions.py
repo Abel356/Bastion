@@ -1,6 +1,6 @@
 from typing import Literal
 
-from sqlalchemy import select
+from sqlalchemy import select, update
 from sqlalchemy.orm import Session
 
 from app.governance.tools import ToolCall
@@ -41,12 +41,15 @@ def approve_action(session: Session, action_id: str) -> PendingActionRow:
 def review_action(
     session: Session, action_id: str, decision: ReviewDecision,
 ) -> PendingActionRow:
+    statement = update(PendingActionRow).where(
+        PendingActionRow.id == action_id, PendingActionRow.status == "pending"
+    ).values(status=decision)
+    updated = session.execute(statement).rowcount
     action = session.get(PendingActionRow, action_id)
     if action is None:
         raise LookupError("Pending action not found")
-    if action.status != "pending":
+    if updated != 1:
         raise ValueError("Action is no longer pending")
-    action.status = decision
     session.commit()
     session.refresh(action)
     return action
