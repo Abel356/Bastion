@@ -4,7 +4,7 @@ from app.governance.executor import execute_tool
 from app.governance.tools import ToolCall, ToolName
 from app.ingestion import seed_corpus
 from app.personas import MAYA
-from app.repositories.actions import approve_action, list_pending_actions
+from app.repositories.actions import list_pending_actions, review_action
 from app.repositories.audit import append_event, finish_run, list_events, start_run
 
 
@@ -51,7 +51,7 @@ def test_internal_email_creates_approvable_action(session: Session) -> None:
     })
     result = execute_tool(session, MAYA, run.id, call)
     assert result.requires_approval
-    action = approve_action(session, result.data["action_id"])
+    action = review_action(session, result.data["action_id"], "approved")
     assert action.status == "approved"
 
 

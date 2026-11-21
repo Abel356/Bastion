@@ -21,10 +21,6 @@ def create_pending_action(
     return action
 
 
-def reject_action(session: Session, action_id: str) -> PendingActionRow:
-    return review_action(session, action_id, "rejected")
-
-
 def list_pending_actions(session: Session) -> list[PendingActionRow]:
     statement = select(PendingActionRow).where(
         PendingActionRow.status == "pending"
@@ -32,10 +28,6 @@ def list_pending_actions(session: Session) -> list[PendingActionRow]:
     return list(session.scalars(statement))
 def get_action(session: Session, action_id: str) -> PendingActionRow | None:
     return session.get(PendingActionRow, action_id)
-
-
-def approve_action(session: Session, action_id: str) -> PendingActionRow:
-    return review_action(session, action_id, "approved")
 
 
 def review_action(
