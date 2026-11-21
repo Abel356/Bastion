@@ -23,3 +23,11 @@
 - Next: build the React demo shell and evaluation harness.
 
 **November 20, 2026.** Shipped the persona workspace, cited offline retrieval, quarantine evidence, Security timelines, synthetic draft review, and an output-scanner comparison. Pushed 140 commits today (744 total). Ruff, 62 tests, the Python wheel, the frontend build, and Chrome smoke passed. Live Cohere, pgvector, and hosting remain unverified. Offline input-token reporting and database-enforced audit immutability remain open.
+
+
+## November 21, 2026
+
+- Draft approval and rejection now commit together with a Security audit event that records the reviewer, action ID, and decision. Conflicting reviews return HTTP 409. A failed audit insert rolls back the decision, and the open Security timeline refreshes after a successful review.
+- Passed Ruff, all 64 pytest tests, the Vite production build, the Python wheel build, and the offline evaluation smoke. Chrome verified approval and rejection through the UI. Twenty concurrent SQLite smoke runs confirmed unique, contiguous audit sequences while reviews and regular events were written to the same run.
+- Pushed 18 commits to `Abel356/Bastion` main, including this record.
+- Live Cohere citations, pgvector retrieval, and PostgreSQL transaction behavior remain unverified. This workstation had no Cohere API key, PostgreSQL runtime, or container runtime. Database-enforced audit immutability remains open.
