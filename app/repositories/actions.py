@@ -31,7 +31,7 @@ def get_action(session: Session, action_id: str) -> PendingActionRow | None:
 
 
 def review_action(
-    session: Session, action_id: str, decision: ReviewDecision,
+    session: Session, action_id: str, decision: ReviewDecision, reviewer_id: str,
 ) -> PendingActionRow:
     statement = update(PendingActionRow).where(
         PendingActionRow.id == action_id, PendingActionRow.status == "pending"

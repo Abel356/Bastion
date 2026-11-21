@@ -51,7 +51,7 @@ def test_internal_email_creates_approvable_action(session: Session) -> None:
     })
     result = execute_tool(session, MAYA, run.id, call)
     assert result.requires_approval
-    action = review_action(session, result.data["action_id"], "approved")
+    action = review_action(session, result.data["action_id"], "approved", "priya")
     assert action.status == "approved"
 
 

@@ -25,10 +25,10 @@ class ActionView(BaseModel):
 
 def transition(
     action_id: str, session: SessionDependency,
-    decision: ReviewDecision,
+    decision: ReviewDecision, reviewer_id: str,
 ) -> ActionView:
     try:
-        action = review_action(session, action_id, decision)
+        action = review_action(session, action_id, decision, reviewer_id)
     except LookupError as exc:
         raise HTTPException(status.HTTP_404_NOT_FOUND, str(exc)) from exc
     except ValueError as exc:
@@ -48,13 +48,11 @@ def pending_actions(
 def approve(
     action_id: str, session: SessionDependency, security: SecurityDependency
 ) -> ActionView:
-    del security
-    return transition(action_id, session, "approved")
+    return transition(action_id, session, "approved", security.id)
 
 
 @router.post("/{action_id}/reject", response_model=ActionView)
 def reject(
     action_id: str, session: SessionDependency, security: SecurityDependency
 ) -> ActionView:
-    del security
-    return transition(action_id, session, "rejected")
+    return transition(action_id, session, "rejected", security.id)
