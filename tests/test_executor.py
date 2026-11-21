@@ -1,13 +1,18 @@
 import pytest
 from sqlalchemy import text
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, sessionmaker
 
 from app.governance.executor import execute_tool
 from app.governance.tools import ToolCall, ToolName
 from app.ingestion import seed_corpus
 from app.personas import MAYA
-from app.repositories.actions import list_pending_actions, review_action
+from app.repositories.actions import (
+    create_pending_action,
+    get_action,
+    list_pending_actions,
+    review_action,
+)
 from app.repositories.audit import append_event, finish_run, list_events, start_run
 
 
@@ -74,3 +79,18 @@ def test_audit_events_are_ordered_and_run_finishes(session: Session) -> None:
     assert [event.sequence for event in events] == [1, 2]
     finished = finish_run(session, run, "completed", 10, 4, 2)
     assert (finished.status, finished.step_count) == ("completed", 2)
+
+
+def test_review_persists_with_audit_evidence(file_sessions: sessionmaker[Session]) -> None:
+    call = ToolCall(name=ToolName.PROPOSE_EMAIL, arguments={
+        "recipients": ["team@acme.example"], "subject": "Update", "body": "Hello"
+    })
+    with file_sessions() as session:
+        run_id = make_run(session).id
+        action_id = create_pending_action(session, run_id, call).id
+    with file_sessions() as session:
+        review_action(session, action_id, "approved", "priya")
+    with file_sessions() as session:
+        action = get_action(session, action_id)
+        assert action is not None and action.status == "approved"
+        assert len(list_events(session, run_id)) == 1
