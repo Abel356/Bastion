@@ -31,3 +31,10 @@
 - Passed Ruff, all 64 pytest tests, the Vite production build, the Python wheel build, and the offline evaluation smoke. Chrome verified approval and rejection through the UI. Twenty concurrent SQLite smoke runs confirmed unique, contiguous audit sequences while reviews and regular events were written to the same run.
 - Pushed 18 commits to `Abel356/Bastion` main, including this record.
 - Live Cohere citations, pgvector retrieval, and PostgreSQL transaction behavior remain unverified. This workstation had no Cohere API key, PostgreSQL runtime, or container runtime. Database-enforced audit immutability remains open.
+
+## November 22, 2026
+
+- Bastion startup installs persistent SQLite triggers that reject direct updates and deletes on `run_events`. Existing databases gain the guards on restart and keep their audit history. Bastion also enables recursive triggers on its SQLite connections so replacement writes cannot remove an existing audit event. Other SQLite clients need `PRAGMA recursive_triggers = ON` for that replacement protection. [SQLite conflict handling](https://www.sqlite.org/lang_conflict.html)
+- Passed Ruff, all 66 pytest tests, the Vite production build, the Python wheel build, and the offline evaluation smoke. A file-backed API smoke verified that Security could read the original audit event after two startups and that new runs appended ordered events. Tests also verified the SQL guards and preserved payloads on fresh and existing databases.
+- Pushed 5 commits to `Abel356/Bastion` main, including this record.
+- PostgreSQL audit permissions, live Cohere citations, and pgvector retrieval remain unverified. This workstation had no Cohere API key or PostgreSQL runtime.

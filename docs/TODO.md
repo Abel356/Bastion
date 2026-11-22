@@ -1,3 +1,3 @@
-# TODO — November 22, 2026
+# TODO — November 23, 2026
 
-**Make the local audit log append-only.** Install idempotent database guards for `run_events` in fresh and existing SQLite demo databases. Verify that the application can append and read events in sequence, and that direct SQL UPDATE and DELETE fail without changing existing events.
+**Account for input tokens on every offline chat step.** Use the runtime's deterministic message estimate for the offline provider's reply, tool proposal, and tool-result paths. Verify with a multi-step retrieval run that per-step model audit events sum to the reported input usage and that an insufficient cumulative budget stops the next step before execution.
