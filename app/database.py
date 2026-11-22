@@ -31,4 +31,14 @@ def get_session() -> Generator[Session, None, None]:
 def create_schema() -> None:
     from app import models  # noqa: F401
 
-    Base.metadata.create_all(engine)
+    with engine.begin() as connection:
+        Base.metadata.create_all(connection)
+        if connection.dialect.name == "sqlite":
+            for operation in ("UPDATE", "DELETE"):
+                connection.exec_driver_sql(f"""
+                    CREATE TRIGGER IF NOT EXISTS run_events_no_{operation.lower()}
+                    BEFORE {operation} ON run_events
+                    BEGIN
+                        SELECT RAISE(ABORT, 'Run events are append-only');
+                    END
+                """)
