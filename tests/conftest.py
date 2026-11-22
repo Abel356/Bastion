@@ -4,7 +4,10 @@ from pathlib import Path
 import pytest
 from sqlalchemy.orm import Session, sessionmaker
 
-from app import models  # noqa: F401
+from app import (
+    database,
+    models,  # noqa: F401
+)
 from app.database import Base, build_engine
 
 
@@ -18,10 +21,13 @@ def session() -> Iterator[Session]:
 
 
 @pytest.fixture
-def file_sessions(tmp_path: Path) -> Iterator[sessionmaker[Session]]:
+def file_sessions(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> Iterator[sessionmaker[Session]]:
     engine = build_engine(f"sqlite:///{(tmp_path / 'bastion.db').as_posix()}")
+    monkeypatch.setattr(database, "engine", engine)
     try:
-        Base.metadata.create_all(engine)
+        database.create_schema()
         yield sessionmaker(engine)
     finally:
         engine.dispose()

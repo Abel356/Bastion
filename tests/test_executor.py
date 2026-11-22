@@ -85,6 +85,24 @@ def test_audit_events_are_ordered_and_run_finishes(session: Session) -> None:
     assert (finished.status, finished.step_count) == ("completed", 2)
 
 
+def test_fresh_sqlite_audit_events_are_append_only(file_sessions: sessionmaker[Session]) -> None:
+    with file_sessions() as session:
+        run_id = make_run(session).id
+        append_event(session, run_id, "original", {"preserved": True})
+        for statement in (
+            "UPDATE run_events SET event_type = 'modified'",
+            "DELETE FROM run_events",
+            "REPLACE INTO run_events SELECT * FROM run_events",
+        ):
+            with pytest.raises(IntegrityError, match="Run events are append-only"):
+                session.execute(text(statement))
+            session.rollback()
+        append_event(session, run_id, "next", {})
+        assert [(event.sequence, event.event_type, event.payload) for event in list_events(session, run_id)] == [
+            (1, "original", {"preserved": True}), (2, "next", {}),
+        ]
+
+
 def review_from_session(file_sessions: sessionmaker[Session], action_id: str, decision: ReviewDecision) -> str:
     with file_sessions() as session:
         try:
