@@ -1,4 +1,7 @@
+import sqlite3
 from concurrent.futures import ThreadPoolExecutor
+from contextlib import closing
+from pathlib import Path
 from threading import Barrier
 
 import pytest
@@ -6,6 +9,7 @@ from sqlalchemy import text
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, sessionmaker
 
+from app import database
 from app.governance.executor import execute_tool
 from app.governance.tools import ToolCall, ToolName
 from app.ingestion import seed_corpus
@@ -101,6 +105,36 @@ def test_fresh_sqlite_audit_events_are_append_only(file_sessions: sessionmaker[S
         assert [(event.sequence, event.event_type, event.payload) for event in list_events(session, run_id)] == [
             (1, "original", {"preserved": True}), (2, "next", {}),
         ]
+
+
+def test_existing_sqlite_audit_log_is_guarded_on_startup(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    path = tmp_path / "legacy.db"
+    engine = database.build_engine(f"sqlite:///{path.as_posix()}")
+    try:
+        database.Base.metadata.create_all(engine)
+        with Session(engine) as session:
+            run_id = make_run(session).id
+            original_id = append_event(session, run_id, "legacy", {"version": 1}).id
+        monkeypatch.setattr(database, "engine", engine)
+        database.create_schema()
+        database.create_schema()
+
+        with closing(sqlite3.connect(path)) as connection:
+            for statement in ("UPDATE run_events SET sequence = 99", "DELETE FROM run_events"):
+                with pytest.raises(sqlite3.IntegrityError, match="Run events are append-only"):
+                    connection.execute(statement)
+
+        with Session(engine) as session:
+            append_event(session, run_id, "after_restart", {})
+            original, latest = list_events(session, run_id)
+            assert (original.id, original.sequence, original.event_type, original.payload) == (
+                original_id, 1, "legacy", {"version": 1},
+            )
+            assert (latest.sequence, latest.event_type) == (2, "after_restart")
+    finally:
+        engine.dispose()
 
 
 def review_from_session(file_sessions: sessionmaker[Session], action_id: str, decision: ReviewDecision) -> str:
