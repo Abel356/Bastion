@@ -1,6 +1,7 @@
 from collections.abc import Generator
+from sqlite3 import Connection
 
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, event
 from sqlalchemy.engine import Engine
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 from sqlalchemy.pool import StaticPool
@@ -12,11 +13,20 @@ class Base(DeclarativeBase):
     pass
 
 
+def enable_sqlite_recursive_triggers(connection: Connection, _: object) -> None:
+    # SQLite fires the audit delete guard during REPLACE only with this enabled.
+    connection.execute("PRAGMA recursive_triggers = ON").close()
+
+
 def build_engine(url: str) -> Engine:
     connect_args = {"check_same_thread": False} if url.startswith("sqlite") else {}
     if url.endswith("/:memory:"):
-        return create_engine(url, connect_args=connect_args, poolclass=StaticPool)
-    return create_engine(url, connect_args=connect_args, pool_pre_ping=True)
+        database_engine = create_engine(url, connect_args=connect_args, poolclass=StaticPool)
+    else:
+        database_engine = create_engine(url, connect_args=connect_args, pool_pre_ping=True)
+    if database_engine.dialect.name == "sqlite":
+        event.listen(database_engine, "connect", enable_sqlite_recursive_triggers)
+    return database_engine
 
 
 engine = build_engine(settings.database_url)
