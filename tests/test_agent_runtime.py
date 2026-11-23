@@ -1,13 +1,16 @@
 from typing import Any
+from unittest.mock import patch
 
 from sqlalchemy.orm import Session
 
+from app.agent.messages import initial_messages
 from app.agent.models import RunStatus
 from app.agent.runtime import AgentRuntime
 from app.governance.budget import BudgetLimits
 from app.ingestion import seed_corpus
 from app.personas import MAYA
 from app.providers.base import ChatResult
+from app.providers.local import LocalProvider
 from app.repositories.audit import list_events
 
 
@@ -107,3 +110,28 @@ def test_runtime_audits_model_and_release(session: Session) -> None:
     assert event_types == [
         "request_received", "model_call", "response_released"
     ]
+
+
+def test_offline_retrieval_enforces_cumulative_input_budget(session: Session) -> None:
+    seed_corpus(session)
+    provider = LocalProvider()
+    request = "What is the remote work policy?"
+    complete = AgentRuntime(provider).run(session, MAYA, request)
+    assert complete.status is RunStatus.COMPLETED
+    assert complete.citations
+    first, second = [
+        event.payload["input_tokens"] for event in list_events(session, complete.run_id)
+        if event.event_type == "model_call"
+    ]
+    assert first == len(str(initial_messages(request)).split())
+    assert second > first
+    assert complete.usage.input_tokens == first + second
+
+    limits = BudgetLimits(max_input_tokens=first + second - 1)
+    with patch.object(provider, "chat", wraps=provider.chat) as chat:
+        stopped = AgentRuntime(provider, limits).run(session, MAYA, request)
+    assert chat.call_count == stopped.usage.steps == 1
+    assert stopped.status is RunStatus.BUDGET_EXCEEDED
+    assert stopped.usage.input_tokens == first
+    assert stopped.blocked_reason == "Input token budget exhausted"
+    assert list_events(session, stopped.run_id)[-1].event_type == "budget_stopped"

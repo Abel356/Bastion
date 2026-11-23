@@ -19,6 +19,11 @@ def test_local_rerank_orders_matching_text() -> None:
 
 def test_local_chat_is_clearly_labeled() -> None:
     provider = LocalProvider()
-    result = provider.chat([{"role": "user", "content": "hello"}])
+    messages = [
+        {"role": "system", "content": "You are Bastion."},
+        {"role": "user", "content": "hello"},
+    ]
+    result = provider.chat(messages)
     assert result.text.startswith("Offline demo response:")
     assert result.finish_reason == "COMPLETE"
+    assert result.input_tokens == len(str(messages).split())
