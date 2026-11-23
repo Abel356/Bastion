@@ -38,3 +38,10 @@
 - Passed Ruff, all 66 pytest tests, the Vite production build, the Python wheel build, and the offline evaluation smoke. A file-backed API smoke verified that Security could read the original audit event after two startups and that new runs appended ordered events. Tests also verified the SQL guards and preserved payloads on fresh and existing databases.
 - Pushed 5 commits to `Abel356/Bastion` main, including this record.
 - PostgreSQL audit permissions, live Cohere citations, and pgvector retrieval remain unverified. This workstation had no Cohere API key or PostgreSQL runtime.
+
+## November 23, 2026
+
+- Every offline chat call now reports the deterministic estimate for its full message history. The runtime uses the same estimate for its input budget check. A seeded retrieval run recorded 56 and 330 input tokens in its two model events. The chat response and Security run summary both reported 386. A regression test verified that a cumulative limit one token lower stops the second call before it reaches the provider.
+- Passed Ruff, all 67 pytest tests, the Vite production build, the Python wheel build, the offline evaluation smoke, and a file-backed chat and Security API smoke.
+- Pushed 3 commits to `Abel356/Bastion` main, including this record.
+- Live Cohere and PostgreSQL checks remain unverified because the workstation had no Cohere API key or PostgreSQL runtime.

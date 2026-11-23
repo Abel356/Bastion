@@ -1,3 +1,3 @@
-# TODO — November 23, 2026
+# TODO — November 24, 2026
 
-**Account for input tokens on every offline chat step.** Use the runtime's deterministic message estimate for the offline provider's reply, tool proposal, and tool-result paths. Verify with a multi-step retrieval run that per-step model audit events sum to the reported input usage and that an insufficient cumulative budget stops the next step before execution.
+**Audit completed model calls that exceed the token budget.** Preserve the provider's reported input and output usage in a `model_call` event before recording `budget_stopped` when actual usage exceeds a limit. Use a scripted provider to verify audit order and totals and confirm the runtime stops before releasing the answer or executing a proposed tool.
