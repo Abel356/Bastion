@@ -14,7 +14,7 @@ from app.governance.budget import BudgetExceeded, BudgetLimits, RunBudget
 from app.governance.executor import execute_tool
 from app.governance.scanner import scan_output
 from app.governance.tools import TOOL_SCHEMAS, ToolResult
-from app.providers.base import ChatResult, ModelProvider
+from app.providers.base import ChatResult, ModelProvider, estimate_input_tokens
 from app.repositories.audit import append_event, finish_run, start_run
 
 
@@ -39,8 +39,7 @@ class AgentRuntime:
         untrusted_seen = False
         try:
             while not budget.exhausted:
-                estimated = len(str(messages).split())
-                budget.before_call(estimated)
+                budget.before_call(estimate_input_tokens(messages))
                 response = self.provider.chat(
                     messages, TOOL_SCHEMAS,
                     max_tokens=min(800, budget.remaining_output_tokens),

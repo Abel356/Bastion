@@ -1,7 +1,7 @@
 from hashlib import sha256
 from typing import Any
 
-from app.providers.base import ChatResult, RerankItem
+from app.providers.base import ChatResult, RerankItem, estimate_input_tokens
 from app.providers.offline_chat import offline_evidence, offline_request
 
 
@@ -41,12 +41,14 @@ class LocalProvider:
             (message.get("content", "") for message in reversed(messages)), ""
         )
         if role == "tool":
-            return offline_evidence(latest, max_tokens)
-        if tools and role == "user" and str(latest).lower() not in {"hi", "hello"}:
-            return offline_request(latest)
-        return ChatResult(
-            text=f"Offline demo response: {latest}",
-            input_tokens=len(str(latest).split()),
-            output_tokens=len(str(latest).split()) + 3,
-            finish_reason="COMPLETE",
-        )
+            result = offline_evidence(latest, max_tokens)
+        elif tools and role == "user" and str(latest).lower() not in {"hi", "hello"}:
+            result = offline_request(latest)
+        else:
+            result = ChatResult(
+                text=f"Offline demo response: {latest}",
+                output_tokens=len(str(latest).split()) + 3,
+                finish_reason="COMPLETE",
+            )
+        result.input_tokens = estimate_input_tokens(messages)
+        return result

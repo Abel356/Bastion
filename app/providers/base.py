@@ -3,6 +3,10 @@ from typing import Any, Protocol
 from pydantic import BaseModel, Field
 
 
+def estimate_input_tokens(messages: list[dict[str, Any]]) -> int:
+    return len(str(messages).split())
+
+
 class RerankItem(BaseModel):
     index: int
     score: float
