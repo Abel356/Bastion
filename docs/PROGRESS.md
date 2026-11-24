@@ -45,3 +45,10 @@
 - Passed Ruff, all 67 pytest tests, the Vite production build, the Python wheel build, the offline evaluation smoke, and a file-backed chat and Security API smoke.
 - Pushed 3 commits to `Abel356/Bastion` main, including this record.
 - Live Cohere and PostgreSQL checks remain unverified because the workstation had no Cohere API key or PostgreSQL runtime.
+
+## November 24, 2026
+
+- Completed provider calls now record their reported input and output tokens before `budget_stopped`, even when actual usage exceeds a limit. Regression tests covered input and output overruns and verified that the runtime withheld the answer and skipped tool execution.
+- A file-backed API smoke verified the Security timeline after restart. The second call recorded 320 input and 401 output tokens before the stop. The chat response and persisted run summary agreed on 420 input and 1,001 output tokens across two calls. The proposed email created no pending action.
+- Passed Ruff, all 69 pytest tests, the Vite production build, the Python wheel build, and the offline evaluation smoke. Pushed 2 commits to `Abel356/Bastion` main, including this record.
+- Live Cohere and PostgreSQL checks remain unverified because the workstation had no Cohere API key or PostgreSQL runtime.
