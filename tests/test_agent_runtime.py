@@ -1,6 +1,7 @@
 from typing import Any
 from unittest.mock import patch
 
+import pytest
 from sqlalchemy.orm import Session
 
 from app.agent.messages import initial_messages
@@ -110,6 +111,40 @@ def test_runtime_audits_model_and_release(session: Session) -> None:
     assert event_types == [
         "request_received", "model_call", "response_released"
     ]
+
+
+@pytest.mark.parametrize(("limits", "response", "reason"), [
+    (BudgetLimits(max_input_tokens=100),
+     ChatResult(text="Safe answer", input_tokens=101, output_tokens=5),
+     "Input token budget exceeded"),
+    (BudgetLimits(max_output_tokens=5),
+     ChatResult(input_tokens=80, output_tokens=6, tool_calls=[
+         tool_call("search_documents", {"query": "policy"}),
+     ]),
+     "Output token budget exceeded"),
+])
+def test_runtime_audits_usage_before_stopping_over_budget(
+    session: Session, limits: BudgetLimits, response: ChatResult, reason: str,
+) -> None:
+    provider = ScriptedProvider([response])
+    with patch("app.agent.runtime.execute_tool") as execute_tool:
+        result = AgentRuntime(provider, limits).run(session, MAYA, "Hello")
+    execute_tool.assert_not_called()
+    assert result.status is RunStatus.BUDGET_EXCEEDED
+    assert result.answer is None
+    assert result.usage.model_dump() == {
+        "steps": 1, "input_tokens": response.input_tokens,
+        "output_tokens": response.output_tokens,
+    }
+    events = list_events(session, result.run_id)
+    assert [(event.sequence, event.event_type) for event in events] == [
+        (1, "request_received"), (2, "model_call"), (3, "budget_stopped"),
+    ]
+    assert events[1].payload == {
+        "step": 1, "input_tokens": response.input_tokens,
+        "output_tokens": response.output_tokens, "tool_call_count": len(response.tool_calls),
+    }
+    assert events[2].payload == {"reason": reason}
 
 
 def test_offline_retrieval_enforces_cumulative_input_budget(session: Session) -> None:

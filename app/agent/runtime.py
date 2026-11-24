@@ -44,8 +44,10 @@ class AgentRuntime:
                     messages, TOOL_SCHEMAS,
                     max_tokens=min(800, budget.remaining_output_tokens),
                 )
-                budget.after_call(response.input_tokens, response.output_tokens)
-                self._record_model_call(session, run.id, response, budget)
+                try:
+                    budget.after_call(response.input_tokens, response.output_tokens)
+                finally:
+                    self._record_model_call(session, run.id, response, budget)
                 if not response.tool_calls:
                     return self._release(
                         session, run, response, budget, tool_results
