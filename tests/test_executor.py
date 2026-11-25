@@ -50,6 +50,18 @@ def test_search_uses_provider_result_order(session: Session) -> None:
     assert texts == list(reversed(reranker.documents))[:4]
 
 
+def test_search_filters_sensitive_passages_before_rerank(session: Session) -> None:
+    seed_corpus(session)
+    reranker = CapturingReranker()
+    result = search_documents(
+        session, MAYA, "code conduct compensation", reranker
+    )
+    assert reranker.documents
+    assert all("CANARY-BSTN-42" not in text for text in reranker.documents)
+    assert all("# Compensation Guide" not in text for text in reranker.documents)
+    assert result.data["quarantined_ids"]
+
+
 def test_search_quarantines_poisoned_chunk(session: Session) -> None:
     seed_corpus(session)
     run = make_run(session)
