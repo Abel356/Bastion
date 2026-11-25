@@ -100,13 +100,20 @@ class AgentRuntime:
     def _record_tool(
         self, session: Session, run_id: str, tool_name: str, result: ToolResult
     ) -> None:
-        append_event(session, run_id, "tool_decision", {
+        payload = {
             "tool": tool_name,
             "status": result.status,
             "source_ids": result.source_ids,
             "requires_approval": result.requires_approval,
             "quarantined_count": len(result.data.get("quarantined_ids", [])),
-        })
+        }
+        if counts := result.search_counts:
+            payload.update({
+                "authorized_candidate_count": counts.authorized_candidate_count,
+                "rerank_candidate_count": counts.rerank_candidate_count,
+                "context_passage_count": len(result.source_ids),
+            })
+        append_event(session, run_id, "tool_decision", payload)
 
     def _release(
         self, session: Session, run: Any, response: ChatResult,
