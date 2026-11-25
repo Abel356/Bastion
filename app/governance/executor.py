@@ -8,7 +8,13 @@ from app.domain.identity import Persona
 from app.domain.policy import can_read
 from app.governance.policy import PolicyStatus, decide_tool
 from app.governance.scanner import scan_untrusted
-from app.governance.tools import ARGUMENT_MODELS, ToolCall, ToolName, ToolResult
+from app.governance.tools import (
+    ARGUMENT_MODELS,
+    SearchCounts,
+    ToolCall,
+    ToolName,
+    ToolResult,
+)
 from app.models import DocumentRow
 from app.providers.base import ModelProvider
 from app.repositories.actions import create_pending_action
@@ -69,7 +75,7 @@ def search_documents(
             blocked_ids.append(chunk.id)
     selected_chunks = (
         rerank_chunks(query, safe_chunks, reranker, CONTEXT_PASSAGE_LIMIT)
-        if reranker else safe_chunks[:CONTEXT_PASSAGE_LIMIT]
+        if reranker is not None else safe_chunks[:CONTEXT_PASSAGE_LIMIT]
     )
     data = {
         "results": [
@@ -84,6 +90,10 @@ def search_documents(
         name=ToolName.SEARCH_DOCUMENTS, status="completed", data=data,
         source_ids=[chunk.id for chunk in selected_chunks],
         trust_level="untrusted",
+        search_counts=SearchCounts(
+            authorized_candidate_count=len(chunks),
+            rerank_candidate_count=len(safe_chunks) if reranker is not None else 0,
+        ),
     )
 
 

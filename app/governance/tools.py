@@ -15,6 +15,11 @@ class ToolCall(BaseModel):
     arguments: dict[str, Any] = Field(default_factory=dict)
 
 
+class SearchCounts(BaseModel):
+    authorized_candidate_count: int
+    rerank_candidate_count: int
+
+
 class ToolResult(BaseModel):
     name: ToolName
     status: str
@@ -22,6 +27,7 @@ class ToolResult(BaseModel):
     source_ids: list[str] = Field(default_factory=list)
     trust_level: str = "internal"
     requires_approval: bool = False
+    search_counts: SearchCounts | None = Field(default=None, exclude=True)
 
 
 SEARCH_DOCUMENTS_SCHEMA = {
