@@ -14,6 +14,9 @@ from app.repositories.actions import create_pending_action
 from app.repositories.documents import retrieve_authorized
 from app.retrieval import lexical_score
 
+RERANK_CANDIDATE_LIMIT = 6
+CONTEXT_PASSAGE_LIMIT = 4
+
 
 def blocked(call: ToolCall, reason: str, status: str = "blocked") -> ToolResult:
     return ToolResult(name=call.name, status=status, data={"reason": reason})
@@ -50,7 +53,9 @@ def execute_tool(
 def search_documents(
     session: Session, persona: Persona, query: str
 ) -> ToolResult:
-    ranked = retrieve_authorized(session, persona, query, limit=6)
+    ranked = retrieve_authorized(
+        session, persona, query, limit=RERANK_CANDIDATE_LIMIT
+    )
     chunks = [chunk for chunk in ranked if lexical_score(query, chunk) > 0]
     safe_chunks = []
     blocked_ids = []
@@ -60,18 +65,19 @@ def search_documents(
             safe_chunks.append(chunk)
         else:
             blocked_ids.append(chunk.id)
+    selected_chunks = safe_chunks[:CONTEXT_PASSAGE_LIMIT]
     data = {
         "results": [
             {"id": chunk.id, "text": chunk.text, "document_id": chunk.label.id,
              "department": chunk.label.department, "clearance": chunk.label.clearance,
              "trust_level": chunk.label.trust_level.value}
-            for chunk in safe_chunks
+            for chunk in selected_chunks
         ],
         "quarantined_ids": blocked_ids,
     }
     return ToolResult(
         name=ToolName.SEARCH_DOCUMENTS, status="completed", data=data,
-        source_ids=[chunk.id for chunk in safe_chunks],
+        source_ids=[chunk.id for chunk in selected_chunks],
         trust_level="untrusted",
     )
 
