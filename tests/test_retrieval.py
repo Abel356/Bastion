@@ -1,6 +1,7 @@
 from app.domain.document import DocumentLabel
 from app.domain.identity import Persona, Role
-from app.retrieval import Chunk, authorized_candidates, retrieve
+from app.providers.base import RerankItem
+from app.retrieval import Chunk, authorized_candidates, rerank_chunks, retrieve
 
 persona = Persona(id="maya", name="Maya", departments=frozenset({"Engineering"}), clearance=1, role=Role.EMPLOYEE)
 def chunk(identifier: str, department: str, text: str) -> Chunk:
@@ -9,6 +10,24 @@ def chunk(identifier: str, department: str, text: str) -> Chunk:
 allowed = chunk("eng", "Engineering", "incident response policy")
 irrelevant = chunk("other", "Engineering", "office parking guide")
 restricted = chunk("fin", "Finance", "secret compensation canary")
+
+
+class ReverseReranker:
+    def rerank(self, query: str, documents: list[str], top_n: int) -> list[RerankItem]:
+        del query
+        return [
+            RerankItem(index=index, score=float(index))
+            for index in reversed(range(len(documents)))
+        ][:top_n]
+
+
+def test_maps_provider_order_back_to_chunks() -> None:
+    results = rerank_chunks(
+        "policy", [allowed, irrelevant], ReverseReranker(), limit=2
+    )
+    assert [item.id for item in results] == ["other", "eng"]
+
+
 def test_filters_before_ranking() -> None:
     candidate_ids = {item.id for item in authorized_candidates(persona, [restricted, allowed])}
     assert candidate_ids == {"eng"}
