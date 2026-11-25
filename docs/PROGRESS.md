@@ -52,3 +52,6 @@
 - A file-backed API smoke verified the Security timeline after restart. The second call recorded 320 input and 401 output tokens before the stop. The chat response and persisted run summary agreed on 420 input and 1,001 output tokens across two calls. The proposed email created no pending action.
 - Passed Ruff, all 69 pytest tests, the Vite production build, the Python wheel build, and the offline evaluation smoke. Pushed 2 commits to `Abel356/Bastion` main, including this record.
 - Live Cohere and PostgreSQL checks remain unverified because the workstation had no Cohere API key or PostgreSQL runtime.
+- The governed search tool now sends at most six SQL-authorized, scanner-cleared candidates to Cohere Rerank and releases at most four passages to model context. Offline runs retain lexical order.
+- Scripted-provider tests proved the returned order follows reranking and that Finance-only and quarantined passage text reaches neither Rerank nor the subsequent model request.
+- Passed Ruff, all 73 pytest tests, and the Python source and wheel builds. Live Cohere ranking remains unverified because this workstation had no Cohere API key.
