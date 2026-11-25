@@ -10,10 +10,11 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, sessionmaker
 
 from app import database
-from app.governance.executor import execute_tool
+from app.governance.executor import execute_tool, search_documents
 from app.governance.tools import ToolCall, ToolName
 from app.ingestion import seed_corpus
 from app.personas import MAYA
+from app.providers.base import RerankItem
 from app.repositories.actions import (
     ReviewDecision,
     create_pending_action,
@@ -26,6 +27,27 @@ from app.repositories.audit import append_event, finish_run, list_events, start_
 
 def make_run(session: Session):
     return start_run(session, MAYA.id, "test request")
+
+
+class CapturingReranker:
+    def __init__(self) -> None:
+        self.documents: list[str] = []
+
+    def rerank(self, query: str, documents: list[str], top_n: int) -> list[RerankItem]:
+        del query
+        self.documents = documents
+        return [
+            RerankItem(index=index, score=float(index))
+            for index in reversed(range(len(documents)))
+        ][:top_n]
+
+
+def test_search_uses_provider_result_order(session: Session) -> None:
+    seed_corpus(session)
+    reranker = CapturingReranker()
+    result = search_documents(session, MAYA, "remote work", reranker)
+    texts = [item["text"] for item in result.data["results"]]
+    assert texts == list(reversed(reranker.documents))[:4]
 
 
 def test_search_quarantines_poisoned_chunk(session: Session) -> None:
