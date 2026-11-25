@@ -10,20 +10,31 @@ from app.agent.runtime import AgentRuntime
 from app.governance.budget import BudgetLimits
 from app.ingestion import seed_corpus
 from app.personas import MAYA
-from app.providers.base import ChatResult
+from app.providers.base import ChatResult, RerankItem
 from app.providers.local import LocalProvider
 from app.repositories.audit import list_events
 
 
 class ScriptedProvider:
-    def __init__(self, responses: list[ChatResult | Exception]) -> None:
+    def __init__(
+        self, responses: list[ChatResult | Exception], external_rerank: bool = False
+    ) -> None:
         self.responses = responses
         self.calls = 0
+        self.uses_external_rerank = external_rerank
+        self.rerank_documents: list[str] = []
+        self.message_history: list[list[dict[str, Any]]] = []
+
+    def rerank(self, query: str, documents: list[str], top_n: int) -> list[RerankItem]:
+        del query
+        self.rerank_documents = documents
+        return [RerankItem(index=index, score=1.0) for index in range(top_n)]
 
     def chat(
         self, messages: list[dict[str, Any]], tools=None, max_tokens: int = 800
     ) -> ChatResult:
-        del messages, tools, max_tokens
+        self.message_history.append(messages.copy())
+        del tools, max_tokens
         response = self.responses[self.calls]
         self.calls += 1
         if isinstance(response, Exception):
