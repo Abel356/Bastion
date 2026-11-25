@@ -105,6 +105,25 @@ def test_untrusted_retrieval_blocks_followup_action(session: Session) -> None:
     assert result.tool_results[-1].status == "blocked"
 
 
+def test_sensitive_passages_never_reach_rerank_or_model_context(
+    session: Session,
+) -> None:
+    seed_corpus(session)
+    search = ChatResult(tool_calls=[tool_call(
+        "search_documents", {"query": "code conduct compensation"}, "search-1"
+    )])
+    provider = ScriptedProvider(
+        [search, ChatResult(text="I found the authorized policy.")],
+        external_rerank=True,
+    )
+    result = AgentRuntime(provider).run(session, MAYA, "Find the policy")
+    assert result.status is RunStatus.COMPLETED
+    assert "CANARY-BSTN-42" not in str(provider.rerank_documents)
+    assert "# Compensation Guide" not in str(provider.rerank_documents)
+    assert "CANARY-BSTN-42" not in str(provider.message_history[1])
+    assert "# Compensation Guide" not in str(provider.message_history[1])
+
+
 def test_provider_failure_is_audited(session: Session) -> None:
     result = AgentRuntime(ScriptedProvider([RuntimeError("offline")])).run(
         session, MAYA, "Hello"
