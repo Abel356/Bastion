@@ -1,6 +1,6 @@
-# TODO — November 25, 2026
+# TODO — November 26, 2026
 
-**Audit retrieval decisions without logging passage contents.** Record authorized candidate,
-quarantine, rerank, and released-context counts plus the selected source IDs in the run
-timeline. Verify the audit payload never contains document text, rejected source IDs, or
-provider credentials, and surface the counts in the Security run detail.
+**Validate Cohere Rerank responses before selecting context.** Check that returned indices are
+unique, within the submitted candidate list, and within the requested result count. On a malformed
+response, use the scanner-cleared lexical order and record that fallback in the Security timeline.
+Verify the behavior with a scripted provider and preserve the four-passage context cap.

@@ -55,3 +55,10 @@
 - The governed search tool now sends at most six SQL-authorized, scanner-cleared candidates to Cohere Rerank and releases at most four passages to model context. Offline runs retain lexical order.
 - Scripted-provider tests proved the returned order follows reranking and that Finance-only and quarantined passage text reaches neither Rerank nor the subsequent model request.
 - Passed Ruff, all 73 pytest tests, and the Python source and wheel builds. Live Cohere ranking remains unverified because this workstation had no Cohere API key.
+
+## November 25, 2026
+
+- Security run details now show the number of bounded, SQL-authorized lexical matches, quarantined passages, passages sent to Cohere Rerank, and passages selected for context, plus the selected source IDs. Offline searches report zero sent to Rerank. The persisted retrieval decision contains no passage text, rejected source IDs, or provider credentials.
+- Passed Ruff, all 75 pytest tests, the Vite production build, the Python wheel build, and the offline evaluation smoke. A 390 px Chrome smoke checked populated and empty search decisions. The Security API returned identical audit events after restarting against a file-backed SQLite database.
+- Pushed 6 commits to `Abel356/Bastion` main, including this record. This task supported six buildable checkpoints for search counts, audit persistence, scripted-provider coverage, API coverage, timeline rendering, and the handoff.
+- Live Cohere and PostgreSQL remain unverified. The workstation had no Cohere API key or PostgreSQL runtime.
