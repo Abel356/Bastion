@@ -10,9 +10,10 @@ from app.governance.policy import PolicyStatus, decide_tool
 from app.governance.scanner import scan_untrusted
 from app.governance.tools import ARGUMENT_MODELS, ToolCall, ToolName, ToolResult
 from app.models import DocumentRow
+from app.providers.base import ModelProvider
 from app.repositories.actions import create_pending_action
 from app.repositories.documents import retrieve_authorized
-from app.retrieval import lexical_score
+from app.retrieval import lexical_score, rerank_chunks
 
 RERANK_CANDIDATE_LIMIT = 6
 CONTEXT_PASSAGE_LIMIT = 4
@@ -30,7 +31,7 @@ def validate_arguments(call: ToolCall) -> dict[str, Any]:
 
 def execute_tool(
     session: Session, persona: Persona, run_id: str, call: ToolCall,
-    from_untrusted_content: bool = False,
+    from_untrusted_content: bool = False, reranker: ModelProvider | None = None,
 ) -> ToolResult:
     decision = decide_tool(persona, call, from_untrusted_content)
     if decision.status is PolicyStatus.DENY:
@@ -40,7 +41,7 @@ def execute_tool(
     except ValidationError as exc:
         return blocked(call, str(exc), status="invalid")
     if call.name is ToolName.SEARCH_DOCUMENTS:
-        return search_documents(session, persona, arguments["query"])
+        return search_documents(session, persona, arguments["query"], reranker)
     if call.name is ToolName.READ_DOCUMENT:
         return read_document(session, persona, arguments["document_id"])
     action = create_pending_action(session, run_id, call)
@@ -51,7 +52,8 @@ def execute_tool(
 
 
 def search_documents(
-    session: Session, persona: Persona, query: str
+    session: Session, persona: Persona, query: str,
+    reranker: ModelProvider | None = None,
 ) -> ToolResult:
     ranked = retrieve_authorized(
         session, persona, query, limit=RERANK_CANDIDATE_LIMIT
@@ -65,7 +67,10 @@ def search_documents(
             safe_chunks.append(chunk)
         else:
             blocked_ids.append(chunk.id)
-    selected_chunks = safe_chunks[:CONTEXT_PASSAGE_LIMIT]
+    selected_chunks = (
+        rerank_chunks(query, safe_chunks, reranker, CONTEXT_PASSAGE_LIMIT)
+        if reranker else safe_chunks[:CONTEXT_PASSAGE_LIMIT]
+    )
     data = {
         "results": [
             {"id": chunk.id, "text": chunk.text, "document_id": chunk.label.id,
