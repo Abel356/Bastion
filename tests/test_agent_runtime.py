@@ -122,6 +122,16 @@ def test_sensitive_passages_never_reach_rerank_or_model_context(
     assert "# Compensation Guide" not in str(provider.rerank_documents)
     assert "CANARY-BSTN-42" not in str(provider.message_history[1])
     assert "# Compensation Guide" not in str(provider.message_history[1])
+    [decision] = [
+        event.payload for event in list_events(session, result.run_id)
+        if event.event_type == "tool_decision"
+    ]
+    assert decision == {
+        "tool": "search_documents", "status": "completed", "requires_approval": False,
+        "source_ids": ["company-code-of-conduct-1:0", "company-code-of-conduct-3:0"],
+        "authorized_candidate_count": 3, "quarantined_count": 1,
+        "rerank_candidate_count": 2, "context_passage_count": 2,
+    }
 
 
 def test_provider_failure_is_audited(session: Session) -> None:
