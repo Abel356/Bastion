@@ -5,6 +5,7 @@ from pydantic import BaseModel
 from app.domain.document import DocumentLabel
 from app.domain.identity import Persona
 from app.domain.policy import can_read
+from app.providers.base import ModelProvider
 
 
 class Chunk(BaseModel):
@@ -25,3 +26,14 @@ def retrieve(persona: Persona, query: str, chunks: list[Chunk], limit: int = 4) 
     candidates = authorized_candidates(persona, chunks)
     ranked = sorted(candidates, key=lambda chunk: lexical_score(query, chunk), reverse=True)
     return ranked[:limit]
+
+
+def rerank_chunks(
+    query: str, chunks: list[Chunk], provider: ModelProvider, limit: int
+) -> list[Chunk]:
+    if not chunks:
+        return []
+    rankings = provider.rerank(
+        query, [chunk.text for chunk in chunks], min(limit, len(chunks))
+    )
+    return [chunks[item.index] for item in rankings]
