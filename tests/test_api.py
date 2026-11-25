@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 import app.api.chat as chat_api
 from app.database import get_session
 from app.governance.tools import ToolCall, ToolName
+from app.ingestion import seed_corpus
 from app.main import app
 from app.personas import MAYA
 from app.providers.local import LocalProvider
@@ -83,6 +84,35 @@ def test_security_can_view_ordered_events(
     select(api_client, "priya")
     response = api_client.get(f"/api/audit/runs/{run.id}/events")
     assert [event["sequence"] for event in response.json()] == [1, 2]
+
+
+@pytest.mark.parametrize(("query", "candidates", "quarantined", "selected"), [
+    ("Code of conduct", 3, 1, ["company-code-of-conduct-1:0", "company-code-of-conduct-3:0"]),
+    ("zxqvnomatch", 0, 0, []),
+])
+def test_offline_search_counts_are_visible_to_security(
+    api_client: TestClient, session: Session, monkeypatch: pytest.MonkeyPatch,
+    query: str, candidates: int, quarantined: int, selected: list[str],
+) -> None:
+    seed_corpus(session)
+    monkeypatch.setattr(chat_api, "get_provider", LocalProvider)
+    select(api_client, "maya")
+    response = api_client.post("/api/chat", json={"message": query})
+    assert response.status_code == 200
+    run = response.json()
+    assert "search_counts" not in run["tool_results"][0]
+    url = f"/api/audit/runs/{run['run_id']}/events"
+    assert api_client.get(url).status_code == 403
+    select(api_client, "priya")
+    timeline = api_client.get(url)
+    assert timeline.status_code == 200
+    [decision] = [event["payload"] for event in timeline.json() if event["event_type"] == "tool_decision"]
+    assert decision == {
+        "tool": "search_documents", "status": "completed", "requires_approval": False,
+        "source_ids": selected, "authorized_candidate_count": candidates,
+        "quarantined_count": quarantined, "rerank_candidate_count": 0,
+        "context_passage_count": len(selected),
+    }
 
 
 def pending_email(session: Session) -> str:
