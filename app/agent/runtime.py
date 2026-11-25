@@ -56,7 +56,12 @@ class AgentRuntime:
                 for payload in response.tool_calls:
                     call_id, call = parse_tool_call(payload)
                     result = execute_tool(
-                        session, persona, run.id, call, untrusted_seen
+                        session, persona, run.id, call, untrusted_seen,
+                        reranker=(
+                            self.provider
+                            if getattr(self.provider, "uses_external_rerank", False)
+                            else None
+                        ),
                     )
                     tool_results.append(result)
                     self._record_tool(session, run.id, call.name.value, result)

@@ -7,6 +7,8 @@ from app.providers.base import ChatResult, Citation, RerankItem
 
 
 class CohereProvider:
+    uses_external_rerank = True
+
     def __init__(self, api_key: str | None = None, client: Any = None) -> None:
         key = api_key or settings.cohere_api_key
         if client is None and not key:
