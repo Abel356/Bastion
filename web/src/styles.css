@@ -19,6 +19,9 @@ textarea { display: block; width: 100%; min-height: 6rem; resize: vertical; marg
 .audit-toggle { float: right; }
 .audit li, .result li { margin: .65rem 0; }
 .audit li button { text-align: left; overflow-wrap: anywhere; }
+.search-metrics > div { display: flex; flex-wrap: wrap; gap: .25rem .75rem; margin: .35rem 0; }
+.search-metrics dt { color: #a8b9ca; }
+.search-metrics dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
 pre { white-space: pre-wrap; overflow-wrap: anywhere; }
 .answer { white-space: pre-wrap; line-height: 1.65; max-width: 66ch; }
 .notice, .status[data-status="approval_required"] { color: #ffd48e; }
