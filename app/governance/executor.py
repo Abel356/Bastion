@@ -74,11 +74,12 @@ def search_documents(
         else:
             blocked_ids.append(chunk.id)
     selected_chunks = safe_chunks[:CONTEXT_PASSAGE_LIMIT]
+    rerank_fallback = False
     if reranker is not None:
         try:
             selected_chunks = rerank_chunks(query, safe_chunks, reranker, CONTEXT_PASSAGE_LIMIT)
         except InvalidRerankResponse:
-            pass
+            rerank_fallback = True
     data = {
         "results": [
             {"id": chunk.id, "text": chunk.text, "document_id": chunk.label.id,
@@ -95,6 +96,7 @@ def search_documents(
         search_counts=SearchCounts(
             authorized_candidate_count=len(chunks),
             rerank_candidate_count=len(safe_chunks) if reranker is not None else 0,
+            rerank_fallback=rerank_fallback,
         ),
     )
 

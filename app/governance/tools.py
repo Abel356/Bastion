@@ -18,6 +18,7 @@ class ToolCall(BaseModel):
 class SearchCounts(BaseModel):
     authorized_candidate_count: int
     rerank_candidate_count: int
+    rerank_fallback: bool = False
 
 
 class ToolResult(BaseModel):

@@ -113,6 +113,8 @@ class AgentRuntime:
                 "rerank_candidate_count": counts.rerank_candidate_count,
                 "context_passage_count": len(result.source_ids),
             })
+            if counts.rerank_fallback:
+                payload["rerank_fallback"] = True
         append_event(session, run_id, "tool_decision", payload)
 
     def _release(
