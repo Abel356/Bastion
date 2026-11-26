@@ -52,9 +52,13 @@ class CohereProvider:
                 top_n=top_n,
             )
             # The SDK can coerce fractional and boolean indices to integers.
+            http_response = getattr(response, "response", None)
+            if http_response is None:
+                # Cohere 5.20 only exposes the underlying response via this attribute.
+                http_response = response._response
             return [
                 RerankItem(index=item["index"], score=item["relevance_score"])
-                for item in response.response.json()["results"]
+                for item in http_response.json()["results"]
             ]
         except ApiError as exc:
             if exc.status_code is None or not 200 <= exc.status_code < 300:
