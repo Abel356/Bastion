@@ -26,6 +26,9 @@ function TimelineEvent({ event }: { event: AuditEvent }) {
       {searchMetrics.map(([label, key]) => <div key={key}>
         <dt>{label}</dt><dd>{String(payload[key])}</dd>
       </div>)}
+      {payload.rerank_fallback === true && <div>
+        <dt>Rerank fallback</dt><dd>Used lexical order after an invalid rerank response.</dd>
+      </div>}
       <div><dt>Selected source IDs</dt><dd>{sources.length ? sources.join(', ') : 'None'}</dd></div>
     </dl>
   </details>
