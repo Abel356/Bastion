@@ -3,7 +3,10 @@ from types import SimpleNamespace as NS
 
 import cohere
 import httpx
+import pytest
+from cohere.core.api_error import ApiError
 
+from app.providers.base import InvalidRerankResponse
 from app.providers.cohere import CohereProvider
 
 
@@ -51,6 +54,33 @@ def test_rerank_maps_scores_and_indexes() -> None:
         client = cohere.ClientV2("fixture-key", httpx_client=http_client)
         results = CohereProvider(client=client).rerank("query", ["a", "b"], 2)
     assert [(item.index, item.score) for item in results] == [(1, 0.9), (0, 0.2)]
+
+
+@pytest.mark.parametrize("body", [
+    b'{"results":[{"index":true,"relevance_score":1}]}',
+    b'{"results":[{"index":0.9,"relevance_score":1}]}',
+    b'{"results":[{"index":"0","relevance_score":1}]}',
+    b'{"results":[{"relevance_score":1}]}',
+    b'{"results":[4]}',
+    b'{"results":null}',
+    b'null',
+    b'not JSON',
+])
+def test_rerank_reports_malformed_success_response(body: bytes) -> None:
+    transport = httpx.MockTransport(lambda request: httpx.Response(200, content=body))
+    with httpx.Client(transport=transport) as http_client:
+        client = cohere.ClientV2("fixture-key", httpx_client=http_client)
+        with pytest.raises(InvalidRerankResponse, match="Malformed Cohere rerank response"):
+            CohereProvider(client=client).rerank("query", ["a"], 1)
+
+
+def test_rerank_preserves_http_failures() -> None:
+    transport = httpx.MockTransport(lambda request: httpx.Response(401, json={}))
+    with httpx.Client(transport=transport) as http_client:
+        client = cohere.ClientV2("fixture-key", httpx_client=http_client)
+        with pytest.raises(ApiError) as failure:
+            CohereProvider(client=client).rerank("query", ["a"], 1)
+        assert failure.value.status_code == 401
 
 
 def test_chat_preserves_citations_and_usage() -> None:
