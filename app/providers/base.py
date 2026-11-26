@@ -12,7 +12,7 @@ class InvalidRerankResponse(ValueError):
 
 
 class RerankItem(BaseModel):
-    index: int
+    index: int = Field(strict=True)
     score: float
 
 

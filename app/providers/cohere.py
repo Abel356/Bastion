@@ -1,9 +1,11 @@
 from typing import Any
 
 import cohere
+from cohere.core.api_error import ApiError
+from pydantic import ValidationError
 
 from app.config import settings
-from app.providers.base import ChatResult, Citation, RerankItem
+from app.providers.base import ChatResult, Citation, InvalidRerankResponse, RerankItem
 
 
 class CohereProvider:
@@ -42,16 +44,24 @@ class CohereProvider:
     def rerank(
         self, query: str, documents: list[str], top_n: int
     ) -> list[RerankItem]:
-        response = self.client.rerank(
-            model=settings.cohere_rerank_model,
-            query=query,
-            documents=documents,
-            top_n=top_n,
-        )
-        return [
-            RerankItem(index=item.index, score=item.relevance_score)
-            for item in response.results
-        ]
+        try:
+            response = self.client.with_raw_response.rerank(
+                model=settings.cohere_rerank_model,
+                query=query,
+                documents=documents,
+                top_n=top_n,
+            )
+            # The SDK can coerce fractional and boolean indices to integers.
+            return [
+                RerankItem(index=item["index"], score=item["relevance_score"])
+                for item in response.response.json()["results"]
+            ]
+        except ApiError as exc:
+            if exc.status_code is None or not 200 <= exc.status_code < 300:
+                raise
+            raise InvalidRerankResponse("Malformed Cohere rerank response") from exc
+        except (AttributeError, KeyError, TypeError, ValidationError) as exc:
+            raise InvalidRerankResponse("Malformed Cohere rerank response") from exc
 
     def chat(
         self, messages: list[dict[str, Any]],

@@ -1,4 +1,8 @@
+import json
 from types import SimpleNamespace as NS
+
+import cohere
+import httpx
 
 from app.providers.cohere import CohereProvider
 
@@ -6,17 +10,11 @@ from app.providers.cohere import CohereProvider
 class FakeClient:
     def __init__(self) -> None:
         self.last_embed: dict = {}
-        self.last_rerank: dict = {}
         self.last_chat: dict = {}
 
     def embed(self, **kwargs):
         self.last_embed = kwargs
         return NS(embeddings=NS(float_=[[0.1, 0.2]]))
-
-    def rerank(self, **kwargs):
-        self.last_rerank = kwargs
-        results = [NS(index=1, relevance_score=0.9), NS(index=0, relevance_score=0.2)]
-        return NS(results=results)
 
     def chat(self, **kwargs):
         self.last_chat = kwargs
@@ -41,10 +39,18 @@ def test_query_embeddings_use_search_query() -> None:
 
 
 def test_rerank_maps_scores_and_indexes() -> None:
-    client = FakeClient()
-    results = CohereProvider(client=client).rerank("query", ["a", "b"], 2)
+    def rerank(request: httpx.Request) -> httpx.Response:
+        assert request.url.path == "/v2/rerank"
+        assert json.loads(request.content)["top_n"] == 2
+        return httpx.Response(200, json={"results": [
+            {"index": 1, "relevance_score": 0.9},
+            {"index": 0, "relevance_score": 0.2},
+        ]})
+
+    with httpx.Client(transport=httpx.MockTransport(rerank)) as http_client:
+        client = cohere.ClientV2("fixture-key", httpx_client=http_client)
+        results = CohereProvider(client=client).rerank("query", ["a", "b"], 2)
     assert [(item.index, item.score) for item in results] == [(1, 0.9), (0, 0.2)]
-    assert client.last_rerank["top_n"] == 2
 
 
 def test_chat_preserves_citations_and_usage() -> None:
