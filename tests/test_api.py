@@ -1,4 +1,5 @@
 from collections.abc import Iterator
+from unittest.mock import Mock
 
 import pytest
 from fastapi.testclient import TestClient
@@ -10,6 +11,7 @@ from app.governance.tools import ToolCall, ToolName
 from app.ingestion import seed_corpus
 from app.main import app
 from app.personas import MAYA
+from app.providers.base import RerankItem
 from app.providers.local import LocalProvider
 from app.repositories.actions import create_pending_action
 from app.repositories.audit import append_event, start_run
@@ -112,6 +114,42 @@ def test_offline_search_counts_are_visible_to_security(
         "source_ids": selected, "authorized_candidate_count": candidates,
         "quarantined_count": quarantined, "rerank_candidate_count": 0,
         "context_passage_count": len(selected),
+    }
+
+
+def test_security_sees_malformed_rerank_fallback(
+    api_client: TestClient, session: Session, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    seed_corpus(session)
+    provider = Mock(wraps=LocalProvider(), uses_external_rerank=True)
+    provider.rerank.return_value = [RerankItem(index=4, score=1)] * 2
+    monkeypatch.setattr(chat_api, "get_provider", lambda: provider)
+    select(api_client, "maya")
+    response = api_client.post("/api/chat", json={"message": "code conduct compensation remote work"})
+    assert response.status_code == 200
+    run = response.json()
+    assert run["status"] == "completed"
+    provider.rerank.assert_called_once()
+    _, candidates, requested = provider.rerank.call_args.args
+    assert (len(candidates), requested) == (5, 4)
+    selected = [
+        "company-code-of-conduct-1:0", "company-code-of-conduct-3:0",
+        "company-remote-work-1:0", "company-remote-work-2:0",
+    ]
+    assert run["tool_results"][0]["source_ids"] == selected
+    assert "search_counts" not in run["tool_results"][0]
+    assert run["citations"][0]["source_ids"] == selected[:1]
+    url = f"/api/audit/runs/{run['run_id']}/events"
+    assert api_client.get(url).status_code == 403
+    select(api_client, "priya")
+    timeline = api_client.get(url)
+    assert timeline.status_code == 200
+    [decision] = [event["payload"] for event in timeline.json() if event["event_type"] == "tool_decision"]
+    assert decision == {
+        "tool": "search_documents", "status": "completed", "requires_approval": False,
+        "source_ids": selected, "authorized_candidate_count": 6,
+        "quarantined_count": 1, "rerank_candidate_count": 5,
+        "context_passage_count": 4, "rerank_fallback": True,
     }
 
 
