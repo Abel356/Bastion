@@ -1,6 +1,10 @@
+from unittest.mock import Mock
+
+import pytest
+
 from app.domain.document import DocumentLabel
 from app.domain.identity import Persona, Role
-from app.providers.base import RerankItem
+from app.providers.base import InvalidRerankResponse, RerankItem
 from app.retrieval import Chunk, authorized_candidates, rerank_chunks, retrieve
 
 persona = Persona(id="maya", name="Maya", departments=frozenset({"Engineering"}), clearance=1, role=Role.EMPLOYEE)
@@ -9,6 +13,7 @@ def chunk(identifier: str, department: str, text: str) -> Chunk:
     return Chunk(id=identifier, text=text, label=label)
 allowed = chunk("eng", "Engineering", "incident response policy")
 irrelevant = chunk("other", "Engineering", "office parking guide")
+third = chunk("travel", "Engineering", "travel guide")
 restricted = chunk("fin", "Finance", "secret compensation canary")
 
 
@@ -26,6 +31,27 @@ def test_maps_provider_order_back_to_chunks() -> None:
         "policy", [allowed, irrelevant], ReverseReranker(), limit=2
     )
     assert [item.id for item in results] == ["other", "eng"]
+
+
+@pytest.mark.parametrize("indices", [[], [-1], [3], [1, 1], [0, 1, 2]])
+def test_rejects_invalid_rankings_before_mapping(indices: list[int]) -> None:
+    provider = Mock()
+    provider.rerank.return_value = [RerankItem(index=index, score=1) for index in indices]
+    with pytest.raises(InvalidRerankResponse):
+        rerank_chunks("policy", [allowed, irrelevant, third], provider, limit=2)
+
+
+def test_rerank_accepts_a_shorter_valid_ranking() -> None:
+    provider = Mock()
+    provider.rerank.return_value = [RerankItem(index=2, score=1)]
+    results = rerank_chunks("policy", [allowed, irrelevant, third], provider, limit=2)
+    assert results == [third]
+
+
+def test_rerank_skips_empty_candidates() -> None:
+    provider = Mock()
+    assert rerank_chunks("policy", [], provider, limit=2) == []
+    provider.rerank.assert_not_called()
 
 
 def test_filters_before_ranking() -> None:
