@@ -62,3 +62,10 @@
 - Passed Ruff, all 75 pytest tests, the Vite production build, the Python wheel build, and the offline evaluation smoke. A 390 px Chrome smoke checked populated and empty search decisions. The Security API returned identical audit events after restarting against a file-backed SQLite database.
 - Pushed 6 commits to `Abel356/Bastion` main, including this record. This task supported six buildable checkpoints for search counts, audit persistence, scripted-provider coverage, API coverage, timeline rendering, and the handoff.
 - Live Cohere and PostgreSQL remain unverified. The workstation had no Cohere API key or PostgreSQL runtime.
+
+## November 26, 2026
+
+- Bastion rejects Rerank responses with malformed indices, duplicates, or an empty or oversized result list when candidates were submitted. Valid shorter rankings keep Cohere's order. Invalid responses use the first four scanner-cleared lexical matches and add a redacted fallback flag to the Security timeline. [Cohere Rerank API](https://docs.cohere.com/v2/reference/rerank)
+- Passed Ruff, all 92 pytest tests, the Vite production build, the Python wheel build, and the offline evaluation smoke. All 13 Cohere adapter tests passed against mocked HTTP on SDK 5.20.0 and 7.3.1. A 390 px Chrome smoke verified malformed, valid, and no-match searches. A file-backed SQLite smoke verified that the redacted audit events survived restart.
+- Pushed 9 commits to `Abel356/Bastion` main, including this record. The task supported nine buildable checkpoints covering validation, fallback auditing, SDK parsing and compatibility, regression and API tests, timeline rendering, and the handoff.
+- Live Cohere and PostgreSQL remain unverified. The workstation had no Cohere API key or PostgreSQL runtime.

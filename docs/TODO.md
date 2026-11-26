@@ -1,6 +1,6 @@
-# TODO — November 26, 2026
+# TODO — November 27, 2026
 
-**Validate Cohere Rerank responses before selecting context.** Check that returned indices are
-unique, within the submitted candidate list, and within the requested result count. On a malformed
-response, use the scanner-cleared lexical order and record that fallback in the Security timeline.
-Verify the behavior with a scripted provider and preserve the four-passage context cap.
+**Keep document searches available when Cohere Rerank times out.** Use at most four scanner-cleared
+lexical matches on a Rerank timeout and record the timeout as the fallback reason in the Security
+timeline. Verify with a simulated timeout that the run returns cited evidence and that Security can
+distinguish the timeout from a malformed response. Preserve the existing handling of authorization errors.
