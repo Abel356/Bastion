@@ -16,7 +16,7 @@ from app.governance.tools import (
     ToolResult,
 )
 from app.models import DocumentRow
-from app.providers.base import ModelProvider
+from app.providers.base import InvalidRerankResponse, ModelProvider
 from app.repositories.actions import create_pending_action
 from app.repositories.documents import retrieve_authorized
 from app.retrieval import lexical_score, rerank_chunks
@@ -73,10 +73,12 @@ def search_documents(
             safe_chunks.append(chunk)
         else:
             blocked_ids.append(chunk.id)
-    selected_chunks = (
-        rerank_chunks(query, safe_chunks, reranker, CONTEXT_PASSAGE_LIMIT)
-        if reranker is not None else safe_chunks[:CONTEXT_PASSAGE_LIMIT]
-    )
+    selected_chunks = safe_chunks[:CONTEXT_PASSAGE_LIMIT]
+    if reranker is not None:
+        try:
+            selected_chunks = rerank_chunks(query, safe_chunks, reranker, CONTEXT_PASSAGE_LIMIT)
+        except InvalidRerankResponse:
+            pass
     data = {
         "results": [
             {"id": chunk.id, "text": chunk.text, "document_id": chunk.label.id,

@@ -5,7 +5,7 @@ from pydantic import BaseModel
 from app.domain.document import DocumentLabel
 from app.domain.identity import Persona
 from app.domain.policy import can_read
-from app.providers.base import ModelProvider
+from app.providers.base import InvalidRerankResponse, ModelProvider
 
 
 class Chunk(BaseModel):
@@ -31,9 +31,15 @@ def retrieve(persona: Persona, query: str, chunks: list[Chunk], limit: int = 4) 
 def rerank_chunks(
     query: str, chunks: list[Chunk], provider: ModelProvider, limit: int
 ) -> list[Chunk]:
-    if not chunks:
+    requested = min(limit, len(chunks))
+    if requested <= 0:
         return []
-    rankings = provider.rerank(
-        query, [chunk.text for chunk in chunks], min(limit, len(chunks))
-    )
-    return [chunks[item.index] for item in rankings]
+    rankings = provider.rerank(query, [chunk.text for chunk in chunks], requested)
+    if not 1 <= len(rankings) <= requested:
+        raise InvalidRerankResponse("Unexpected rerank result count")
+    indices = [item.index for item in rankings]
+    if any(type(index) is not int or not 0 <= index < len(chunks) for index in indices):
+        raise InvalidRerankResponse("Invalid rerank index")
+    if len(set(indices)) != len(indices):
+        raise InvalidRerankResponse("Duplicate rerank index")
+    return [chunks[index] for index in indices]

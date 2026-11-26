@@ -7,6 +7,10 @@ def estimate_input_tokens(messages: list[dict[str, Any]]) -> int:
     return len(str(messages).split())
 
 
+class InvalidRerankResponse(ValueError):
+    """The provider returned a ranking that cannot be used."""
+
+
 class RerankItem(BaseModel):
     index: int
     score: float
