@@ -11,6 +11,10 @@ class InvalidRerankResponse(ValueError):
     """The provider returned a ranking that cannot be used."""
 
 
+class RerankTimeout(TimeoutError):
+    """The provider timed out while ranking candidates."""
+
+
 class RerankItem(BaseModel):
     index: int = Field(strict=True)
     score: float

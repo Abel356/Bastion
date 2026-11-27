@@ -1,11 +1,18 @@
 from typing import Any
 
 import cohere
+import httpx
 from cohere.core.api_error import ApiError
 from pydantic import ValidationError
 
 from app.config import settings
-from app.providers.base import ChatResult, Citation, InvalidRerankResponse, RerankItem
+from app.providers.base import (
+    ChatResult,
+    Citation,
+    InvalidRerankResponse,
+    RerankItem,
+    RerankTimeout,
+)
 
 
 class CohereProvider:
@@ -60,6 +67,8 @@ class CohereProvider:
                 RerankItem(index=item["index"], score=item["relevance_score"])
                 for item in http_response.json()["results"]
             ]
+        except httpx.TimeoutException as exc:
+            raise RerankTimeout("Cohere rerank timed out") from exc
         except ApiError as exc:
             if exc.status_code is None or not 200 <= exc.status_code < 300:
                 raise

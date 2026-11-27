@@ -18,7 +18,7 @@ class ToolCall(BaseModel):
 class SearchCounts(BaseModel):
     authorized_candidate_count: int
     rerank_candidate_count: int
-    rerank_fallback_reason: Literal["invalid_response"] | None = None
+    rerank_fallback_reason: Literal["invalid_response", "timeout"] | None = None
 
 
 class ToolResult(BaseModel):
