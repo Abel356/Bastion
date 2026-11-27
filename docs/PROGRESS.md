@@ -69,3 +69,11 @@
 - Passed Ruff, all 92 pytest tests, the Vite production build, the Python wheel build, and the offline evaluation smoke. All 13 Cohere adapter tests passed against mocked HTTP on SDK 5.20.0 and 7.3.1. A 390 px Chrome smoke verified malformed, valid, and no-match searches. A file-backed SQLite smoke verified that the redacted audit events survived restart.
 - Pushed 9 commits to `Abel356/Bastion` main, including this record. The task supported nine buildable checkpoints covering validation, fallback auditing, SDK parsing and compatibility, regression and API tests, timeline rendering, and the handoff.
 - Live Cohere and PostgreSQL remain unverified. The workstation had no Cohere API key or PostgreSQL runtime.
+
+## November 27, 2026
+
+- Rerank transport timeouts and HTTP 408 or 504 now fall back to at most four SQL-authorized, scanner-cleared lexical passages. Rerank uses a five-second timeout per network phase and makes one SDK attempt. Provider authorization errors still stop the run. [Cohere Rerank API](https://docs.cohere.com/reference/rerank)
+- Security sees a redacted timeout reason distinct from an invalid ranking. Existing audit events still render their invalid-response message.
+- Passed Ruff, all 102 pytest tests, the Vite production build, the Python wheel build, and the offline evaluation smoke. All 20 Cohere adapter tests passed with mocked HTTP on SDK 5.20.0 and 7.3.1. A 390 px Chrome smoke verified cited timeout recovery and current and legacy timeline messages. The persisted audit events matched after a file-backed SQLite restart.
+- Pushed 8 commits to `Abel356/Bastion` main, including this record. This narrow task supported eight buildable checkpoints across fallback reasons, timeout recovery, the Security UI, request limits, regression tests, and the handoff.
+- Live Cohere and PostgreSQL remain unverified. The workstation had no Cohere API key or PostgreSQL runtime.
