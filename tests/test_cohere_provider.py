@@ -74,13 +74,14 @@ def test_rerank_reports_malformed_success_response(body: bytes) -> None:
             CohereProvider(client=client).rerank("query", ["a"], 1)
 
 
-def test_rerank_preserves_http_failures() -> None:
-    transport = httpx.MockTransport(lambda request: httpx.Response(401, json={}))
+@pytest.mark.parametrize("status", [401, 403, 429, 503])
+def test_rerank_preserves_other_http_failures(status: int) -> None:
+    transport = httpx.MockTransport(lambda request: httpx.Response(status, json={}))
     with httpx.Client(transport=transport) as http_client:
         client = cohere.ClientV2("fixture-key", httpx_client=http_client)
         with pytest.raises(ApiError) as failure:
             CohereProvider(client=client).rerank("query", ["a"], 1)
-        assert failure.value.status_code == 401
+        assert failure.value.status_code == status
 
 
 @pytest.mark.parametrize("status", [408, 504])
@@ -96,6 +97,21 @@ def test_rerank_reports_http_timeouts_without_retry(status: int) -> None:
         with pytest.raises(RerankTimeout, match="Cohere rerank timed out"):
             CohereProvider(client=client).rerank("query", ["a"], 1)
     assert len(requests) == 1
+
+
+@pytest.mark.parametrize("error", [httpx.ConnectTimeout, httpx.ReadTimeout])
+def test_rerank_bounds_and_normalizes_transport_timeouts(
+    error: type[httpx.TimeoutException],
+) -> None:
+    def timeout(request: httpx.Request) -> httpx.Response:
+        assert request.extensions["timeout"] == {"connect": 5, "read": 5, "write": 5, "pool": 5}
+        raise error("fixture transport timeout", request=request)
+
+    with httpx.Client(transport=httpx.MockTransport(timeout)) as http_client:
+        client = cohere.ClientV2("fixture-key", httpx_client=http_client)
+        with pytest.raises(RerankTimeout) as failure:
+            CohereProvider(client=client).rerank("query", ["a"], 1)
+    assert isinstance(failure.value.__cause__, error)
 
 
 def test_chat_preserves_citations_and_usage() -> None:
