@@ -11,7 +11,7 @@ from app.governance.tools import ToolCall, ToolName
 from app.ingestion import seed_corpus
 from app.main import app
 from app.personas import MAYA
-from app.providers.base import RerankItem
+from app.providers.base import RerankItem, RerankTimeout
 from app.providers.local import LocalProvider
 from app.repositories.actions import create_pending_action
 from app.repositories.audit import append_event, start_run
@@ -117,12 +117,17 @@ def test_offline_search_counts_are_visible_to_security(
     }
 
 
-def test_security_sees_malformed_rerank_fallback(
+@pytest.mark.parametrize("reason", ["invalid_response", "timeout"])
+def test_security_sees_rerank_fallback_reason(
     api_client: TestClient, session: Session, monkeypatch: pytest.MonkeyPatch,
+    reason: str,
 ) -> None:
     seed_corpus(session)
     provider = Mock(wraps=LocalProvider(), uses_external_rerank=True)
-    provider.rerank.return_value = [RerankItem(index=4, score=1)] * 2
+    if reason == "timeout":
+        provider.rerank.side_effect = RerankTimeout("private provider details")
+    else:
+        provider.rerank.return_value = [RerankItem(index=4, score=1)] * 2
     monkeypatch.setattr(chat_api, "get_provider", lambda: provider)
     select(api_client, "maya")
     response = api_client.post("/api/chat", json={"message": "code conduct compensation remote work"})
@@ -132,6 +137,8 @@ def test_security_sees_malformed_rerank_fallback(
     provider.rerank.assert_called_once()
     _, candidates, requested = provider.rerank.call_args.args
     assert (len(candidates), requested) == (5, 4)
+    assert all("CANARY-BSTN-42" not in text for text in candidates)
+    assert all("# Compensation Guide" not in text for text in candidates)
     selected = [
         "company-code-of-conduct-1:0", "company-code-of-conduct-3:0",
         "company-remote-work-1:0", "company-remote-work-2:0",
@@ -150,7 +157,7 @@ def test_security_sees_malformed_rerank_fallback(
         "source_ids": selected, "authorized_candidate_count": 6,
         "quarantined_count": 1, "rerank_candidate_count": 5,
         "context_passage_count": 4, "rerank_fallback": True,
-        "rerank_fallback_reason": "invalid_response",
+        "rerank_fallback_reason": reason,
     }
 
 
