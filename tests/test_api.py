@@ -2,6 +2,7 @@ from collections.abc import Iterator
 from unittest.mock import Mock
 
 import pytest
+from cohere.core.api_error import ApiError
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
@@ -159,6 +160,27 @@ def test_security_sees_rerank_fallback_reason(
         "context_passage_count": 4, "rerank_fallback": True,
         "rerank_fallback_reason": reason,
     }
+
+
+@pytest.mark.parametrize("status", [401, 403])
+def test_rerank_authorization_failure_does_not_release_fallback(
+    api_client: TestClient, session: Session, monkeypatch: pytest.MonkeyPatch, status: int,
+) -> None:
+    seed_corpus(session)
+    provider = Mock(wraps=LocalProvider(), uses_external_rerank=True)
+    provider.rerank.side_effect = ApiError(status_code=status, body="private provider details")
+    monkeypatch.setattr(chat_api, "get_provider", lambda: provider)
+    select(api_client, "maya")
+    run = api_client.post("/api/chat", json={"message": "Code of conduct"}).json()
+    assert run["status"] == "failed"
+    assert run["citations"] == []
+    provider.chat.assert_called_once()
+    provider.rerank.assert_called_once()
+    select(api_client, "priya")
+    timeline = api_client.get(f"/api/audit/runs/{run['run_id']}/events").json()
+    assert not any(event["event_type"] == "tool_decision" for event in timeline)
+    [failure] = [event["payload"] for event in timeline if event["event_type"] == "run_failed"]
+    assert failure == {"error_type": "ApiError"}
 
 
 def pending_email(session: Session) -> str:
