@@ -57,6 +57,7 @@ class CohereProvider:
                 query=query,
                 documents=documents,
                 top_n=top_n,
+                request_options={"timeout_in_seconds": 5, "max_retries": 0},
             )
             # The SDK can coerce fractional and boolean indices to integers.
             http_response = getattr(response, "response", None)
@@ -70,6 +71,8 @@ class CohereProvider:
         except httpx.TimeoutException as exc:
             raise RerankTimeout("Cohere rerank timed out") from exc
         except ApiError as exc:
+            if exc.status_code in (408, 504):
+                raise RerankTimeout("Cohere rerank timed out") from exc
             if exc.status_code is None or not 200 <= exc.status_code < 300:
                 raise
             raise InvalidRerankResponse("Malformed Cohere rerank response") from exc

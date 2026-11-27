@@ -6,7 +6,7 @@ import httpx
 import pytest
 from cohere.core.api_error import ApiError
 
-from app.providers.base import InvalidRerankResponse
+from app.providers.base import InvalidRerankResponse, RerankTimeout
 from app.providers.cohere import CohereProvider
 
 
@@ -81,6 +81,21 @@ def test_rerank_preserves_http_failures() -> None:
         with pytest.raises(ApiError) as failure:
             CohereProvider(client=client).rerank("query", ["a"], 1)
         assert failure.value.status_code == 401
+
+
+@pytest.mark.parametrize("status", [408, 504])
+def test_rerank_reports_http_timeouts_without_retry(status: int) -> None:
+    requests = []
+
+    def timeout(request: httpx.Request) -> httpx.Response:
+        requests.append(request)
+        return httpx.Response(status, json={"message": "Request timed out"})
+
+    with httpx.Client(transport=httpx.MockTransport(timeout)) as http_client:
+        client = cohere.ClientV2("fixture-key", httpx_client=http_client)
+        with pytest.raises(RerankTimeout, match="Cohere rerank timed out"):
+            CohereProvider(client=client).rerank("query", ["a"], 1)
+    assert len(requests) == 1
 
 
 def test_chat_preserves_citations_and_usage() -> None:
