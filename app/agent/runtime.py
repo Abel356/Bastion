@@ -113,8 +113,9 @@ class AgentRuntime:
                 "rerank_candidate_count": counts.rerank_candidate_count,
                 "context_passage_count": len(result.source_ids),
             })
-            if counts.rerank_fallback:
+            if counts.rerank_fallback_reason is not None:
                 payload["rerank_fallback"] = True
+                payload["rerank_fallback_reason"] = counts.rerank_fallback_reason
         append_event(session, run_id, "tool_decision", payload)
 
     def _release(

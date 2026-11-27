@@ -150,6 +150,7 @@ def test_security_sees_malformed_rerank_fallback(
         "source_ids": selected, "authorized_candidate_count": 6,
         "quarantined_count": 1, "rerank_candidate_count": 5,
         "context_passage_count": 4, "rerank_fallback": True,
+        "rerank_fallback_reason": "invalid_response",
     }
 
 

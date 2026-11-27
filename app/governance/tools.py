@@ -1,5 +1,5 @@
 from enum import StrEnum
-from typing import Any
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
@@ -18,7 +18,7 @@ class ToolCall(BaseModel):
 class SearchCounts(BaseModel):
     authorized_candidate_count: int
     rerank_candidate_count: int
-    rerank_fallback: bool = False
+    rerank_fallback_reason: Literal["invalid_response"] | None = None
 
 
 class ToolResult(BaseModel):
